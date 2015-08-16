@@ -1,0 +1,104 @@
+/*************************************************************\
+ * HeadsUpDisplay.h                                          *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the declaration of the HeadsUpDisplay  *
+ * Class, which created an Orthoganl Matrix infront of the   *
+ * Screen which allows for a 2D Heads Up Display to be       *
+ * Printed before the user at any time                       *
+ * It also passes input to the developer console             *
+\*************************************************************/
+
+#ifndef HEADSUPDISPLAY
+#define HEADSUPDISPLAY
+
+// For displaying text in the HUD
+#include "TextEngine.h"
+// The Developer Console
+#include "Console.h"
+
+class HeadsUpDisplay
+{
+private:
+	// The pixel boundaries of the screen
+	const int SCREENTOP = 0, SCREENBOTTOM = 500,
+		SCREENLEFT = 0, SCREENRIGHT = 500;
+	// Duration of time to dim screen (Goes from black to clear as time progresses)
+	int dimTime = 0;
+	// Duration of time to go dark (completely black)
+	int darkTime = 0;
+	// Wether or not to dim
+	bool dimNow = false;
+	// Wether or not to darken
+	bool darkNow = false;
+	// Wether or not we are in developer console
+	bool devConsole = false;
+	
+	// Tag to current alert
+	std::string currentAlert;
+	// Text to print to the screen
+	std::string currentText;
+	// What the user is typing
+	std::string currentInput;
+
+	// To Display text
+	TextEngine helmet;
+	// Dev Console
+	Console dev;
+
+	// Prepares OpenGL draw in 2D
+	void prepare2D();
+	// Draws an info bar at the top of the screen
+	void drawHelmetBounds();
+	// Displays suit alerts
+	void DisplayAlerts();
+	// Draws the Heads Up Display
+	void drawHUD();
+	// Manages the dimming of the screen
+	void dim();
+	// Manages the darkening of the screen
+	void dark();
+	// Draws the box which stores the info text
+	void drawInfoBox();
+	// Draws the developer console window
+	void drawConsole();
+	// Displays standard info in the top left corner 
+	void displayInfo(char* tag);
+	// "Resets" OpenGL to draw in 3D
+	void prepare3D();
+
+public:
+	// Manages the HUD
+	void DisplayHUD();
+
+	/****           ALTERATION FUNCTIONS            *****\
+	\**** Should always be called before DisplayHud *****/
+
+	// Tells the HUD how long to dim
+	void goDim(int time);
+
+	//Tells the HUD how long to go dark
+	void goDark(int time);
+
+	// Flips dev_console
+	void toggleConsole();
+
+	// Takes in a tag to print to screen
+	void displayWarning(std::string warning);
+
+	// Takes in a string to print to screen
+	void printToConsole(std::string text);
+
+	// Signifies a completed input to the console
+	void inputString(std::string text);
+
+	// Returns an item of the console's log
+	std::string getHist(int count);
+
+	// Returns the number of items in the console's log
+	int getHistNum();
+};
+
+#endif
