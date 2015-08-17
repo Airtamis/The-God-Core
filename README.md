@@ -1,2 +1,3 @@
 # The-God-Core
-Github for my scholars project
+
+This is an online repository for my project, for anyone's viewing enjoyment.
