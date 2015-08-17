@@ -25,7 +25,6 @@ using namespace std;
 
 // Initializing the constants
 const char* TextEngine::TEXT_PATH = "Resources\\Scripts\\";
-const char* TextEngine::SAVE_PATH = "Resources\\Save Data\\";
 const float TextEngine::LINE_OFFSET = 10;
 
 void TextEngine::displayText(float x, float y,
