@@ -23,8 +23,6 @@ class TextEngine
 private:
 	// The path to the game's text files (.log's)
 	static const char* TEXT_PATH;
-	// The path to the game's save file (.sav)
-	static const char* SAVE_PATH;
 	// The offset between lines of characters
 	static const float LINE_OFFSET;
 
