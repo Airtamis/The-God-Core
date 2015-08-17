@@ -178,7 +178,7 @@ void Console::readFromFile(string input)
 
 		string text;
 
-		// core.sav will only have one line (unless through console shenanigans)
+		// For now, core.sav only has one line. Hopefully I'll update this when I change that
 		infile >> text;
 
 		console_log.push_back(text);
