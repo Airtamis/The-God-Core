@@ -71,6 +71,8 @@ public:
 	void key_up(unsigned char key, int x, int y);
 	// Special keys
 	void special(int key, int x, int y);
+	// To manage playing and releasing music
+	void manageMusic();
 
 	// Wether or not core.sav exists
 	bool canContinue;

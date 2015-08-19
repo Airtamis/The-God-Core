@@ -137,6 +137,13 @@ void Console::processInput()
 		console_input.clear();
 	}
 
+	else if (currentInput.substr(0, 5) == "Play ")
+	{
+		string input = currentInput.substr(5);
+
+		playSong(input);
+	}
+
 	// Invalid command
 	else
 	{
@@ -247,6 +254,59 @@ void Console::readFromFile(string input)
 
 			infile.close();
 		}
+	}
+}
+
+void Console::playSong(string input)
+{
+	if (input == glob.SONG0 || input == "0")
+	{
+		glob.songNum = 0;
+		glob.changeSong = true;
+
+		string song(glob.SONG0);
+
+		console_log.push_back("Now playing " + song);
+		console_color.push_back(VALID_COLOR);
+	}
+
+	else if (input == glob.SONG1 || input == "1")
+	{
+		glob.songNum = 1;
+		glob.changeSong = true;
+
+		string song(glob.SONG1);
+
+		console_log.push_back("Now playing " + song);
+		console_color.push_back(VALID_COLOR);
+	}
+
+	else if (input == glob.SONG2 || input == "2")
+	{
+		glob.songNum = 2;
+		glob.changeSong = true;
+
+		string song(glob.SONG2);
+
+		console_log.push_back("Now playing " + song);
+		console_color.push_back(VALID_COLOR);
+	}
+
+	else if (input == glob.SONG3 || input == "3")
+	{
+		glob.songNum = 3;
+		glob.changeSong = true;
+
+		string song(glob.SONG3);
+
+		console_log.push_back("Now playing " + song);
+		console_color.push_back(VALID_COLOR);
+	}
+
+	else
+	{
+		console_log.push_back("ERROR: " + input + " not a valid song file");
+		console_color.push_back(INVALID_COLOR);
 	}
 }
 

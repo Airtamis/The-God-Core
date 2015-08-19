@@ -22,7 +22,12 @@ public:
 	static bool
 		clipping,
 		goDim, goDark, loading,
-		getInput, isPaused, isInScreen;
+		getInput, isPaused, isInScreen,
+		changeSong;
+
+	static int songNum;
+
+	const static char *SONG0, *SONG1, *SONG2, *SONG3;
 
 	static HeadsUpDisplay HUD;
 	static CameraControl Cam;

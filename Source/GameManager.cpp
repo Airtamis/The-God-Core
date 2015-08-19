@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
 #include "Globals.h"
+// ALL INSTANCES OF GLOB MUST BE STATIC
 static Globals glob;
 
 void GameManager::mouse(int button, int state, int x, int y)
@@ -100,12 +101,14 @@ bool GameManager::draw2()
 
 void GameManager::manageScenes()
 {
+	// If we need to change the song, we can do it here
+	if (glob.changeSong)
+	{
+		manageMusic();
+	}
+
 	// Clears the previous drawing
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	// All variables need to persist between frames
-	static SoundClass background;
-	static bool isPlaying = false;
 
 	if (glob.isPaused)
 	{
@@ -122,12 +125,6 @@ void GameManager::manageScenes()
 	{
 		glutSetCursor(GLUT_CURSOR_NONE);
 		bool close = draw2();
-		if (isPlaying == false)
-		{
-			SoundSystem.makeSound(&background, "Mismer.mp3");
-			SoundSystem.playSound(background);
-			isPlaying = true;
-		}
 
 		// Moves the camera to the correct position
 		glob.Cam.Display();
@@ -155,6 +152,37 @@ void GameManager::manageScenes()
 
 	// Displays the current drawing
 	glutSwapBuffers();
+}
+
+void GameManager::manageMusic()
+{
+	// All variables need to persist between frames
+	static SoundClass background;
+
+	SoundSystem.releaseSound(background);
+	glob.changeSong = false;
+
+	switch (glob.songNum)
+	{
+	case 0:
+		SoundSystem.makeSound(&background, glob.SONG0);
+		SoundSystem.playSound(background);
+		break;
+	case 1:
+		SoundSystem.makeSound(&background, glob.SONG1);
+		SoundSystem.playSound(background);
+		break;
+	case 2:
+		SoundSystem.makeSound(&background, glob.SONG2);
+		SoundSystem.playSound(background);
+		break;
+	case 3:
+		SoundSystem.makeSound(&background, glob.SONG3);
+		SoundSystem.playSound(background);
+		break;
+	default:
+		break;
+	}	
 }
 
 // Normal key presses

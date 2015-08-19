@@ -69,6 +69,8 @@ private:
 
 	void readFromFile(std::string input);
 
+	void playSong(std::string input);
+
 public:
 	// Initializes VALID_COLOR, INVALID_COLOR, and NEUTRAL_COLOR
 	Console();

@@ -11,7 +11,16 @@ bool Globals::isPaused = false;
 bool Globals::isInScreen = false;
 bool Globals::loading = false;
 
+bool Globals::changeSong = true;
+
+int Globals::songNum = 0;
+
 std::string Globals::curr_level;
+
+const char* Globals::SONG0 = "Dark Fog.mp3";
+const char* Globals::SONG1 = "Mismer.mp3";
+const char* Globals::SONG2 = "Cold Hope.mp3";
+const char* Globals::SONG3 = "One Sly Move.mp3";
 
 HeadsUpDisplay Globals::HUD;
 CameraControl Globals::Cam;
