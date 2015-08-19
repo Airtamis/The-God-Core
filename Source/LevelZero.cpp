@@ -143,7 +143,7 @@ bool LevelZero::display()
 	if (glob.clipping)
 	{
 		col.didCollide(x, y, z,
-			0, 0, 1.5, 5, 1, 2.5);
+			0, 0, 1.5, 3.7, 1.5, 2.5);
 	}
 
 	if (col.isClose(x, y, z, 0, 0, 3, .5))
