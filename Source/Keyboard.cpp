@@ -114,7 +114,7 @@ void Keyboard::normal(unsigned char key, int x, int y)
 	}
 
 	// Otherwise (as long we aren't paused)
-	else if (!glob.isPaused)
+	else if (!glob.isPaused && !glob.isInScreen)
 	{
 		switch (key)
 		{
@@ -140,7 +140,7 @@ void Keyboard::normal(unsigned char key, int x, int y)
 
 		case 'e':
 		case 'E':
-			glob.isInScreen = true;
+			glob.goDark = true;
 			break;
 
 		case '~':
@@ -198,7 +198,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_F4:
-		glob.goDim = true;
+		glob.Cam.resetCam();
 		break;
 
 	case GLUT_KEY_UP:
