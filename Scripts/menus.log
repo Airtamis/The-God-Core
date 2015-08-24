@@ -1,0 +1,19 @@
+$PAUSE-INV$
+INVENTORY
+$END$
+
+$PAUSE-QUIT$
+QUIT
+$END$
+
+$BACK$
+B
+A
+C
+K
+$END$
+
+$TEST$
+This is 
+a button
+$END$
