@@ -14,6 +14,8 @@
 // Because concatenating char*'s are really hard
 #include <string>
 
+#include <iostream> // cerr
+
 using namespace std;
 
 // Initialize the constant member of the class
@@ -24,7 +26,12 @@ MusicManager::MusicManager()
 	if (FMOD::System_Create(&m_pSystem) != FMOD_OK)
 	{
 		// Report Error
-		return;
+		cerr << "ERROR: FMOD unable to create system\n"
+			"Press enter to abort";
+		cin.ignore();
+		cin.get();
+
+		exit(1);
 	}
 
 	int driverCount = 0;
@@ -34,7 +41,12 @@ MusicManager::MusicManager()
 	if (driverCount == 0)
 	{
 		// Report Error
-		return;
+		cerr << "ERROR: FMOD unable to detect drivers\n"
+			"Press enter to abort";
+		cin.ignore();
+		cin.get();
+
+		exit(1);
 	}
 
 	// Initialize our Instance with 36 Channels
