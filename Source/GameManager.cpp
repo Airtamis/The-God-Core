@@ -4,6 +4,8 @@
 // ALL INSTANCES OF GLOB MUST BE STATIC
 static Globals glob;
 
+#include "Level.h"
+
 void GameManager::mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_RIGHT_BUTTON)
@@ -95,8 +97,25 @@ void GameManager::changeSize(int w, int h)
 
 bool GameManager::draw2()
 {
-	LevelZero level (glob.Cam.x, glob.Cam.y, glob.Cam.z);
-	return level.display();
+	//LevelZero level (glob.Cam.x, glob.Cam.y, glob.Cam.z);
+	//return level.display();
+
+	static Level lvl;
+
+	if (!isLoaded)
+	{
+		lvl.loadLevel("LEVELZERO");
+
+		isLoaded = true;
+	}
+
+	else
+	{
+		lvl.displayLevel();
+		
+	}
+
+	return false;
 }
 
 void GameManager::manageScenes()

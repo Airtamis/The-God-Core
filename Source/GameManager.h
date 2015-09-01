@@ -49,6 +49,8 @@ private:
 	SaveManager SaveSystem;
 	Keyboard board;
 
+	bool isLoaded = false;
+
 	// Functions
 
 	// Capture's the users input for typing

@@ -24,15 +24,7 @@
 // For processing text
 #include "TextEngine.h"
 
-// For holding string colors
-class triple
-{
-public:
-	float a, b, c;
-};
-
-// For converting to a triple
-triple makeTrip(float _a, float _b, float _c);
+#include "Triple.h"
 
 class Console
 {
@@ -40,11 +32,11 @@ private:
 	/***** Variables for the console itself ****/
 
 	// Triples for good color, bad color, and nuetral colors
-	triple VALID_COLOR, INVALID_COLOR, NEUTRAL_COLOR;
+	Triple VALID_COLOR, INVALID_COLOR, NEUTRAL_COLOR;
 	// What the console "says" (aka what appears on screen)
 	std::deque<std::string> console_log;
 	// The colors of said strings
-	std::deque<triple> console_color;
+	std::deque<Triple> console_color;
 	// Contains the actual player input
 	std::vector<std::string> console_input;
 	// The current (finished) input being processed

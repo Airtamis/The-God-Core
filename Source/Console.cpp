@@ -34,16 +34,6 @@ Console::Console()
 	NEUTRAL_COLOR = makeTrip(1, 1, 1);
 }
 
-triple makeTrip(float _a, float _b, float _c)
-{
-	triple ret;
-	ret.a = _a;
-	ret.b = _b;
-	ret.c = _c;
-
-	return ret;
-}
-
 void Console::activate(string input, string text)
 {
 	currentInput = input;
@@ -64,7 +54,7 @@ void Console::activate(string text)
 void Console::printInput()
 {
 	deque<string>::iterator it = console_log.begin();
-	deque<triple>::iterator jt = console_color.begin();
+	deque<Triple>::iterator jt = console_color.begin();
 	// Iterates through the console's current log and prints it to the screen
 	for (it; it != console_log.end(); it++, jt++)
 	{
