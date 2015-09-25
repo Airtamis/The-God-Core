@@ -55,7 +55,8 @@ public:
 	void Display();
 
 	// Location of the camera
-	float x = 0.0, y = 0.0, z = 0.0;
+	float x =0.0, y = 0.0, z = -1.0;
+	float prevx, prevz;
 	// Angles of rotation
 	float x_angle = 0.0, y_angle = 0.0, z_angle = -1.0;
 };

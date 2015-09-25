@@ -2,10 +2,9 @@
 
 #include <iostream>
 
-// SQLite API
-#include "sqlite3.h"
-
 #include "Rectangle.h"
+
+#include "CollisionEngine.h"
 
 using namespace std;
 
@@ -20,46 +19,22 @@ Quad makeQuad(float a, float b, float c, float d)
 	return ret;
 }
 
-// Dunno really what this does at this point
-static int callback(void *data, int argc, char **argv, char **azColName){
-	int i;
-	for (i = 0; i< 2; i++){
-		cout <<  azColName[i] << argv[i] << argv[i] << endl;
-	}
-	return 0;
-}
-
-void Level::loadLevel(std::string levelName)
+void Level::loadWalls(sqlite3 *db)
 {
-	// Connection to SQL database
-	sqlite3 *db;
-	// 1 if error with DB
-	int connectErr = sqlite3_open("Data.db", &db);
-	// SQL command
-	char* cmd;
 	// Prepared Statement
 	sqlite3_stmt *stm;
-	// ??
-	char *zErrMsg = 0;
+	// SQL command
+	char* cmd;
+	// Connection Error Test
+	int err;
+	cmd = "SELECT * FROM walls WHERE LEVEL = \"LEVELZERO\"";
 
+	err = sqlite3_prepare(db, cmd, -1, &stm, 0);
 
-	if (connectErr != SQLITE_OK)
-	{
-		exit(3);
-	}
-
-	cmd = "SELECT * FROM OBJECTS WHERE LEVEL = \"LEVELZERO\" AND OBJTYPE = \"WALL\"";
-
-	//connectErr = sqlite3_exec(db, cmd, callback, 0, &zErrMsg);
-
-	connectErr = sqlite3_prepare(db, cmd, -1, &stm, 0);
-
-	if (connectErr != SQLITE_OK)
+	if (err != SQLITE_OK)
 	{
 		exit(4);
 	}
-
-	int i = 0;
 
 	// While we still get rows of output
 	while (sqlite3_step(stm) == SQLITE_ROW)
@@ -69,40 +44,128 @@ void Level::loadLevel(std::string levelName)
 			z1, z2, z3, z4,
 			r, g, b, a;
 
-		x1 = sqlite3_column_double(stm, 3);
-		x2 = sqlite3_column_double(stm, 4);
-		x3 = sqlite3_column_double(stm, 5);
-		x4 = sqlite3_column_double(stm, 19);
+		x1 = sqlite3_column_double(stm, 2);
+		x2 = sqlite3_column_double(stm, 3);
+		x3 = sqlite3_column_double(stm, 4);
+		x4 = sqlite3_column_double(stm, 5);
 
 		y1 = sqlite3_column_double(stm, 6);
 		y2 = sqlite3_column_double(stm, 7);
 		y3 = sqlite3_column_double(stm, 8);
-		y4 = sqlite3_column_double(stm, 20);
+		y4 = sqlite3_column_double(stm, 9);
 
-		z1 = sqlite3_column_double(stm, 9);
-		z2 = sqlite3_column_double(stm, 10);
-		z3 = sqlite3_column_double(stm, 11);
-		z4 = sqlite3_column_double(stm, 21);
+		z1 = sqlite3_column_double(stm, 10);
+		z2 = sqlite3_column_double(stm, 11);
+		z3 = sqlite3_column_double(stm, 12);
+		z4 = sqlite3_column_double(stm, 13);
 
-		r = sqlite3_column_double(stm, 15);
-		g = sqlite3_column_double(stm, 16);
-		b = sqlite3_column_double(stm, 17);
-		a = sqlite3_column_double(stm, 18);
+		r = sqlite3_column_double(stm, 14);
+		g = sqlite3_column_double(stm, 15);
+		b = sqlite3_column_double(stm, 16);
+		a = sqlite3_column_double(stm, 17);
 
-		v1.push_back(makeTrip(x1, y1, z1));
-		v2.push_back(makeTrip(x2, y2, z2));
-		v3.push_back(makeTrip(x3, y3, z3));
-		v4.push_back(makeTrip(x4, y4, z4));
+		float verts[12] =
+		{
+			x1, y1, z1,
+			x2, y2, z2,
+			x3, y3, z3,
+			x4, y4, z4
+		};
+		float colors[4] = { r, g, b, a };
 
-		colors.push_back(makeQuad(r, g, b, a));
+		Rectangle rect(verts, colors);
 
-		cout << x1 << endl;
-
-		i++;
+		walls.push_back(rect);
 	}
 
 	// Deconstructs the statement
 	sqlite3_finalize(stm);
+}
+
+void Level::loadDoors(sqlite3 *db)
+{
+
+	// Prepared Statement
+	sqlite3_stmt *stm;
+	// SQL command
+	char* cmd;
+	// Connection Error Test
+	int err;
+	cmd = "SELECT * FROM doors WHERE LEVEL = \"LEVELZERO\"";
+
+	err = sqlite3_prepare(db, cmd, -1, &stm, 0);
+
+	if (err != SQLITE_OK)
+	{
+		exit(4);
+	}
+
+	// While we still get rows of output
+	while (sqlite3_step(stm) == SQLITE_ROW)
+	{
+		double x1, x2, x3, x4,
+			y1, y2, y3, y4,
+			z1, z2, z3, z4,
+			r, g, b, a;
+
+		x1 = sqlite3_column_double(stm, 2);
+		x2 = sqlite3_column_double(stm, 3);
+		x3 = sqlite3_column_double(stm, 4);
+		x4 = sqlite3_column_double(stm, 5);
+
+		y1 = sqlite3_column_double(stm, 6);
+		y2 = sqlite3_column_double(stm, 7);
+		y3 = sqlite3_column_double(stm, 8);
+		y4 = sqlite3_column_double(stm, 9);
+
+		z1 = sqlite3_column_double(stm, 10);
+		z2 = sqlite3_column_double(stm, 11);
+		z3 = sqlite3_column_double(stm, 12);
+		z4 = sqlite3_column_double(stm, 13);
+
+		r = sqlite3_column_double(stm, 14);
+		g = sqlite3_column_double(stm, 15);
+		b = sqlite3_column_double(stm, 16);
+		a = sqlite3_column_double(stm, 17);
+
+		float verts[12] =
+		{
+			x1, y1, z1,
+			x2, y2, z2,
+			x3, y3, z3,
+			x4, y4, z4
+		};
+		float colors[4] = { r, g, b, a };
+
+		Rectangle rect(verts, colors);
+
+		doors.push_back(rect);
+	}
+
+	// Deconstructs the statement
+	sqlite3_finalize(stm);
+}
+
+void Level::loadLevel(std::string levelName)
+{
+	if (quadratic == NULL)
+	{
+		quadratic = gluNewQuadric();
+	}
+
+	// Connection to SQL database
+	sqlite3 *db;
+	// 1 if error with DB
+	int connectErr = sqlite3_open("Data.db", &db);
+
+	if (connectErr != SQLITE_OK)
+	{
+		exit(3);
+	}
+
+	loadWalls(db);
+	loadDoors(db);
+	
 	// Closes the database
 	sqlite3_close(db);
 
@@ -110,21 +173,27 @@ void Level::loadLevel(std::string levelName)
 
 void Level::displayLevel()
 {
-	for (int i = 0; i < v1.size(); i++)
-	{
-		float verts[12] =
-		{ 
-			v1[i].a, v1[i].b, v1[i].c,
-			v2[i].a, v2[i].b, v2[i].c,
-			v3[i].a, v3[i].b, v3[i].c,
-			v4[i].a, v4[i].b, v4[i].c };
-		
-		float Wallcolors[4] =
-		{
-			colors[i].r, colors[i].g, colors[i].b, colors[i].a
-		};
+	vector<Rectangle>::iterator it;
 
-		Rectangle wall(verts, Wallcolors);
-		wall.Display();
+	//cout << walls.size() << endl;
+
+	for (it = walls.begin(); it != walls.end(); it++)
+	{
+		it->Display();
 	}
+
+	for (it = doors.begin(); it != doors.end(); it++)
+	{
+		it->Display();
+	}
+
+	GLfloat lmodel_ambient[] = { 0.6, 0.6, 0.6, 1.0 };
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
+}
+
+bool Level::checkCollision()
+{
+	CollisionEngine col;
+
+	return col.collide(walls);
 }

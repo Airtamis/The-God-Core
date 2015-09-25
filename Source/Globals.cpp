@@ -25,3 +25,4 @@ const char* Globals::SONG3 = "One Sly Move.mp3";
 HeadsUpDisplay Globals::HUD;
 CameraControl Globals::Cam;
 PauseScreen Globals::pause;
+Level Globals::lvl;

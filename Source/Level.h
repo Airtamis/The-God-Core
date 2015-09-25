@@ -4,6 +4,12 @@
 #include <string>
 #include <vector>
 #include "Triple.h"
+#include "Rectangle.h"
+
+// SQLite API
+#include "sqlite3.h"
+
+#include <GL\glut.h>
 
 struct Quad
 {
@@ -17,12 +23,17 @@ Quad makeQuad(float a, float b, float c, float d);
 class Level
 {
 private:
-	// Vertices 1, 2, 3, and 4
-	std::vector<Triple> v1, v2, v3, v4;
-	std::vector<Quad> colors;
+	GLUquadricObj *quadratic;
+
+	std::vector<Rectangle> walls;
+	std::vector<Rectangle> doors;
+
+	void loadWalls(sqlite3 *db);
+	void loadDoors(sqlite3 *db);
 public:
 	void loadLevel(std::string levelName);
 	void displayLevel();
+	bool checkCollision();
 };
 
 #endif

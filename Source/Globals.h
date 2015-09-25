@@ -15,6 +15,7 @@
 #include "HeadsUpDisplay.h"
 #include "CameraControl.h"
 #include "PauseScreen.h"
+#include "Level.h"
 
 class Globals
 {
@@ -33,6 +34,7 @@ public:
 	static CameraControl Cam;
 	static PauseScreen pause;
 	static std::string curr_level;
+	static Level lvl;
 };
 
 #endif

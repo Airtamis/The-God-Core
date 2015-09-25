@@ -12,23 +12,17 @@
 #ifndef COLLISION_ENGINE_H
 #define COLLISION_ENGINE_H
 
+#include <vector>
+#include "Rectangle.h"
+
 class CollisionEngine
 {
 private:
+	bool collideX(const float X);
+	bool collideZ(const float Z);
 
 public:
-	// Determines if the player is close enough to interact with an object
-	bool isClose(
-		float x, float y, float z, // The player's xyz position
-		float _x, float _y, float _z, // The xyz position of the object
-		float radius); // Radius of object
-
-	// Determines if the player has collided with a wall
-	void didCollide(
-			float &x, float &y, float &z, // The player's xyz position
-			float _x, float _y, float _z, // The xyz position of the room
-			float length, float depth, float width // from origin of room to left/right walls, front/back walls, and floor
-		);
+	bool collide(std::vector<Rectangle> walls);
 };
 
 #endif

@@ -121,6 +121,10 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		case 'w':
 		case 'W':
 			glob.Cam.moveForward(speedMod);
+			/*if (glob.lvl.checkCollision())
+			{
+				glob.Cam.moveBackward(speedMod);
+			}*/
 			break;
 
 		case 'a':
@@ -131,6 +135,10 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		case 's':
 		case 'S':
 			glob.Cam.moveBackward(speedMod);
+			/*if (glob.lvl.checkCollision())
+			{
+				glob.Cam.moveForward(speedMod);
+			}*/
 			break;
 
 		case 'd':

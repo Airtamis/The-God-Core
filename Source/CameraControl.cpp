@@ -95,6 +95,8 @@ void CameraControl::lookDown()
 
 void CameraControl::strafeLeft()
 {
+	prevz = z;
+	prevx = x;
 	// Angles + 90 degrees for an angle that is perpendicular to x_angle
 	z = z + moveSpeed * cos(toRadian(x_angle + 90));
 	x = x - moveSpeed * sin(toRadian(x_angle + 90));
@@ -102,6 +104,8 @@ void CameraControl::strafeLeft()
 
 void CameraControl::strafeRight()
 {
+	prevz = z;
+	prevx = x;
 	// Angles - 90 degrees for an angle that is perpendicular to x_angle
 	z = z + moveSpeed * cos(toRadian(x_angle - 90));
 	x = x - moveSpeed * sin(toRadian(x_angle - 90));
@@ -109,12 +113,16 @@ void CameraControl::strafeRight()
 
 void CameraControl::moveForward(int mod)
 {
+	prevz = z;
+	prevx = x;
 	z = z + moveSpeed * mod * cos(toRadian(x_angle));
 	x = x - moveSpeed * mod * sin(toRadian(x_angle));
 }
 
 void CameraControl::moveBackward(int mod)
 {
+	prevz = z;
+	prevx = x;
 	z = z - moveSpeed * mod * cos(toRadian(x_angle));
 	x = x + moveSpeed * mod * sin(toRadian(x_angle));
 }

@@ -100,19 +100,16 @@ bool GameManager::draw2()
 	//LevelZero level (glob.Cam.x, glob.Cam.y, glob.Cam.z);
 	//return level.display();
 
-	static Level lvl;
-
 	if (!isLoaded)
 	{
-		lvl.loadLevel("LEVELZERO");
+		glob.lvl.loadLevel("LEVELZERO");
 
 		isLoaded = true;
 	}
 
 	else
 	{
-		lvl.displayLevel();
-		
+		glob.lvl.displayLevel();
 	}
 
 	return false;

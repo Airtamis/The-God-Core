@@ -14,6 +14,9 @@
 #include <iterator>
 #include <utility>
 
+// max and min
+#include <algorithm>
+
 // OpenGL API
 #include <GL\glew.h>
 #include <GL\glut.h>
@@ -52,4 +55,34 @@ void Rectangle::Display2D()
 	glVertex2f(vertices[6], vertices[7]);
 	glVertex2f(vertices[9], vertices[10]);
 	glEnd();
+}
+
+const float Rectangle::getXMax()
+{
+	return max(max(vertices[0], vertices[3]), max(vertices[6], vertices[9]));
+}
+
+const float Rectangle::getXMin()
+{
+	return min(min(vertices[0], vertices[3]), min(vertices[6], vertices[9]));
+}
+
+const float Rectangle::getYMax()
+{
+	return max(max(vertices[1], vertices[4]), max(vertices[7], vertices[10]));
+}
+
+const float Rectangle::getYMin()
+{
+	return min(min(vertices[1], vertices[4]), min(vertices[7], vertices[10]));
+}
+
+const float Rectangle::getZMax()
+{
+	return max(max(vertices[2], vertices[5]), max(vertices[8], vertices[11]));
+}
+
+const float Rectangle::getZMin()
+{
+	return min(min(vertices[2], vertices[5]), min(vertices[8], vertices[11]));
 }
