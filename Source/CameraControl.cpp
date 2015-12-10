@@ -27,7 +27,7 @@
 // To include Globals Variables
 #include "Globals.h"
 
-static Globals glob;
+static
 
 // For converting degrees to radians
 const float PI = 3.14159;
@@ -40,7 +40,7 @@ float toRadian(float angle)
 
 void CameraControl::lookLeft()
 {
-	if (!glob.isPaused)
+	if (!isPaused)
 	{
 		x_angle -= 2 * turnSpeed;
 
@@ -53,7 +53,7 @@ void CameraControl::lookLeft()
 }
 void CameraControl::lookRight()
 {
-	if (!glob.isPaused)
+	if (!isPaused)
 	{
 		x_angle += turnSpeed;
 
@@ -67,7 +67,7 @@ void CameraControl::lookRight()
 
 void CameraControl::lookUp()
 {
-	if (!glob.isPaused)
+	if (!isPaused)
 	{
 		y_angle -= turnSpeed;
 
@@ -81,7 +81,7 @@ void CameraControl::lookUp()
 
 void CameraControl::lookDown()
 {
-	if (!glob.isPaused)
+	if (!isPaused)
 	{
 		y_angle += turnSpeed;
 
@@ -169,8 +169,8 @@ void CameraControl::Display()
 	glLoadIdentity();
 
 	// Rotate along proper axes
-	glRotatef(x_angle, 0, 1, 0);
 	glRotatef(y_angle, 1, 0, 0);
+	glRotatef(x_angle, 0, 1, 0);	
 	glRotatef(z_angle, 0, 0, 1);
 
 	// Translate along the Rectangle

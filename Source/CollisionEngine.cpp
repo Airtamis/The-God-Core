@@ -21,9 +21,9 @@
 
 bool CollisionEngine::collideX(const float X)
 {
-	Globals glob; 
-	float big = std::max(glob.Cam.x, glob.Cam.prevx);
-	float small = std::min(glob.Cam.x, glob.Cam.prevx);
+ 
+	float big = std::max(Cam.x, Cam.prevx);
+	float small = std::min(Cam.x, Cam.prevx);
 	if (big >= X && small <= X)
 	{
 		return true;
@@ -34,9 +34,9 @@ bool CollisionEngine::collideX(const float X)
 
 bool CollisionEngine::collideZ(const float Z)
 {
-	Globals glob;
-	float big = std::max(glob.Cam.z, glob.Cam.prevz);
-	float small = std::min(glob.Cam.z, glob.Cam.prevz);
+
+	float big = std::max(Cam.z, Cam.prevz);
+	float small = std::min(Cam.z, Cam.prevz);
 	if (big >= Z && small <= Z)
 	{
 		return true;
@@ -47,7 +47,7 @@ bool CollisionEngine::collideZ(const float Z)
 
 bool CollisionEngine::collide(std::vector<Rectangle> walls)
 {
-	Globals glob;
+
 	// i = 2, skip floors and ceilingssss
 	for (unsigned int i = 0; i < walls.size(); i++)
 	{
@@ -63,7 +63,7 @@ bool CollisionEngine::collide(std::vector<Rectangle> walls)
 		{
 			if (collideX(MAX_X))
 			{
-				std::cout << "X " << glob.Cam.x << ' ' << MAX_X << ' ' << MIN_X;
+				std::cout << "X " << Cam.x << ' ' << MAX_X << ' ' << MIN_X;
 				exit(-1);
 				return true;
 			}
@@ -74,7 +74,7 @@ bool CollisionEngine::collide(std::vector<Rectangle> walls)
 		{
 			if (collideZ(MAX_Z))
 			{
-				std::cout << "Z " << glob.Cam.z << ' ' << MAX_Z << ' ' << MIN_Z;
+				std::cout << "Z " << Cam.z << ' ' << MAX_Z << ' ' << MIN_Z;
 				exit(-1);
 				return true;
 			}

@@ -1,8 +1,6 @@
 #include "GameManager.h"
 
 #include "Globals.h"
-// ALL INSTANCES OF GLOB MUST BE STATIC
-static Globals glob;
 
 #include "Level.h"
 
@@ -25,13 +23,13 @@ void GameManager::mouse(int button, int state, int x, int y)
 	{
 		if (state == GLUT_DOWN)
 		{
-			if (glob.isPaused)
+			if (isPaused)
 			{
-				glob.isPaused = glob.pause.getClick(x, y);
+				isPaused = pause.getClick(x, y);
 				bool yes = false;
 			}
 
-			else if (glob.isInScreen)
+			else if (isInScreen)
 			{
 				
 			}
@@ -46,27 +44,27 @@ void GameManager::mouse(int button, int state, int x, int y)
 
 void GameManager::motionPassive(int x, int y)
 {
-	if (!glob.isPaused && !glob.getInput && !glob.isInScreen)
+	if (!isPaused && !getInput && !isInScreen)
 	{
 
 		if (x > 1200)
 		{
-			glob.Cam.lookRight();
+			Cam.lookRight();
 		}
 
 		else if (x < 100)
 		{
-			glob.Cam.lookLeft();
+			Cam.lookLeft();
 		}
 
 		if (y > 700)
 		{
-			glob.Cam.lookDown();
+			Cam.lookDown();
 		}
 
 		else if (y < 100)
 		{
-			glob.Cam.lookUp();
+			Cam.lookUp();
 		}
 	}
 }
@@ -97,19 +95,19 @@ void GameManager::changeSize(int w, int h)
 
 bool GameManager::draw2()
 {
-	//LevelZero level (glob.Cam.x, glob.Cam.y, glob.Cam.z);
+	//LevelZero level (Cam.x, Cam.y, Cam.z);
 	//return level.display();
 
 	if (!isLoaded)
 	{
-		glob.lvl.loadLevel("LEVELZERO");
+		lvl.loadLevel("LEVELZERO");
 
 		isLoaded = true;
 	}
 
 	else
 	{
-		glob.lvl.displayLevel();
+		lvl.displayLevel();
 	}
 
 	return false;
@@ -118,7 +116,7 @@ bool GameManager::draw2()
 void GameManager::manageScenes()
 {
 	// If we need to change the song, we can do it here
-	if (glob.changeSong)
+	if (changeSong)
 	{
 		manageMusic();
 	}
@@ -126,13 +124,13 @@ void GameManager::manageScenes()
 	// Clears the previous drawing
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	if (glob.isPaused)
+	if (isPaused)
 	{
 		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
-		glob.pause.display();
+		pause.display();
 	}
 
-	else if (glob.isInScreen)
+	else if (isInScreen)
 	{
 		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
 	}
@@ -143,27 +141,27 @@ void GameManager::manageScenes()
 		bool close = draw2();
 
 		// Moves the camera to the correct position
-		glob.Cam.Display();
-		if (glob.goDim)
+		Cam.Display();
+		if (goDim)
 		{
-			glob.HUD.goDim(30);
-			glob.goDim = false;
+			HUD.goDim(30);
+			goDim = false;
 		}
 
-		else if (glob.goDark)
+		else if (goDark)
 		{
-			glob.HUD.goDark(30);
-			glob.goDark = false;
+			HUD.goDark(30);
+			goDark = false;
 		}
 
 		// Prompt the user to interact if we should
 		if (close)
-			glob.HUD.displayWarning("INTERACT");
+			HUD.displayWarning("INTERACT");
 		else
-			glob.HUD.displayWarning("");
+			HUD.displayWarning("");
 
 		// Prints the HUD
-		glob.HUD.DisplayHUD();
+		HUD.DisplayHUD();
 	}
 
 	// Displays the current drawing
@@ -176,24 +174,24 @@ void GameManager::manageMusic()
 	static SoundClass background;
 
 	SoundSystem.releaseSound(background);
-	glob.changeSong = false;
+	changeSong = false;
 
-	switch (glob.songNum)
+	switch (songNum)
 	{
 	case 0:
-		SoundSystem.makeSound(&background, glob.SONG0);
+		SoundSystem.makeSound(&background, SONG0);
 		SoundSystem.playSound(background);
 		break;
 	case 1:
-		SoundSystem.makeSound(&background, glob.SONG1);
+		SoundSystem.makeSound(&background, SONG1);
 		SoundSystem.playSound(background);
 		break;
 	case 2:
-		SoundSystem.makeSound(&background, glob.SONG2);
+		SoundSystem.makeSound(&background, SONG2);
 		SoundSystem.playSound(background);
 		break;
 	case 3:
-		SoundSystem.makeSound(&background, glob.SONG3);
+		SoundSystem.makeSound(&background, SONG3);
 		SoundSystem.playSound(background);
 		break;
 	default:

@@ -16,8 +16,6 @@
 
 // Global variables
 #include "Globals.h"
-// EVERY INSTANCE OF GLOB MUST BE STATIC
-static Globals glob;
 
 PauseScreen::PauseScreen()
 {
@@ -77,16 +75,16 @@ void PauseScreen::doStuff()
 	else if (activeButton == 1)
 	{
 		SaveManager Jesus; // Jesus saves
-		Jesus.saveLevel(glob.curr_level);
+		Jesus.saveLevel(curr_level);
 	}
 
 	// Load
 	else if (activeButton == 2)
 	{
 		SaveManager Jesus; // Jesus... loads?
-		glob.loading = true;
+		loading = true;
 
-		glob.curr_level = Jesus.loadGame();
+		curr_level = Jesus.loadGame();
 	}
 
 	// Quit

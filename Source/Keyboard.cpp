@@ -23,8 +23,6 @@
 
 // To recieve and manage global variables
 #include "Globals.h"
-// ALL INSTANCES of GLOB MUST BE STATIC
-static Globals glob;
 
 using namespace std;
 
@@ -52,14 +50,14 @@ void Keyboard::normal(unsigned char key, int x, int y)
 	}
 
 	// If we are currently capturing input
-	if (glob.getInput)
+	if (getInput)
 	{
 		// Up arrow, recieves the next older entry in the console's history
 		if (getPrev)
 		{
-			input = glob.HUD.getHist(count);
+			input = HUD.getHist(count);
 
-			if (count < glob.HUD.getHistNum() - 1)
+			if (count < HUD.getHistNum() - 1)
 			{
 				count++;
 			}
@@ -70,7 +68,7 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		// Down arrow, recieves the next newer entry in the console's history
 		else if (getNext)
 		{
-			input = glob.HUD.getHist(count);
+			input = HUD.getHist(count);
 
 			if (count > 0)
 			{
@@ -83,7 +81,7 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		// Enter key, process and clear input
 		else if (key == 13)
 		{
-			glob.HUD.inputString(input);
+			HUD.inputString(input);
 			input.clear();
 			count = 0;
 		}
@@ -92,8 +90,8 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		else if (key == '~')
 		{
 			input.clear();
-			glob.getInput = false;
-			glob.HUD.toggleConsole();
+			getInput = false;
+			HUD.toggleConsole();
 			count = 0;
 		}
 
@@ -110,60 +108,71 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		}
 
 		// Print what's been typed so far
-		glob.HUD.printToConsole(input);
+		HUD.printToConsole(input);
 	}
 
 	// Otherwise (as long we aren't paused)
-	else if (!glob.isPaused && !glob.isInScreen)
+	else if (!isPaused && !isInScreen)
 	{
 		switch (key)
 		{
 		case 'w':
 		case 'W':
-			glob.Cam.moveForward(speedMod);
-			/*if (glob.lvl.checkCollision())
+			Cam.moveForward(speedMod);
+			/*if (lvl.checkCollision())
 			{
-				glob.Cam.moveBackward(speedMod);
+				Cam.moveBackward(speedMod);
 			}*/
 			break;
 
 		case 'a':
 		case 'A':
-			glob.Cam.strafeRight();
+			Cam.strafeRight();
 			break;
 
 		case 's':
 		case 'S':
-			glob.Cam.moveBackward(speedMod);
-			/*if (glob.lvl.checkCollision())
+			Cam.moveBackward(speedMod);
+			/*if (lvl.checkCollision())
 			{
-				glob.Cam.moveForward(speedMod);
+				Cam.moveForward(speedMod);
 			}*/
 			break;
 
 		case 'd':
 		case 'D':
-			glob.Cam.strafeLeft();
+			Cam.strafeLeft();
 			break;
 
 		case 'e':
 		case 'E':
-			glob.goDark = true;
+			goDark = true;
 			break;
-
+		case 'i':
+		case 'I': Cam.lookUp();
+			break;
+		case 'k':
+		case 'K': Cam.lookDown();
+			break;
+		case 'j':
+		case 'J': Cam.lookLeft();
+			break;
+		case 'l':
+		case 'L': Cam.lookRight();
+			break;
 		case '~':
-			glob.getInput = true;
-			glob.HUD.toggleConsole();
+			getInput = true;
+			HUD.toggleConsole();
 			break;
 
 			// Enter
 		case 13:
-			glob.goDim = true;
+			goDim = true;
 			break;
 
 			// Escape
 		case 27:
-			glob.isPaused = true;
+			isPaused = true;
 			break;
 		}
 	}
@@ -173,8 +182,8 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		{
 		// Escape
 		case 27:
-			glob.isPaused = false;
-			glob.pause.reset();
+			isPaused = false;
+			pause.reset();
 			break;
 		}
 	}
@@ -202,15 +211,15 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_F3:
-		glob.getInput = !glob.getInput;
+		getInput = !getInput;
 		break;
 
 	case GLUT_KEY_F4:
-		glob.Cam.resetCam();
+		Cam.resetCam();
 		break;
 
 	case GLUT_KEY_UP:
-		if (glob.getInput)
+		if (getInput)
 		{
 			getPrev = true;
 			getNext = false;
@@ -221,7 +230,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_DOWN:
-		if (glob.getInput)
+		if (getInput)
 		{
 			getNext = true;
 			getPrev = false;

@@ -173,7 +173,7 @@ void Level::loadLevel(std::string levelName)
 
 void Level::displayLevel()
 {
-	vector<Rectangle>::iterator it;
+	vr::iterator it;
 
 	//cout << walls.size() << endl;
 

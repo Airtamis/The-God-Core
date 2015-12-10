@@ -17,24 +17,19 @@
 #include "PauseScreen.h"
 #include "Level.h"
 
-class Globals
-{
-public:
-	static bool
-		clipping,
-		goDim, goDark, loading,
-		getInput, isPaused, isInScreen,
-		changeSong;
+extern bool clipping,
+	goDim, goDark, loading,
+	getInput, isPaused, isInScreen,
+	changeSong;
 
-	static int songNum;
+extern int songNum;
 
-	const static char *SONG0, *SONG1, *SONG2, *SONG3;
+extern const char *SONG0, *SONG1, *SONG2, *SONG3;
 
-	static HeadsUpDisplay HUD;
-	static CameraControl Cam;
-	static PauseScreen pause;
-	static std::string curr_level;
-	static Level lvl;
-};
+extern HeadsUpDisplay HUD;
+extern CameraControl Cam;
+extern PauseScreen pause;
+extern std::string curr_level;
+extern Level lvl;
 
 #endif

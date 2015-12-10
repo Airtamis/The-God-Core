@@ -19,8 +19,6 @@
 
 // Contains global environment variables
 #include "Globals.h"
-// ALL INSTANCES OF GLOB MUST BE STATIC
-static Globals glob;
 
 using namespace std;
 
@@ -77,7 +75,7 @@ void Console::processInput()
 		console_log.push_back("Noclip toggled.");
 		console_color.push_back(VALID_COLOR);
 
-		glob.clipping = !glob.clipping;
+		clipping = !clipping;
 	}
 
 	// Toggles damage on and off
@@ -249,45 +247,45 @@ void Console::readFromFile(string input)
 
 void Console::playSong(string input)
 {
-	if (input == glob.SONG0 || input == "0")
+	if (input == SONG0 || input == "0")
 	{
-		glob.songNum = 0;
-		glob.changeSong = true;
+		songNum = 0;
+		changeSong = true;
 
-		string song(glob.SONG0);
+		string song(SONG0);
 
 		console_log.push_back("Now playing " + song);
 		console_color.push_back(VALID_COLOR);
 	}
 
-	else if (input == glob.SONG1 || input == "1")
+	else if (input == SONG1 || input == "1")
 	{
-		glob.songNum = 1;
-		glob.changeSong = true;
+		songNum = 1;
+		changeSong = true;
 
-		string song(glob.SONG1);
+		string song(SONG1);
 
 		console_log.push_back("Now playing " + song);
 		console_color.push_back(VALID_COLOR);
 	}
 
-	else if (input == glob.SONG2 || input == "2")
+	else if (input == SONG2 || input == "2")
 	{
-		glob.songNum = 2;
-		glob.changeSong = true;
+		songNum = 2;
+		changeSong = true;
 
-		string song(glob.SONG2);
+		string song(SONG2);
 
 		console_log.push_back("Now playing " + song);
 		console_color.push_back(VALID_COLOR);
 	}
 
-	else if (input == glob.SONG3 || input == "3")
+	else if (input == SONG3 || input == "3")
 	{
-		glob.songNum = 3;
-		glob.changeSong = true;
+		songNum = 3;
+		changeSong = true;
 
-		string song(glob.SONG3);
+		string song(SONG3);
 
 		console_log.push_back("Now playing " + song);
 		console_color.push_back(VALID_COLOR);

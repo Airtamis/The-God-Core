@@ -11,6 +11,8 @@
 
 #include <GL\glut.h>
 
+typedef std::vector<Rectangle> vr;
+
 struct Quad
 {
 	float r, g, b, a;
@@ -25,8 +27,8 @@ class Level
 private:
 	GLUquadricObj *quadratic;
 
-	std::vector<Rectangle> walls;
-	std::vector<Rectangle> doors;
+	vr walls;
+	vr doors;
 
 	void loadWalls(sqlite3 *db);
 	void loadDoors(sqlite3 *db);
