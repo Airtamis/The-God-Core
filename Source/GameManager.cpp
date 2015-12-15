@@ -44,6 +44,58 @@ void GameManager::mouse(int button, int state, int x, int y)
 
 void GameManager::motionPassive(int x, int y)
 {
+	static int _x = 0, _y = 0;
+
+	if (!isPaused && !getInput && !isInScreen)
+	{
+		if (x > _x)
+		{
+			Cam.lookRight();
+			_x = x;
+		}
+
+		else if (x < _x)
+		{
+			Cam.lookLeft();
+			_x = x;
+		}
+
+		if (y < _y)
+		{
+			Cam.lookUp();
+			_y = y;
+		}
+
+		else if (y > _y)
+		{
+			Cam.lookDown();
+			_y = y;
+		}
+
+		// Loop around to the other side of the screen
+
+		bool updateMouse = false;
+		int newY = y, newX = x;
+		if (y == 0 || y > 500)
+		{
+			updateMouse = true;
+			newY = 300;
+			_y = 300;
+		}
+
+		if (x == 0 || x > 500)
+		{ 
+			updateMouse = true;
+			newX = 300;
+			_x = 300;
+		}
+
+		if (updateMouse)
+		{
+			glutWarpPointer(newX, newY);
+		}
+	}
+	/*
 	if (!isPaused && !getInput && !isInScreen)
 	{
 
@@ -66,7 +118,7 @@ void GameManager::motionPassive(int x, int y)
 		{
 			Cam.lookUp();
 		}
-	}
+	}*/
 }
 
 void GameManager::changeSize(int w, int h)
