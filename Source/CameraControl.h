@@ -20,7 +20,7 @@ class CameraControl
 {
 private:
 	// Speeds for moving and rotating
-	float moveSpeed = 0.1f, turnSpeed = .5f;
+	float moveSpeed = 0.1f, turnSpeed = 1.0f;
 
 public:
 	// Negatively adjusts angle and modifies lx

@@ -12,6 +12,8 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
+#include <string>
+
 class Keyboard
 {
 private:
@@ -21,6 +23,12 @@ private:
 public:
 	// Normal keys
 	void normal(unsigned char key, int x, int y);
+	// To read console input
+	void inputConsole(unsigned char key, int x, int y);
+	// To read terminal input
+	void inputTerminal(unsigned char key, int x, int y);
+	// All other input
+	void interact(unsigned char key, int x, int y);
 	// If a key is released
 	void key_up(unsigned char key, int x, int y);
 	// Special keys (functions, arrows, ect.)

@@ -18,12 +18,16 @@
 #ifndef PAUSESCREEN_H
 #define PAUSESCREEN_H
 
-#include "Screen.h"
+#include "TwoD.h"
 #include <string>
+#include <vector>
 
-class PauseScreen : public Screen
+class PauseScreen : public TwoD
 {
 private: 
+	int num_of_buttons, activeButton;
+	std::vector <std::string> buttonNames;
+
 
 public:
 	// Initializes variables

@@ -46,7 +46,8 @@ void GameManager::motionPassive(int x, int y)
 {
 	static int _x = 0, _y = 0;
 
-	if (!isPaused && !getInput && !isInScreen)
+	// If nothing else is happening basically
+	if (!isPaused && !getConsole && !getTerminal && !isInScreen)
 	{
 		if (x > _x)
 		{

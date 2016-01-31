@@ -98,9 +98,10 @@ void PauseScreen::display()
 {
 	prepare2D();
 
-	drawExit();
-	drawSideBar();
-	drawButtons();
+	// We're gonna have specialized actions for this main menu
+	//drawExit();
+	//drawSideBar();
+	//drawButtons();
 	doStuff();
 
 	prepare3D();

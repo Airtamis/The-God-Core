@@ -26,39 +26,6 @@
 
 using namespace std;
 
-void HeadsUpDisplay::prepare2D()
-{
-	// Disable writing to the z buffer
-	glDisable(GL_DEPTH_TEST);
-	glDepthMask(GL_FALSE);
-	// Disables lighting
-	glDisable(GL_LIGHTING);
-
-	// Create an orthogonal matrix to write on
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glLoadIdentity();
-	glOrtho(SCREENTOP, SCREENBOTTOM, SCREENRIGHT, SCREENLEFT, -1, 1);
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-}
-
-void HeadsUpDisplay::prepare3D()
-{
-	// Discards the orthogonal matrices
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-
-	// Enables writing to the z buffer
-	glEnable(GL_DEPTH_TEST);
-	glDepthMask(GL_TRUE);
-	// Renable lighting
-	glEnable(GL_LIGHTING);
-}
-
 void HeadsUpDisplay::drawHelmetBounds()
 {
 	// Helmet bounds are black
@@ -67,25 +34,25 @@ void HeadsUpDisplay::drawHelmetBounds()
 	// The top of the helmet
 	float top_vertices[9] =
 	{
-		SCREENRIGHT / 5, SCREENTOP, -1,
-		SCREENRIGHT / 2, 30, -1,
-		4 * SCREENRIGHT / 5, SCREENTOP, -1
+		SCREENRIGHT, SCREENTOP, -1,
+		SCREENLEFT, SCREENTOP, -1,
+		SCREENRIGHT / 2.0, SCREENBOTTOM / 20.0, -1
 	};
 
 	// The left of the hemlet
 	float left_vertices[9] =
 	{
 		SCREENLEFT, SCREENBOTTOM, -1,
-		SCREENLEFT, SCREENBOTTOM / 2, -1,
-		SCREENRIGHT / 20, 3 * SCREENBOTTOM / 4, -1
+		SCREENLEFT, SCREENTOP, -1,
+		SCREENRIGHT / 20.0, 3 * SCREENBOTTOM / 5.0, -1
 	};
 
 	// The back of the helmet
 	float right_vertices[9] =
 	{
 		SCREENRIGHT, SCREENBOTTOM, -1,
-		SCREENRIGHT, SCREENBOTTOM / 2, -1,
-		19 * SCREENRIGHT / 20, 3 * SCREENBOTTOM / 4, -1
+		SCREENRIGHT, SCREENTOP, -1,
+		19 * SCREENRIGHT / 20.0, 3 * SCREENBOTTOM / 5.0, -1
 	};
 
 	Triangle top_helm{ top_vertices, colors };
@@ -212,9 +179,9 @@ void HeadsUpDisplay::drawInfoBox()
 	float vertices[12] =
 	{
 		SCREENLEFT, SCREENTOP, -1,
-		SCREENLEFT, 40, -1,
-		50, 40, -1,
-		50, SCREENTOP, -1
+		SCREENLEFT, SCREENBOTTOM / 10, -1,
+		SCREENRIGHT / 10, SCREENBOTTOM / 10, -1,
+		SCREENRIGHT / 10, SCREENTOP, -1
 	};
 
 	Rectangle info{ vertices, colors };
@@ -223,7 +190,7 @@ void HeadsUpDisplay::drawInfoBox()
 
 void HeadsUpDisplay::displayInfo(char* tag)
 {
-	helmet.openFile(SCREENLEFT, SCREENTOP + 10, 1, 1, 1,
+	helmet.openFile(SCREENLEFT, SCREENTOP +  20, 1, 1, 1,
 		"suitAlerts.log", "INFO-WELL");
 }
 

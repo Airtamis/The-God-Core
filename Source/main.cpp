@@ -42,6 +42,11 @@ bool initGame(int argc, char **argv);
 // Manages the game's scenes
 void manageScenes();
 
+float light_diffuse[] = { 0.3, 0.3, 0.3, 0.5 };
+float light_position[] = { 0, 1, 0, 0 };
+float mat_specular[] = { 0.3, 0.3, 0.3, 0.5 };
+float mat_shininess[] = { 3.0 };
+
 
 //****** FUNCTION DEFINITIONS ******\\
 
@@ -86,8 +91,18 @@ bool initGame(int argc, char **argv)
 	glEnable(GL_DEPTH_TEST);
 	// Let there be light!
 	glEnable(GL_LIGHTING);
+	// First light source
+	glEnable(GL_LIGHT0);
 	// Light doesnt turn everything grey
 	glEnable(GL_COLOR_MATERIAL);
+	// Light properties
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+
+	glutWarpPointer(300, 300);
 
 	// Start in Fullscreen
 	glutFullScreen();

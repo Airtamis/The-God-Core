@@ -17,9 +17,14 @@
 #include "PauseScreen.h"
 #include "Level.h"
 
+// Remember that if you're doing anything else, globals are bad.
+// But we're in the hellscape that is graphics
+// There are no rules here
+// There is no mercy
+
 extern bool clipping,
 	goDim, goDark, loading,
-	getInput, isPaused, isInScreen,
+	getConsole, getTerminal, isPaused, isInScreen,
 	changeSong;
 
 extern int songNum;

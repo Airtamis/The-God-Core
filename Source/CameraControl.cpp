@@ -27,8 +27,6 @@
 // To include Globals Variables
 #include "Globals.h"
 
-static
-
 // For converting degrees to radians
 const float PI = 3.14159;
 

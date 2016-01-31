@@ -14,17 +14,17 @@
 #ifndef HEADSUPDISPLAY
 #define HEADSUPDISPLAY
 
+// Base class for 2D operations
+#include "TwoD.h"
+
 // For displaying text in the HUD
 #include "TextEngine.h"
 // The Developer Console
 #include "Console.h"
 
-class HeadsUpDisplay
+class HeadsUpDisplay : public TwoD
 {
 private:
-	// The pixel boundaries of the screen
-	const int SCREENTOP = 0, SCREENBOTTOM = 500,
-		SCREENLEFT = 0, SCREENRIGHT = 500;
 	// Duration of time to dim screen (Goes from black to clear as time progresses)
 	int dimTime = 0;
 	// Duration of time to go dark (completely black)
@@ -48,8 +48,6 @@ private:
 	// Dev Console
 	Console dev;
 
-	// Prepares OpenGL draw in 2D
-	void prepare2D();
 	// Draws an info bar at the top of the screen
 	void drawHelmetBounds();
 	// Displays suit alerts
@@ -66,8 +64,7 @@ private:
 	void drawConsole();
 	// Displays standard info in the top left corner 
 	void displayInfo(char* tag);
-	// "Resets" OpenGL to draw in 3D
-	void prepare3D();
+	
 
 public:
 	// Manages the HUD

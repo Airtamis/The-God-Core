@@ -28,16 +28,181 @@ using namespace std;
 
 void Keyboard::normal(unsigned char key, int x, int y)
 {
-	// Speed at which the player moves 
-	int speedMod = 1;
+	// If we are currently capturing input
+	if (getConsole)
+	{
+		inputConsole(key, x, y);
+	}
 
-	// Checks if shift, ctr, or alt is pressed
-	int modKey = glutGetModifiers();
+	else if (getTerminal)
+	{
+		inputTerminal(key, x, y);
+	}
 
+	// Otherwise (as long we aren't paused)
+	else if (!isPaused && !isInScreen)
+	{
+		interact(key, x, y);
+	}
+
+	else
+	{
+		switch (key)
+		{
+			// Escape
+		case 27:
+			isPaused = false;
+			//pause.reset();
+			break;
+		}
+	}
+
+}
+
+void Keyboard::inputConsole(unsigned char key, int x, int y)
+{
 	// User string input
 	static string input;
 	// Number in console history
 	static int count = 0;
+
+	// Up arrow, recieves the next older entry in the console's history
+	if (getPrev)
+	{
+		input = HUD.getHist(count);
+
+		if (count < HUD.getHistNum() - 1)
+		{
+			count++;
+		}
+
+		getPrev = false;
+	}
+
+	// Down arrow, recieves the next newer entry in the console's history
+	else if (getNext)
+	{
+		input = HUD.getHist(count);
+
+		if (count > 0)
+		{
+			count--;
+		}
+
+		getNext = false;
+	}
+
+	// Enter key, process and clear input
+	else if (key == 13)
+	{
+		HUD.inputString(input);
+		input.clear();
+		count = 0;
+	}
+
+	// Tilda, close the console
+	else if (key == '~')
+	{
+		input.clear();
+		getConsole = false;
+		HUD.toggleConsole();
+		count = 0;
+	}
+
+	// Backspace. Self explanatory
+	else if (key == 8 && !input.empty())
+	{
+		input.pop_back();
+	}
+
+	// Otherwise, type normally
+	else
+	{
+		input += key;
+	}
+
+	// Print what's been typed so far
+	HUD.printToConsole(input);
+}
+
+// Pretty much a copy pasta of inputConsole because I'm a terrible programmer
+// I'll try to combine em in the future, I swear
+// Just adjust all of these to do terminally stuff I guess
+// Also exits 6 because it shouldnt be called yet
+void Keyboard::inputTerminal(unsigned char key, int x, int y)
+{
+	exit(6); //  This shouldn't be called yet
+	// User string input
+	static string input;
+	// Number in console history
+	static int count = 0;
+
+	// Up arrow, recieves the next older entry in the console's history
+	if (getPrev)
+	{
+		input = HUD.getHist(count); 
+
+		if (count < HUD.getHistNum() - 1)
+		{
+			count++;
+		}
+
+		getPrev = false;
+	}
+
+	// Down arrow, recieves the next newer entry in the console's history
+	else if (getNext)
+	{
+		input = HUD.getHist(count);
+
+		if (count > 0)
+		{
+			count--;
+		}
+
+		getNext = false;
+	}
+
+	// Enter key, process and clear input
+	else if (key == 13)
+	{
+		HUD.inputString(input);
+		input.clear();
+		count = 0;
+	}
+
+	// Tilda, close the console
+	else if (key == '~')
+	{
+		input.clear();
+		getConsole = false;
+		HUD.toggleConsole();
+		count = 0;
+	}
+
+	// Backspace. Self explanatory
+	else if (key == 8 && !input.empty())
+	{
+		input.pop_back();
+	}
+
+	// Otherwise, type normally
+	else
+	{
+		input += key;
+	}
+
+	// Print what's been typed so far
+	HUD.printToConsole(input);
+}
+
+// All other input
+void Keyboard::interact(unsigned char key, int x, int y)
+{
+	// Speed at which the player moves 
+	int speedMod = 1;
+
+	int modKey = glutGetModifiers();
 
 	if (modKey == GLUT_ACTIVE_SHIFT)
 	{
@@ -49,143 +214,43 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		speedMod = 1;
 	}
 
-	// If we are currently capturing input
-	if (getInput)
+	switch (key)
 	{
-		// Up arrow, recieves the next older entry in the console's history
-		if (getPrev)
-		{
-			input = HUD.getHist(count);
+	case 'w':
+	case 'W':
+		Cam.moveForward(speedMod);
+		break;
+	case 'a':
+	case 'A':
+		Cam.strafeRight();
+		break;
 
-			if (count < HUD.getHistNum() - 1)
-			{
-				count++;
-			}
+	case 's':
+	case 'S':
+		Cam.moveBackward(speedMod);
+		break;
+	case 'd':
+	case 'D':
+		Cam.strafeLeft();
+		break;
+	case 'e':
+	case 'E':
+		goDark = true;
+		break;
+	case '~':
+		getConsole = true;
+		HUD.toggleConsole();
+		break;
 
-			getPrev = false;
-		}
+		// Enter
+	case 13:
+		//goDim = true;
+		break;
 
-		// Down arrow, recieves the next newer entry in the console's history
-		else if (getNext)
-		{
-			input = HUD.getHist(count);
-
-			if (count > 0)
-			{
-				count--;
-			}
-
-			getNext = false;
-		}
-
-		// Enter key, process and clear input
-		else if (key == 13)
-		{
-			HUD.inputString(input);
-			input.clear();
-			count = 0;
-		}
-
-		// Tilda, close the console
-		else if (key == '~')
-		{
-			input.clear();
-			getInput = false;
-			HUD.toggleConsole();
-			count = 0;
-		}
-
-		// Backspace. Self explanatory
-		else if (key == 8 && !input.empty())
-		{
-			input.pop_back();
-		}
-
-		// Otherwise, type normally
-		else
-		{
-			input += key;
-		}
-
-		// Print what's been typed so far
-		HUD.printToConsole(input);
-	}
-
-	// Otherwise (as long we aren't paused)
-	else if (!isPaused && !isInScreen)
-	{
-		switch (key)
-		{
-		case 'w':
-		case 'W':
-			Cam.moveForward(speedMod);
-			/*if (lvl.checkCollision())
-			{
-				Cam.moveBackward(speedMod);
-			}*/
-			break;
-
-		case 'a':
-		case 'A':
-			Cam.strafeRight();
-			break;
-
-		case 's':
-		case 'S':
-			Cam.moveBackward(speedMod);
-			/*if (lvl.checkCollision())
-			{
-				Cam.moveForward(speedMod);
-			}*/
-			break;
-
-		case 'd':
-		case 'D':
-			Cam.strafeLeft();
-			break;
-
-		case 'e':
-		case 'E':
-			goDark = true;
-			break;
-		case 'i':
-		case 'I': Cam.lookUp();
-			break;
-		case 'k':
-		case 'K': Cam.lookDown();
-			break;
-		case 'j':
-		case 'J': Cam.lookLeft();
-			break;
-		case 'l':
-		case 'L': Cam.lookRight();
-			break;
-		case '~':
-			getInput = true;
-			HUD.toggleConsole();
-			break;
-
-			// Enter
-		case 13:
-			goDim = true;
-			break;
-
-			// Escape
-		case 27:
-			isPaused = true;
-			break;
-		}
-	}
-	else
-	{
-		switch (key)
-		{
 		// Escape
-		case 27:
-			isPaused = false;
-			pause.reset();
-			break;
-		}
+	case 27:
+		isPaused = true;
+		break;
 	}
 }
 
@@ -211,7 +276,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_F3:
-		getInput = !getInput;
+		getTerminal = !getTerminal;
 		break;
 
 	case GLUT_KEY_F4:
@@ -219,7 +284,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_UP:
-		if (getInput)
+		if (getConsole || getTerminal)
 		{
 			getPrev = true;
 			getNext = false;
@@ -230,7 +295,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_DOWN:
-		if (getInput)
+		if (getConsole || getTerminal)
 		{
 			getNext = true;
 			getPrev = false;

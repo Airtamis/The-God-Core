@@ -4,7 +4,8 @@ bool clipping = true;
 bool goDim = false;
 bool goDark = false;
 // Captures string inputs for the user
-bool getInput = false;
+bool getConsole = false;
+bool getTerminal = false;
 // Is in the pause menu
 bool isPaused = false;
 // Is in a computer screen
