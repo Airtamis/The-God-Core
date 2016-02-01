@@ -247,54 +247,21 @@ void Console::readFromFile(string input)
 
 void Console::playSong(string input)
 {
-	if (input == SONG0 || input == "0")
-	{
-		songNum = 0;
-		changeSong = true;
-
-		string song(SONG0);
-
-		console_log.push_back("Now playing " + song);
-		console_color.push_back(VALID_COLOR);
-	}
-
-	else if (input == SONG1 || input == "1")
-	{
-		songNum = 1;
-		changeSong = true;
-
-		string song(SONG1);
-
-		console_log.push_back("Now playing " + song);
-		console_color.push_back(VALID_COLOR);
-	}
-
-	else if (input == SONG2 || input == "2")
-	{
-		songNum = 2;
-		changeSong = true;
-
-		string song(SONG2);
-
-		console_log.push_back("Now playing " + song);
-		console_color.push_back(VALID_COLOR);
-	}
-
-	else if (input == SONG3 || input == "3")
-	{
-		songNum = 3;
-		changeSong = true;
-
-		string song(SONG3);
-
-		console_log.push_back("Now playing " + song);
-		console_color.push_back(VALID_COLOR);
-	}
-
-	else
+	int sNum = getSongNum(input);
+	
+	if (sNum == -1) // Invalid input
 	{
 		console_log.push_back("ERROR: " + input + " not a valid song file");
 		console_color.push_back(INVALID_COLOR);
+	}
+
+	else // Valid input
+	{
+		songNum = sNum;
+		changeSong = true;
+		string song = getSongName(sNum);
+		console_log.push_back("Now playing " + song);
+		console_color.push_back(VALID_COLOR);
 	}
 }
 

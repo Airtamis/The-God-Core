@@ -229,27 +229,13 @@ void GameManager::manageMusic()
 	SoundSystem.releaseSound(background);
 	changeSong = false;
 
-	switch (songNum)
+	// Because you can never have too much bounds checking
+	if (songNum >= 0 && songNum <= 9)
 	{
-	case 0:
-		SoundSystem.makeSound(&background, SONG0);
+		std::string song = getSongName(songNum);
+		SoundSystem.makeSound(&background, song.c_str());
 		SoundSystem.playSound(background);
-		break;
-	case 1:
-		SoundSystem.makeSound(&background, SONG1);
-		SoundSystem.playSound(background);
-		break;
-	case 2:
-		SoundSystem.makeSound(&background, SONG2);
-		SoundSystem.playSound(background);
-		break;
-	case 3:
-		SoundSystem.makeSound(&background, SONG3);
-		SoundSystem.playSound(background);
-		break;
-	default:
-		break;
-	}	
+	}
 }
 
 // Normal key presses

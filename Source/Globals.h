@@ -20,7 +20,7 @@
 // Remember that if you're doing anything else, globals are bad.
 // But we're in the hellscape that is graphics
 // There are no rules here
-// There is no mercy
+// Only madness dwells here
 
 extern bool clipping,
 	goDim, goDark, loading,
@@ -29,12 +29,16 @@ extern bool clipping,
 
 extern int songNum;
 
-extern const char *SONG0, *SONG1, *SONG2, *SONG3;
+extern const char *SONG0, *SONG1, *SONG2, *SONG3, *SONG4, *SONG5,
+					*SONG6, *SONG7, *SONG8, *SONG9;
 
 extern HeadsUpDisplay HUD;
 extern CameraControl Cam;
 extern PauseScreen pause;
 extern std::string curr_level;
 extern Level lvl;
+
+int getSongNum(std::string input);
+std::string getSongName(int input);
 
 #endif

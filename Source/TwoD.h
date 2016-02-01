@@ -9,6 +9,9 @@ class TwoD
 {
 protected:
 	// The pixel boundaries of the screen
+	// My warning to you: comment as you code. 
+	// Because a year later I have no idea where 767 and 1367 came from
+	// And I'm to scared to change them now.
 	const float SCREENTOP = 0, SCREENBOTTOM = 767,
 		SCREENLEFT = 0, SCREENRIGHT = 1367;
 
