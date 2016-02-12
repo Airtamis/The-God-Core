@@ -13,6 +13,7 @@
 // For std::copy
 #include <iterator>
 #include <utility>
+#include <iostream>
 
 // max and min
 #include <algorithm>
@@ -23,13 +24,27 @@
 
 using namespace std;
 
-Rectangle::Rectangle(const float (&new_vertices)[12], const float (&new_color)[4])
+Rectangle::Rectangle(const double (&new_vertices)[12], const double (&new_color)[4])
 {
 	// Copies the color
 	copy(begin(new_color), end(new_color), color);
 
 	// Copies the vertices
 	copy(begin(new_vertices), end(new_vertices), vertices);
+
+
+	// Somedays I wonder what I'm even doing \\
+	// When I forget what all this means: http://keisan.casio.com/exec/system/1223596129 \\
+
+	// Calculate vector equation ax + by + cz + d = 0
+	// Get two vectors from three of the corners
+	double AB[] = { vertices[3] - vertices[0], vertices[4] - vertices[1], vertices[5] - vertices[2] };
+	double AC[] = { vertices[6] - vertices[0], vertices[7] - vertices[1], vertices[8] - vertices[2] };
+	// Cross Product of AB and AC
+	a = (AB[1] * AC[2]) - (AB[2] * AC[1]);
+	b = (AB[2] * AC[0]) - (AB[0] * AC[2]);
+	c = (AB[0] * AC[1]) - (AB[1] * AC[0]);
+	d = (a * vertices[0] + b * vertices[1] + c * vertices[2]);
 }
 
 void Rectangle::Display()
@@ -57,32 +72,7 @@ void Rectangle::Display2D()
 	glEnd();
 }
 
-const float Rectangle::getXMax()
+double Rectangle::getNorm()
 {
-	return max(max(vertices[0], vertices[3]), max(vertices[6], vertices[9]));
-}
-
-const float Rectangle::getXMin()
-{
-	return min(min(vertices[0], vertices[3]), min(vertices[6], vertices[9]));
-}
-
-const float Rectangle::getYMax()
-{
-	return max(max(vertices[1], vertices[4]), max(vertices[7], vertices[10]));
-}
-
-const float Rectangle::getYMin()
-{
-	return min(min(vertices[1], vertices[4]), min(vertices[7], vertices[10]));
-}
-
-const float Rectangle::getZMax()
-{
-	return max(max(vertices[2], vertices[5]), max(vertices[8], vertices[11]));
-}
-
-const float Rectangle::getZMin()
-{
-	return min(min(vertices[2], vertices[5]), min(vertices[8], vertices[11]));
+	return sqrt(a * a + b * b + c * c);
 }

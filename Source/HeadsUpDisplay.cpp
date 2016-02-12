@@ -29,10 +29,10 @@ using namespace std;
 void HeadsUpDisplay::drawHelmetBounds()
 {
 	// Helmet bounds are black
-	float colors[4] = { 0, 0, 0, 1 };
+	double colors[4] = { 0, 0, 0, 1 };
 
 	// The top of the helmet
-	float top_vertices[9] =
+	double top_vertices[9] =
 	{
 		SCREENRIGHT, SCREENTOP, -1,
 		SCREENLEFT, SCREENTOP, -1,
@@ -40,7 +40,7 @@ void HeadsUpDisplay::drawHelmetBounds()
 	};
 
 	// The left of the hemlet
-	float left_vertices[9] =
+	double left_vertices[9] =
 	{
 		SCREENLEFT, SCREENBOTTOM, -1,
 		SCREENLEFT, SCREENTOP, -1,
@@ -48,7 +48,7 @@ void HeadsUpDisplay::drawHelmetBounds()
 	};
 
 	// The back of the helmet
-	float right_vertices[9] =
+	double right_vertices[9] =
 	{
 		SCREENRIGHT, SCREENBOTTOM, -1,
 		SCREENRIGHT, SCREENTOP, -1,
@@ -88,8 +88,8 @@ void HeadsUpDisplay::dim()
 		if (timeElapsed < dimTime)
 		{
 			// A black square that grows more transparent as time passes
-			float colors[4] = { 0, 0, 0, (float)(dimTime - timeElapsed) / dimTime };
-			float dimVert[12] =
+			double colors[4] = { 0, 0, 0, (double)(dimTime - timeElapsed) / dimTime };
+			double dimVert[12] =
 			{
 				SCREENLEFT, SCREENTOP, -1,
 				SCREENLEFT, SCREENBOTTOM, -1,
@@ -126,8 +126,8 @@ void HeadsUpDisplay::dark()
 		if (timeElapsed < darkTime)
 		{
 			// A black square that obscures vision
-			float colors[4] = { 0, 0, 0, 1 };
-			float dimVert[12] =
+			double colors[4] = { 0, 0, 0, 1 };
+			double dimVert[12] =
 			{
 				SCREENLEFT, SCREENTOP, -1,
 				SCREENLEFT, SCREENBOTTOM, -1,
@@ -149,8 +149,8 @@ void HeadsUpDisplay::dark()
 
 void HeadsUpDisplay::drawConsole()
 {
-	float colors[4] = { .1, .1, .1, .9 };
-	float vertices[12] =
+	double colors[4] = { .1, .1, .1, .9 };
+	double vertices[12] =
 	{
 		SCREENLEFT, SCREENTOP, -1,
 		SCREENLEFT, SCREENBOTTOM / 5, -1,
@@ -175,8 +175,8 @@ void HeadsUpDisplay::drawConsole()
 
 void HeadsUpDisplay::drawInfoBox()
 {
-	float colors[4] = { 0, 1, 1, .5 };
-	float vertices[12] =
+	double colors[4] = { 0, 1, 1, .5 };
+	double vertices[12] =
 	{
 		SCREENLEFT, SCREENTOP, -1,
 		SCREENLEFT, SCREENBOTTOM / 10, -1,

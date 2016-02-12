@@ -27,7 +27,7 @@ public:
 	void inputConsole(unsigned char key, int x, int y);
 	// To read terminal input
 	void inputTerminal(unsigned char key, int x, int y);
-	// All other input
+	// To interact with the world
 	void interact(unsigned char key, int x, int y);
 	// If a key is released
 	void key_up(unsigned char key, int x, int y);

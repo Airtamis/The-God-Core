@@ -24,23 +24,25 @@
 // To recieve and manage global variables
 #include "Globals.h"
 
+#include "CollisionEngine.h"
+
 using namespace std;
 
 void Keyboard::normal(unsigned char key, int x, int y)
 {
 	// If we are currently capturing input
-	if (getConsole)
+	if (isInConsole)
 	{
 		inputConsole(key, x, y);
 	}
 
-	else if (getTerminal)
+	else if (isInTerminal)
 	{
 		inputTerminal(key, x, y);
 	}
 
 	// Otherwise (as long we aren't paused)
-	else if (!isPaused && !isInScreen)
+	else if (!isPaused)
 	{
 		interact(key, x, y);
 	}
@@ -104,7 +106,7 @@ void Keyboard::inputConsole(unsigned char key, int x, int y)
 	else if (key == '~')
 	{
 		input.clear();
-		getConsole = false;
+		isInConsole = false;
 		HUD.toggleConsole();
 		count = 0;
 	}
@@ -128,10 +130,8 @@ void Keyboard::inputConsole(unsigned char key, int x, int y)
 // Pretty much a copy pasta of inputConsole because I'm a terrible programmer
 // I'll try to combine em in the future, I swear
 // Just adjust all of these to do terminally stuff I guess
-// Also exits 6 because it shouldnt be called yet
 void Keyboard::inputTerminal(unsigned char key, int x, int y)
 {
-	exit(6); //  This shouldn't be called yet
 	// User string input
 	static string input;
 	// Number in console history
@@ -140,9 +140,9 @@ void Keyboard::inputTerminal(unsigned char key, int x, int y)
 	// Up arrow, recieves the next older entry in the console's history
 	if (getPrev)
 	{
-		input = HUD.getHist(count); 
+		input = TEST_TERMINAL.getHist(count); 
 
-		if (count < HUD.getHistNum() - 1)
+		if (count < TEST_TERMINAL.getHistNum() - 1)
 		{
 			count++;
 		}
@@ -153,7 +153,7 @@ void Keyboard::inputTerminal(unsigned char key, int x, int y)
 	// Down arrow, recieves the next newer entry in the console's history
 	else if (getNext)
 	{
-		input = HUD.getHist(count);
+		input = TEST_TERMINAL.getHist(count); 
 
 		if (count > 0)
 		{
@@ -166,17 +166,8 @@ void Keyboard::inputTerminal(unsigned char key, int x, int y)
 	// Enter key, process and clear input
 	else if (key == 13)
 	{
-		HUD.inputString(input);
+		TEST_TERMINAL.inputString(input);
 		input.clear();
-		count = 0;
-	}
-
-	// Tilda, close the console
-	else if (key == '~')
-	{
-		input.clear();
-		getConsole = false;
-		HUD.toggleConsole();
 		count = 0;
 	}
 
@@ -193,12 +184,12 @@ void Keyboard::inputTerminal(unsigned char key, int x, int y)
 	}
 
 	// Print what's been typed so far
-	HUD.printToConsole(input);
+	TEST_TERMINAL.getInput(input); // Drawing handled elsewhere?
 }
 
-// All other input
 void Keyboard::interact(unsigned char key, int x, int y)
 {
+	CollisionEngine col;
 	// Speed at which the player moves 
 	int speedMod = 1;
 
@@ -219,26 +210,41 @@ void Keyboard::interact(unsigned char key, int x, int y)
 	case 'w':
 	case 'W':
 		Cam.moveForward(speedMod);
+		if (col.collide(walls))
+		{
+			Cam.moveBackward(speedMod);
+		}
 		break;
 	case 'a':
 	case 'A':
 		Cam.strafeRight();
+		if (col.collide(walls))
+		{
+			Cam.strafeRight();
+		}
 		break;
-
 	case 's':
 	case 'S':
 		Cam.moveBackward(speedMod);
+		if (col.collide(walls))
+		{
+			Cam.moveForward(speedMod);
+		}
 		break;
 	case 'd':
 	case 'D':
 		Cam.strafeLeft();
+		if (col.collide(walls))
+		{
+			Cam.strafeRight();
+		}
 		break;
 	case 'e':
 	case 'E':
 		goDark = true;
 		break;
 	case '~':
-		getConsole = true;
+		isInConsole = true;
 		HUD.toggleConsole();
 		break;
 
@@ -276,7 +282,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_F3:
-		getTerminal = !getTerminal;
+		isInTerminal = !isInTerminal;
 		break;
 
 	case GLUT_KEY_F4:
@@ -284,7 +290,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_UP:
-		if (getConsole || getTerminal)
+		if (isInConsole || isInTerminal)
 		{
 			getPrev = true;
 			getNext = false;
@@ -295,7 +301,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_DOWN:
-		if (getConsole || getTerminal)
+		if (isInConsole || isInTerminal)
 		{
 			getNext = true;
 			getPrev = false;
@@ -313,7 +319,7 @@ void Keyboard::special(int key, int x, int y)
 
 	else
 	{
-		glutReshapeWindow(1000, 1000);
+		glutReshapeWindow(1367, 767);
 		glutPositionWindow(50, 50);
 	}
 }

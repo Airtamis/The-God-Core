@@ -16,25 +16,20 @@ class Rectangle
 {
 private:
 	// Arrays containing the color and vertices of the Rectangle
-	float color[4];
+	double color[4];
 public:
-	float vertices[12];
+	double vertices[12];
 	// Paramaterized constructor, as there cannot be a rectangle without vertices
-	Rectangle(const float(&new_vertices)[12], const float(&new_color)[4]);
+	Rectangle(const double(&new_vertices)[12], const double(&new_color)[4]);
+
+	double a, b, c, d;
+
+	double getNorm();
 	
 	// Print a Rectangle in 3D
 	void Display();
 	// Print a Rectangle in 2D
 	void Display2D();
-
-	// For use with collision
-
-	const float getXMax();
-	const float getXMin();
-	const float getYMax();
-	const float getYMin();
-	const float getZMax();
-	const float getZMin();
 };
 
 #endif

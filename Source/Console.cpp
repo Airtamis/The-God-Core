@@ -62,7 +62,7 @@ void Console::printInput()
 	}
 
 	// Prints whatever the user is typing
-	log.printString(0, SCREENBOTTOM / 5, 1, 1, 1, currentText);
+	log.printString(0, SCREENBOTTOM / 3.5, 1, 1, 1, currentText);
 }
 
 void Console::processInput()
@@ -75,7 +75,7 @@ void Console::processInput()
 		console_log.push_back("Noclip toggled.");
 		console_color.push_back(VALID_COLOR);
 
-		clipping = !clipping;
+		collision = !collision;
 	}
 
 	// Toggles damage on and off

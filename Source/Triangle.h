@@ -16,10 +16,10 @@ class Triangle
 {
 private:
 	// Arrays containing the colors and the xyz vertices of the triangles
-	float color[4], vertices[9];
+	double color[4], vertices[9];
 public:
 	// Takes in the vertices and color of the triangle
-	Triangle(const float(&new_vertices)[9], const float(&new_color)[4]);
+	Triangle(const double(&new_vertices)[9], const double(&new_color)[4]);
 	// Print the triangle in 3D
 	void Display();
 	// Print the triangle in 2D

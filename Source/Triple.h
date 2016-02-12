@@ -1,9 +1,13 @@
-#pragma once
+#ifndef TRIPLE_H
+#define TRIPLE_H
+
 class Triple
 {
 public:
-	float a, b, c;
+	double a, b, c;
 };
 
 // For converting to a triple
-Triple makeTrip(float _a, float _b, float _c);
+Triple makeTrip(double _a, double _b, double _c);
+
+#endif

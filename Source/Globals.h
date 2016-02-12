@@ -16,15 +16,22 @@
 #include "CameraControl.h"
 #include "PauseScreen.h"
 #include "Level.h"
+#include "Terminal.h"
 
 // Remember that if you're doing anything else, globals are bad.
 // But we're in the hellscape that is graphics
 // There are no rules here
 // Only madness dwells here
 
-extern bool clipping,
+typedef std::vector<Rectangle> vr;
+
+// For collision
+extern vr walls;
+extern vr doors;
+
+extern bool collision,
 	goDim, goDark, loading,
-	getConsole, getTerminal, isPaused, isInScreen,
+	isInConsole, isPaused, isInTerminal,
 	changeSong;
 
 extern int songNum;
@@ -38,7 +45,11 @@ extern PauseScreen pause;
 extern std::string curr_level;
 extern Level lvl;
 
+extern Terminal TEST_TERMINAL;
+
+// Converts a songname to an integer
 int getSongNum(std::string input);
+// Converts an integer to a songname
 std::string getSongName(int input);
 
 #endif

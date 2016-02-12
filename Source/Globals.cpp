@@ -1,15 +1,18 @@
 #include "Globals.h"
 
-bool clipping = true;
+vr walls;
+vr doors;
+
+bool collision = true;
 bool goDim = false;
 bool goDark = false;
 // Captures string inputs for the user
-bool getConsole = false;
+bool isInConsole = false;
 bool getTerminal = false;
 // Is in the pause menu
 bool isPaused = false;
 // Is in a computer screen
-bool isInScreen = false;
+bool isInTerminal = false;
 bool loading = false;
 
 bool changeSong = true;
@@ -33,6 +36,8 @@ HeadsUpDisplay HUD;
 CameraControl Cam;
 PauseScreen pause;
 Level lvl;
+
+Terminal TEST_TERMINAL; // pointer in future?
 
 int getSongNum(std::string input)
 {

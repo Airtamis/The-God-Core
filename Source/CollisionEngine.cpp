@@ -19,25 +19,15 @@
 
 #include <algorithm>
 
-bool CollisionEngine::collideX(const float X)
+const double PLAYER_RADIUS = 1;
+
+bool CollisionEngine::collide(double x, double y, double z)
 {
- 
-	float big = std::max(Cam.x, Cam.prevx);
-	float small = std::min(Cam.x, Cam.prevx);
-	if (big >= X && small <= X)
-	{
-		return true;
-	}
-
-	return false;
-}
-
-bool CollisionEngine::collideZ(const float Z)
-{
-
-	float big = std::max(Cam.z, Cam.prevz);
-	float small = std::min(Cam.z, Cam.prevz);
-	if (big >= Z && small <= Z)
+	// If bounding spheres intersect
+	double distance = pow((x - Cam.x), 2) + pow((y - Cam.y), 2) + pow((z - Cam.z), 2);
+	distance = sqrt(distance);
+	double radii = (PLAYER_RADIUS + .1);
+	if (distance < radii) // Figure out a standard radius for player, dynamically take radius from object
 	{
 		return true;
 	}
@@ -47,39 +37,16 @@ bool CollisionEngine::collideZ(const float Z)
 
 bool CollisionEngine::collide(std::vector<Rectangle> walls)
 {
-
-	// i = 2, skip floors and ceilingssss
-	for (unsigned int i = 0; i < walls.size(); i++)
+	if (collision == false)
 	{
-		const float MAX_X = walls[i].getXMax();
-		const float MIN_X = walls[i].getXMin();
-		const float MAX_Y = walls[i].getYMax();
-		const float MIN_Y = walls[i].getYMin();
-		const float MAX_Z = walls[i].getZMax();
-		const float MIN_Z = walls[i].getZMin();
-
-		// Wall lies along X axis
-		if (MAX_X == MIN_X)
-		{
-			if (collideX(MAX_X))
-			{
-				std::cout << "X " << Cam.x << ' ' << MAX_X << ' ' << MIN_X;
-				exit(-1);
-				return true;
-			}
-		}
-
-		// Wall lies along Z axis
-		else if (MAX_Z == MIN_Z)
-		{
-			if (collideZ(MAX_Z))
-			{
-				std::cout << "Z " << Cam.z << ' ' << MAX_Z << ' ' << MIN_Z;
-				exit(-1);
-				return true;
-			}
-		}
+		return false;
 	}
 
+	for (auto i : walls)
+	{
+		double project = abs(Cam.x * i.a + Cam.y * i.b + Cam.z * i.c + i.d); // Projection matrix
+
+		if (project / i.getNorm() < PLAYER_RADIUS) return true;
+	}
 	return false;
 }

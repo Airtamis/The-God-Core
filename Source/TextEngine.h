@@ -24,13 +24,13 @@ private:
 	// The path to the game's text files (.log's)
 	static const char* TEXT_PATH;
 	// The offset between lines of characters
-	static const float LINE_OFFSET;
+	static const double LINE_OFFSET;
 
 	void displayText(
 		// 2d start location of the text
-		float x, float y,
+		double x, double y,
 		// rgb color of text
-		float r, float g, float b,
+		double r, double g, double b,
 		// glut font and text to be displayed
 		void* font, 
 		std::vector<std::string> text);
@@ -41,11 +41,11 @@ private:
 public:
 	// Takes the location to display the text, color of the text,
 	// The file to read from, and a tag to search for
-	void openFile(float x, float y, float r, float g, float b,
+	void openFile(double x, double y, double r, double g, double b,
 		std::string fileName, std::string tag);
 
 	// Takes in a string to display
-	void printString(float x, float y, float r, float g, float b,
+	void printString(double x, double y, double r, double g, double b,
 		std::string text);
 
 	// Returns text from fileName specified by tag 

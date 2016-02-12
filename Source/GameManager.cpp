@@ -29,10 +29,6 @@ void GameManager::mouse(int button, int state, int x, int y)
 				bool yes = false;
 			}
 
-			else if (isInScreen)
-			{
-				
-			}
 		}
 
 		else
@@ -47,7 +43,7 @@ void GameManager::motionPassive(int x, int y)
 	static int _x = 0, _y = 0;
 
 	// If nothing else is happening basically
-	if (!isPaused && !getConsole && !getTerminal && !isInScreen)
+	if (!isPaused && !isInConsole && !isInTerminal)
 	{
 		if (x > _x)
 		{
@@ -77,14 +73,14 @@ void GameManager::motionPassive(int x, int y)
 
 		bool updateMouse = false;
 		int newY = y, newX = x;
-		if (y == 0 || y > 500)
+		if (y == 0 || y > 700)
 		{
 			updateMouse = true;
 			newY = 300;
 			_y = 300;
 		}
 
-		if (x == 0 || x > 500)
+		if (x == 0 || x > 700)
 		{ 
 			updateMouse = true;
 			newX = 300;
@@ -96,30 +92,6 @@ void GameManager::motionPassive(int x, int y)
 			glutWarpPointer(newX, newY);
 		}
 	}
-	/*
-	if (!isPaused && !getInput && !isInScreen)
-	{
-
-		if (x > 1200)
-		{
-			Cam.lookRight();
-		}
-
-		else if (x < 100)
-		{
-			Cam.lookLeft();
-		}
-
-		if (y > 700)
-		{
-			Cam.lookDown();
-		}
-
-		else if (y < 100)
-		{
-			Cam.lookUp();
-		}
-	}*/
 }
 
 void GameManager::changeSize(int w, int h)
@@ -128,7 +100,7 @@ void GameManager::changeSize(int w, int h)
 	if (h == 0)
 		h = 1;
 
-	float ratio = w * 1.0 / h;
+	double ratio = w * 1.0 / h;
 
 	// Use the Projection Matrix
 	glMatrixMode(GL_PROJECTION);
@@ -183,10 +155,12 @@ void GameManager::manageScenes()
 		pause.display();
 	}
 
-	else if (isInScreen)
+	else if (isInTerminal)
 	{
-		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+		TEST_TERMINAL.display();
 	}
+
+	// glutSetCursor(GLUT_CURSOR_LEFT_ARROW); Keypads maybe?
 
 	else
 	{

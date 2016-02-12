@@ -15,13 +15,24 @@
 #include <vector>
 #include "Rectangle.h"
 
+
+/*
+ * Brainstormingh here
+ * 
+ * Store lower left vertex and upper right vertex of each object
+ * Coords are max, min; max, max; min, max; min, min
+ * 
+ * Bounding spheres for objects and player
+ * (ax-bx)2+(ay-by)2+(az-bz)2 < (ar+br)
+ * just check if bounding sphere hits wall?
+ */
+
 class CollisionEngine
 {
 private:
-	bool collideX(const float X);
-	bool collideZ(const float Z);
 
 public:
+	bool collide(double x, double y, double z); // Later take vector of objects?
 	bool collide(std::vector<Rectangle> walls);
 };
 

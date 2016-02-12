@@ -28,10 +28,10 @@
 #include "Globals.h"
 
 // For converting degrees to radians
-const float PI = 3.14159;
+const double PI = 3.14159;
 
 // Takes in an angle, in degrees, and returns the angle in radians
-float toRadian(float angle)
+double toRadian(double angle)
 {
 	return angle * PI / 180;
 }

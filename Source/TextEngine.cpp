@@ -25,10 +25,10 @@ using namespace std;
 
 // Initializing the constants
 const char* TextEngine::TEXT_PATH = "Resources\\Scripts\\";
-const float TextEngine::LINE_OFFSET = 10;
+const double TextEngine::LINE_OFFSET = 10;
 
-void TextEngine::displayText(float x, float y,
-	float r, float g, float b,
+void TextEngine::displayText(double x, double y,
+	double r, double g, double b,
 	void* font, vector<string> text)
 {
 	vector<string>::iterator it;
@@ -83,8 +83,8 @@ vector<string> TextEngine::findText(string fileName, string tag)
 	return data;
 }
 
-void TextEngine::openFile(float x, float y,
-	float r, float g, float b,
+void TextEngine::openFile(double x, double y,
+	double r, double g, double b,
 	string fileName, string tag)
 {
 	vector<string> input = findText(fileName, tag);
@@ -101,7 +101,7 @@ vector<string> TextEngine::getText(string fileName, string tag)
 	return input;
 }
 
-void TextEngine::printString(float x, float y, float r, float g, float b,
+void TextEngine::printString(double x, double y, double r, double g, double b,
 	string text)
 {
 	glColor3f(r, g, b);

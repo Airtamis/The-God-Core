@@ -6,9 +6,11 @@
 
 #include "CollisionEngine.h"
 
+#include "Globals.h"
+
 using namespace std;
 
-Quad makeQuad(float a, float b, float c, float d)
+Quad makeQuad(double a, double b, double c, double d)
 {
 	Quad ret;
 	ret.r = a;
@@ -21,6 +23,7 @@ Quad makeQuad(float a, float b, float c, float d)
 
 void Level::loadWalls(sqlite3 *db)
 {
+	walls.clear();
 	// Prepared Statement
 	sqlite3_stmt *stm;
 	// SQL command
@@ -64,14 +67,14 @@ void Level::loadWalls(sqlite3 *db)
 		b = sqlite3_column_double(stm, 16);
 		a = sqlite3_column_double(stm, 17);
 
-		float verts[12] =
+		double verts[12] =
 		{
 			x1, y1, z1,
 			x2, y2, z2,
 			x3, y3, z3,
 			x4, y4, z4
 		};
-		float colors[4] = { r, g, b, a };
+		double colors[4] = { r, g, b, a };
 
 		Rectangle rect(verts, colors);
 
@@ -84,7 +87,7 @@ void Level::loadWalls(sqlite3 *db)
 
 void Level::loadDoors(sqlite3 *db)
 {
-
+	doors.clear();
 	// Prepared Statement
 	sqlite3_stmt *stm;
 	// SQL command
@@ -128,14 +131,14 @@ void Level::loadDoors(sqlite3 *db)
 		b = sqlite3_column_double(stm, 16);
 		a = sqlite3_column_double(stm, 17);
 
-		float verts[12] =
+		double verts[12] =
 		{
 			x1, y1, z1,
 			x2, y2, z2,
 			x3, y3, z3,
 			x4, y4, z4
 		};
-		float colors[4] = { r, g, b, a };
+		double colors[4] = { r, g, b, a };
 
 		Rectangle rect(verts, colors);
 
@@ -187,13 +190,12 @@ void Level::displayLevel()
 		it->Display();
 	}
 
-	GLfloat lmodel_ambient[] = { 0.6, 0.6, 0.6, 1.0 };
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glutSolidCube(.1);
+	glLoadIdentity();
+	glPopMatrix();
+
+	GLfloat lmodel_ambient[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
-}
-
-bool Level::checkCollision()
-{
-	CollisionEngine col;
-
-	return col.collide(walls);
 }

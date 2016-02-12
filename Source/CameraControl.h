@@ -20,7 +20,7 @@ class CameraControl
 {
 private:
 	// Speeds for moving and rotating
-	float moveSpeed = 0.1f, turnSpeed = 1.0f;
+	double moveSpeed = 0.1f, turnSpeed = 0.5f;
 
 public:
 	// Negatively adjusts angle and modifies lx
@@ -55,10 +55,10 @@ public:
 	void Display();
 
 	// Location of the camera
-	float x =0.0, y = 0.0, z = -1.0;
-	float prevx, prevz;
+	double x =0.0, y = 0.0, z = -1.0;
+	double prevx, prevz;
 	// Angles of rotation
-	float x_angle = 0.0, y_angle = 0.0, z_angle = -1.0;
+	double x_angle = 0.0, y_angle = 0.0, z_angle = -1.0;
 };
 
 #endif

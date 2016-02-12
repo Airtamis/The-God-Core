@@ -22,7 +22,7 @@
 using namespace std;
 
 
-Triangle::Triangle(const float(&new_vertices)[9], const float(&new_color)[4])
+Triangle::Triangle(const double(&new_vertices)[9], const double(&new_color)[4])
 {
 	// Copies the color entry
 	copy(begin(new_color), end(new_color), color);

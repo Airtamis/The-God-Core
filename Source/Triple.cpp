@@ -1,6 +1,6 @@
 #include "Triple.h"
 
-Triple makeTrip(float _a, float _b, float _c)
+Triple makeTrip(double _a, double _b, double _c)
 {
 	Triple ret;
 	ret.a = _a;

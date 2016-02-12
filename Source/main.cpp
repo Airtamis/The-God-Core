@@ -42,10 +42,10 @@ bool initGame(int argc, char **argv);
 // Manages the game's scenes
 void manageScenes();
 
-float light_diffuse[] = { 0.3, 0.3, 0.3, 0.5 };
-float light_position[] = { 0, 1, 0, 0 };
-float mat_specular[] = { 0.3, 0.3, 0.3, 0.5 };
-float mat_shininess[] = { 3.0 };
+float light_diffuse[] = { 0.3f, 0.3f, 0.3f, 0.5f };
+float light_position[] = { 0.0f, 1.0f, 0.0f, 0.0f };
+float mat_specular[] = { 0.3f, 0.3f, 0.3f, 0.5f };
+float mat_shininess[] = { 3.0f };
 
 
 //****** FUNCTION DEFINITIONS ******\\
