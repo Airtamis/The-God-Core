@@ -17,6 +17,7 @@
 #include "PauseScreen.h"
 #include "Level.h"
 #include "Terminal.h"
+#include "Door.h"
 
 // Remember that if you're doing anything else, globals are bad.
 // But we're in the hellscape that is graphics
@@ -24,14 +25,15 @@
 // Only madness dwells here
 
 typedef std::vector<Rectangle> vr;
+typedef std::vector<Door> vd;
 
 // For collision
 extern vr walls;
-extern vr doors;
+extern vd doors;
 
 extern bool collision,
 	goDim, goDark, loading,
-	isInConsole, isPaused, isInTerminal,
+	isInConsole, isPaused, isInTerminal, isInMain,
 	changeSong;
 
 extern int songNum;

@@ -1,7 +1,7 @@
 #include "Globals.h"
 
 vr walls;
-vr doors;
+vd doors;
 
 bool collision = true;
 bool goDim = false;
@@ -9,6 +9,7 @@ bool goDark = false;
 // Captures string inputs for the user
 bool isInConsole = false;
 bool getTerminal = false;
+bool isInMain = true;
 // Is in the pause menu
 bool isPaused = false;
 // Is in a computer screen

@@ -53,10 +53,10 @@ void Rectangle::Display()
 	glColor4f(color[0], color[1], color[2], color[3]);
 
 	glBegin(GL_QUADS);
-	glVertex3f(vertices[0], vertices[1], vertices[2]);
-	glVertex3f(vertices[3], vertices[4], vertices[5]);
-	glVertex3f(vertices[6], vertices[7], vertices[8]);
-	glVertex3f(vertices[9], vertices[10], vertices[11]);
+	glVertex3d(vertices[0], vertices[1], vertices[2]);
+	glVertex3d(vertices[3], vertices[4], vertices[5]);
+	glVertex3d(vertices[6], vertices[7], vertices[8]);
+	glVertex3d(vertices[9], vertices[10], vertices[11]);
 	glEnd();
 }
 
@@ -65,10 +65,10 @@ void Rectangle::Display2D()
 	glColor4f(color[0], color[1], color[2], color[3]);
 
 	glBegin(GL_QUADS);
-	glVertex2f(vertices[0], vertices[1]);
-	glVertex2f(vertices[3], vertices[4]);
-	glVertex2f(vertices[6], vertices[7]);
-	glVertex2f(vertices[9], vertices[10]);
+	glVertex2d(vertices[0], vertices[1]);
+	glVertex2d(vertices[3], vertices[4]);
+	glVertex2d(vertices[6], vertices[7]);
+	glVertex2d(vertices[9], vertices[10]);
 	glEnd();
 }
 

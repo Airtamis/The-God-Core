@@ -33,7 +33,7 @@ private:
 
 public:
 	bool collide(double x, double y, double z); // Later take vector of objects?
-	bool collide(std::vector<Rectangle> walls);
+	bool collideWalls();
 };
 
 #endif

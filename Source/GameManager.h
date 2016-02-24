@@ -45,12 +45,15 @@ private:
 
 	bool isLoaded = false;
 
+	// Because the main menu is dumb
+	bool processClick = false;
+
+	int mouse_x, mouse_y;
+
 	// Functions
 
-	// Capture's the users input for typing
-	void captureInput(char key);
-
 public:
+
 	// Captures mouse clicks
 	void mouse(int button, int state, int x, int y);
 	// Captures mouse motion

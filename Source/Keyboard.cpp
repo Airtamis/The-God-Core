@@ -41,8 +41,8 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		inputTerminal(key, x, y);
 	}
 
-	// Otherwise (as long we aren't paused)
-	else if (!isPaused)
+	// Otherwise (as long we aren't in a menu)
+	else if (!isPaused && !isInMain)
 	{
 		interact(key, x, y);
 	}
@@ -210,7 +210,7 @@ void Keyboard::interact(unsigned char key, int x, int y)
 	case 'w':
 	case 'W':
 		Cam.moveForward(speedMod);
-		if (col.collide(walls))
+		if (col.collideWalls())
 		{
 			Cam.moveBackward(speedMod);
 		}
@@ -218,7 +218,7 @@ void Keyboard::interact(unsigned char key, int x, int y)
 	case 'a':
 	case 'A':
 		Cam.strafeRight();
-		if (col.collide(walls))
+		if (col.collideWalls())
 		{
 			Cam.strafeRight();
 		}
@@ -226,7 +226,7 @@ void Keyboard::interact(unsigned char key, int x, int y)
 	case 's':
 	case 'S':
 		Cam.moveBackward(speedMod);
-		if (col.collide(walls))
+		if (col.collideWalls())
 		{
 			Cam.moveForward(speedMod);
 		}
@@ -234,14 +234,14 @@ void Keyboard::interact(unsigned char key, int x, int y)
 	case 'd':
 	case 'D':
 		Cam.strafeLeft();
-		if (col.collide(walls))
+		if (col.collideWalls())
 		{
 			Cam.strafeRight();
 		}
 		break;
 	case 'e':
 	case 'E':
-		goDark = true;
+		//goDark = true;
 		break;
 	case '~':
 		isInConsole = true;
@@ -286,7 +286,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_F4:
-		Cam.resetCam();
+		isInMain = !isInMain;
 		break;
 
 	case GLUT_KEY_UP:

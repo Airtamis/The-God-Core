@@ -17,8 +17,6 @@
 
 #include <iostream>
 
-#include <algorithm>
-
 const double PLAYER_RADIUS = 1;
 
 bool CollisionEngine::collide(double x, double y, double z)
@@ -35,7 +33,7 @@ bool CollisionEngine::collide(double x, double y, double z)
 	return false;
 }
 
-bool CollisionEngine::collide(std::vector<Rectangle> walls)
+bool CollisionEngine::collideWalls()
 {
 	if (collision == false)
 	{
@@ -47,6 +45,16 @@ bool CollisionEngine::collide(std::vector<Rectangle> walls)
 		double project = abs(Cam.x * i.a + Cam.y * i.b + Cam.z * i.c + i.d); // Projection matrix
 
 		if (project / i.getNorm() < PLAYER_RADIUS) return true;
+	}
+
+	for (auto i : doors)
+	{
+		if (!i.isOpen)
+		{
+			double project = abs(Cam.x * i.a + Cam.y * i.b + Cam.z * i.c + i.d); // Projection matrix
+
+			if (project / i.getNorm() < PLAYER_RADIUS) return true;
+		}
 	}
 	return false;
 }

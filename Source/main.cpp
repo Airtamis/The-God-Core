@@ -42,11 +42,11 @@ bool initGame(int argc, char **argv);
 // Manages the game's scenes
 void manageScenes();
 
-float light_diffuse[] = { 0.3f, 0.3f, 0.3f, 0.5f };
-float light_position[] = { 0.0f, 1.0f, 0.0f, 0.0f };
-float mat_specular[] = { 0.3f, 0.3f, 0.3f, 0.5f };
-float mat_shininess[] = { 3.0f };
-
+GLfloat light_diffuse[] = { 0.3f, 0.3f, 0.3f, 0.5f };
+GLfloat light_position[] = { 0.0f, 1.0f, 0.0f, 0.0f };
+GLfloat mat_specular[] = { 0.3f, 0.2f, 0.3f, 0.5f };
+GLfloat mat_shininess[] = { 3.0f };
+GLfloat lmodel_ambient[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 
 //****** FUNCTION DEFINITIONS ******\\
 
@@ -101,6 +101,7 @@ bool initGame(int argc, char **argv)
 	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
 
 	glutWarpPointer(300, 300);
 

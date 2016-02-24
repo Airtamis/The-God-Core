@@ -36,8 +36,8 @@ void TextEngine::displayText(double x, double y,
 	// Iterates throguh the text vector and prints it to the screen
 	for (it = text.begin(); it != text.end(); it++)
 	{
-		glColor3f(r, g, b);
-		glRasterPos2f(x, y);
+		glColor3d(r, g, b);
+		glRasterPos2d(x, y);
 
 		for (unsigned int i = 0; i < it->length(); i++)
 		{
@@ -104,8 +104,8 @@ vector<string> TextEngine::getText(string fileName, string tag)
 void TextEngine::printString(double x, double y, double r, double g, double b,
 	string text)
 {
-	glColor3f(r, g, b);
-	glRasterPos2f(x, y);
+	glColor3d(r, g, b);
+	glRasterPos2d(x, y);
 
 	for (unsigned int i = 0; i < text.length(); i++)
 	{

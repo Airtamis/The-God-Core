@@ -176,26 +176,13 @@ void Level::loadLevel(std::string levelName)
 
 void Level::displayLevel()
 {
-	vr::iterator it;
-
-	//cout << walls.size() << endl;
-
-	for (it = walls.begin(); it != walls.end(); it++)
+	for (auto it : walls)
 	{
-		it->Display();
+		it.Display();
 	}
 
-	for (it = doors.begin(); it != doors.end(); it++)
+	for (auto it : doors)
 	{
-		it->Display();
+		it.Display();
 	}
-
-	glPushMatrix();
-	glColor3f(1, 0, 0);
-	glutSolidCube(.1);
-	glLoadIdentity();
-	glPopMatrix();
-
-	GLfloat lmodel_ambient[] = { 0.6f, 0.6f, 0.6f, 1.0f };
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
 }

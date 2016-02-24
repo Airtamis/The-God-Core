@@ -38,9 +38,9 @@ void Triangle::Display()
 
 	// Draws the triangle
 	glBegin(GL_TRIANGLES);
-	glVertex3f(vertices[0], vertices[1], vertices[2]);
-	glVertex3f(vertices[3], vertices[4], vertices[5]);
-	glVertex3f(vertices[6], vertices[7], vertices[8]);
+	glVertex3d(vertices[0], vertices[1], vertices[2]);
+	glVertex3d(vertices[3], vertices[4], vertices[5]);
+	glVertex3d(vertices[6], vertices[7], vertices[8]);
 	glEnd();
 }
 
@@ -51,8 +51,8 @@ void Triangle::Display2D()
 
 	// Draw's the triangle without the Z vertices
 	glBegin(GL_TRIANGLES);
-	glVertex2f(vertices[0], vertices[1]);
-	glVertex2f(vertices[3], vertices[4]);
-	glVertex2f(vertices[6], vertices[7]);
+	glVertex2d(vertices[0], vertices[1]);
+	glVertex2d(vertices[3], vertices[4]);
+	glVertex2d(vertices[6], vertices[7]);
 	glEnd();
 }

@@ -4,6 +4,8 @@
 
 #include "Level.h"
 
+#include "MainMenu.h"
+
 void GameManager::mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_RIGHT_BUTTON)
@@ -29,6 +31,13 @@ void GameManager::mouse(int button, int state, int x, int y)
 				bool yes = false;
 			}
 
+			else if (isInMain)
+			{
+				mouse_x = x;
+				mouse_y = y;
+				processClick = true;
+			}
+
 		}
 
 		else
@@ -43,7 +52,7 @@ void GameManager::motionPassive(int x, int y)
 	static int _x = 0, _y = 0;
 
 	// If nothing else is happening basically
-	if (!isPaused && !isInConsole && !isInTerminal)
+	if (!isPaused && !isInConsole && !isInTerminal && !isInMain)
 	{
 		if (x > _x)
 		{
@@ -148,7 +157,7 @@ void GameManager::manageScenes()
 
 	// Clears the previous drawing
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	
 	if (isPaused)
 	{
 		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
@@ -160,10 +169,30 @@ void GameManager::manageScenes()
 		TEST_TERMINAL.display();
 	}
 
-	// glutSetCursor(GLUT_CURSOR_LEFT_ARROW); Keypads maybe?
+	else if (isInMain)
+	{
+		// Enable using textures (pictures)
+		glutSetCursor(GLUT_CURSOR_LEFT_ARROW);
+		static MainMenu MM;
 
+		// For some reason, MM breaks horribly when it's a global or class member
+		// So we'll just handle mouse clicks in the display function
+		// Rather than the mouse click function
+		// Because I'm a competent programmer
+		if (processClick)
+		{
+			MM.getClick(mouse_x, mouse_y);
+			processClick = false;
+		}
+
+		MM.display();
+	}
+
+	// glutSetCursor(GLUT_CURSOR_LEFT_ARROW); Keypads maybe?
+	
 	else
 	{
+		// Enable using textures (pictures)
 		glutSetCursor(GLUT_CURSOR_NONE);
 		bool close = draw2();
 
@@ -182,14 +211,12 @@ void GameManager::manageScenes()
 		}
 
 		// Prompt the user to interact if we should
-		if (close)
-			HUD.displayWarning("INTERACT");
-		else
-			HUD.displayWarning("");
+		if (close) HUD.displayWarning("INTERACT");
+		else HUD.displayWarning("");
 
 		// Prints the HUD
 		HUD.DisplayHUD();
-	}
+	} 
 
 	// Displays the current drawing
 	glutSwapBuffers();
