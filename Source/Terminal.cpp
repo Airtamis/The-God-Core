@@ -1,7 +1,17 @@
-#include "Terminal.h"
-#include "Rectangle.h"
+/*************************************************************\
+ * Terminal.cpp                                              *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the definition of the Terminal class   *
+ * For more information, see CameraControl.h                 *
+\*************************************************************/
 
-#include <iostream>
+// Class declaration
+#include "Terminal.h"
+// Rectangles
+#include "Rectangle.h"
 
 using namespace std;
 
@@ -38,7 +48,7 @@ void Terminal::draw()
 		SCREENRIGHT, SCREENTOP, -1 
 	};
 
-	Rectangle background{ vertices, colors };
+	Rectangle background{ vertices, colors};
 	background.Display2D();
 }
 
@@ -63,4 +73,4 @@ void Terminal::display()
 
 }
 
-Terminal::Terminal() {}
+Terminal::Terminal() {};

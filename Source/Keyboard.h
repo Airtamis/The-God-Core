@@ -12,6 +12,7 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 
+// std::string
 #include <string>
 
 class Keyboard
@@ -33,6 +34,8 @@ public:
 	void key_up(unsigned char key, int x, int y);
 	// Special keys (functions, arrows, ect.)
 	void special(int key, int x, int y);
+	// Manages interactivity
+	void interact();
 };
 
 #endif

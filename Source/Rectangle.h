@@ -17,13 +17,24 @@ class Rectangle
 private:
 	// Arrays containing the color and vertices of the Rectangle
 	double color[4];
-public:
+	// What axis is it aligned on (x y z)
+	char axis;
+	// The vertices of the corners
 	double vertices[12];
+public:
+	
 	// Paramaterized constructor, as there cannot be a rectangle without vertices
+	// Can take an axis or can ignore exis
+	Rectangle(const double(&new_vertices)[12], const double(&new_color)[4], char _axis);
 	Rectangle(const double(&new_vertices)[12], const double(&new_color)[4]);
 
+	// Part of the plane equation, calculated in constructor
 	double a, b, c, d;
 
+	// Determines if the player is in the bounds of the rectangle (based on axis)
+	bool isInBounds();
+
+	// Returns the plane norm (Perpindicular line)
 	double getNorm();
 	
 	// Print a Rectangle in 3D

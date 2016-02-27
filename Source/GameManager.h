@@ -1,3 +1,13 @@
+/*************************************************************\
+ * GameManager.h                                             *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the declaration of the GameManger class*
+ * Which oversees and manages the flow of the game           *
+\*************************************************************/
+
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
@@ -26,28 +36,19 @@
 // To manage saving and loading
 #include "SaveManager.h"
 
-// For keyboard functionality
-
 class GameManager
 {
 private:
 	// Variables
 
-	// Name of the current level
-	std::string curr_level;
-	// If we are currently loading
-	bool loading = false;
-
 	// Objects
 	MusicManager SoundSystem;
-	SaveManager SaveSystem;
 	Keyboard board;
 
-	bool isLoaded = false;
-
-	// Because the main menu is dumb
+	// Because the main menu is dumb, we have to know when to get a click
 	bool processClick = false;
 
+	// When in the main menu, mouse coords of a click
 	int mouse_x, mouse_y;
 
 	// Functions
@@ -63,7 +64,7 @@ public:
 	// Manages scene display
 	void manageScenes();
 	// Sample drawing function
-	bool draw2();
+	void draw();
 	// Normal key presses
 	void normal(unsigned char key, int x, int y);
 	// Key releases

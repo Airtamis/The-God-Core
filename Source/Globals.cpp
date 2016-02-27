@@ -1,26 +1,34 @@
+/*************************************************************\
+ * Globals.cpp                                               *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file instantiates the global variables               *
+\*************************************************************/
+
 #include "Globals.h"
 
 vr walls;
 vd doors;
+vs switches;
 
-bool collision = true;
+Switch *activeSwitch = NULL;
+
+bool collision = false;
 bool goDim = false;
 bool goDark = false;
-// Captures string inputs for the user
+bool loading = true;
 bool isInConsole = false;
-bool getTerminal = false;
-bool isInMain = true;
-// Is in the pause menu
 bool isPaused = false;
-// Is in a computer screen
 bool isInTerminal = false;
-bool loading = false;
-
+bool isInMain = false;
 bool changeSong = true;
+bool interactivity = false;
 
 int songNum = 0;
 
-std::string curr_level;
+std::string curr_level = "LEVELZERO";
 
 const char* SONG0 = "Dark Fog.mp3";
 const char* SONG1 = "Mismer.mp3";

@@ -24,6 +24,7 @@
 // For processing text
 #include "TextEngine.h"
 
+// To make rgb calues easier to store
 #include "Triple.h"
 
 class Console
@@ -59,8 +60,10 @@ private:
 	// Writes input to core.sav
 	void writeToSave(std::string input);
 
+	// Reads a bit from the file
 	void readFromFile(std::string input);
 
+	// Changes the currently played track
 	void playSong(std::string input);
 
 public:

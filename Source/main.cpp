@@ -8,15 +8,21 @@
  * and promptly passes control over to the GameManager object*
 \*************************************************************/
 
+// Because doth openGL demandeth
 #include <cstdlib>
-
+// OpenGL API
 #include <GL\glew.h>
 #include <GL\glut.h>
 
+// The Game manger
 #include "GameManager.h"
 GameManager Overlord;
-
+// Save manager
 #include "SaveManager.h"
+// Return codes
+#include "Return.h"
+// System log
+#include "Logger.h"
 
 // Normal key presses
 void normal(unsigned char key, int x, int y);
@@ -48,6 +54,8 @@ GLfloat mat_specular[] = { 0.3f, 0.2f, 0.3f, 0.5f };
 GLfloat mat_shininess[] = { 3.0f };
 GLfloat lmodel_ambient[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 
+using namespace std;
+
 //****** FUNCTION DEFINITIONS ******\\
 
 int main(int argc, char **argv) 
@@ -58,11 +66,19 @@ int main(int argc, char **argv)
 	glutMainLoop();
 
 	// If we ever get here, something bad happened
-	return 1;
+	
+	Logger log;
+	log.logLine("ERROR: GlutMainLoop exited early");
+
+	return EXIT_EARLY;
 }
 
 bool initGame(int argc, char **argv)
 {
+	// Obliderate log file
+	Logger log;
+	log.nuke();
+
 	// Initialize GLUT 
 	glutInit(&argc, argv);
 

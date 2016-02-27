@@ -1,8 +1,21 @@
+/*************************************************************\
+ * MainMenu.cpp                                              *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the defintion of the MainMenu class.   *
+ * for more information, see MainMenu.h                      *
+\*************************************************************/
+
+// Class declaration
 #include "MainMenu.h"
-
-#include <iostream>
-
+// isInMain
 #include "Globals.h"
+// Return codes
+#include "Return.h"
+// System log
+#include "Logger.h"
 
 using namespace std;
 
@@ -18,8 +31,10 @@ MainMenu::MainMenu()
 
 	if (texture == 0)
 	{	
-		cout << SOIL_last_result() << endl;
-		exit(6);
+		Logger log;
+		vector<string> output = {"FATAL ERROR: SOIL cannot load image", SOIL_last_result()};
+		log.logLine(output);
+		exit(SOIL_ERROR);
 	}
 }
 

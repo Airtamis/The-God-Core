@@ -17,6 +17,9 @@
 // Global variables
 #include "Globals.h"
 
+// Return codes
+#include "Return.h"
+
 PauseScreen::PauseScreen()
 {
 	num_of_buttons = 4;
@@ -74,23 +77,23 @@ void PauseScreen::doStuff()
 	// Save
 	else if (activeButton == 1)
 	{
-		SaveManager Jesus; // Jesus saves
-		Jesus.saveLevel(curr_level);
+		//SaveManager Jesus; // Jesus saves
+		//Jesus.saveLevel(curr_level);
 	}
 
 	// Load
 	else if (activeButton == 2)
 	{
-		SaveManager Jesus; // Jesus... loads?
+		//SaveManager Jesus; // Jesus... loads?
 		loading = true;
 
-		curr_level = Jesus.loadGame();
+		//curr_level = Jesus.loadGame();
 	}
 
 	// Quit
 	else if (activeButton == 3)
 	{
-		exit(0);
+		exit(EXIT_OK);
 	}
 }
 

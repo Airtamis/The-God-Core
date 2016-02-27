@@ -1,9 +1,20 @@
+/*************************************************************\
+ * GameManager.cpp                                           *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the defintion of the GameManager class.*
+ * for more information, see GameManager.h                   *
+\*************************************************************/
+
+// Class declaration
 #include "GameManager.h"
-
+// Globals
 #include "Globals.h"
-
+// Level
 #include "Level.h"
-
+// Main Menu
 #include "MainMenu.h"
 
 void GameManager::mouse(int button, int state, int x, int y)
@@ -127,24 +138,22 @@ void GameManager::changeSize(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-bool GameManager::draw2()
+void GameManager::draw()
 {
 	//LevelZero level (Cam.x, Cam.y, Cam.z);
 	//return level.display();
 
-	if (!isLoaded)
+	if (loading)
 	{
 		lvl.loadLevel("LEVELZERO");
 
-		isLoaded = true;
+		loading = false;
 	}
 
 	else
 	{
 		lvl.displayLevel();
 	}
-
-	return false;
 }
 
 void GameManager::manageScenes()
@@ -194,7 +203,7 @@ void GameManager::manageScenes()
 	{
 		// Enable using textures (pictures)
 		glutSetCursor(GLUT_CURSOR_NONE);
-		bool close = draw2();
+		draw();
 
 		// Moves the camera to the correct position
 		Cam.Display();
@@ -211,7 +220,7 @@ void GameManager::manageScenes()
 		}
 
 		// Prompt the user to interact if we should
-		if (close) HUD.displayWarning("INTERACT");
+		if (interactivity) HUD.displayWarning("INTERACT");
 		else HUD.displayWarning("");
 
 		// Prints the HUD

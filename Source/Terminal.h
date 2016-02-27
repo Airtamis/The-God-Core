@@ -1,10 +1,21 @@
+/*************************************************************\
+ * Terminal.h                                                *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the declaration of the Terminal class  *
+ * Which draws and manages ingame computer terminals         *
+ * And has nothing to do with terminal illness I swear       *
+\*************************************************************/
+
 #ifndef TERMINAL_H
 #define TERMINAL_H
 
-#include "TwoD.h"
-#include "TextEngine.h"
+#include "TwoD.h" // To inherit 2D class
+#include "TextEngine.h" // To display text to screen
 
-class Terminal : public TwoD
+class Terminal : public TwoD // Inherit 2D functionality
 {
 private:
 	// What the user is typing
@@ -12,6 +23,7 @@ private:
 	// Print our text
 	TextEngine text;
 
+	// Draws the actual terminal
 	void draw();
 
 public:

@@ -8,17 +8,23 @@
  * For more information, see Console.cpp                     *
 \*************************************************************/
 
+// File I/O
+#include <fstream>
+
 // Class declaration
 #include "Console.h"
 
 // For saving and loading
 #include "SaveManager.h"
 
-// for ifstream
-#include <fstream>
+// System log
+#include "Logger.h"
 
 // Contains global environment variables
 #include "Globals.h"
+
+// Return codes
+#include "Return.h"
 
 using namespace std;
 
@@ -114,7 +120,9 @@ void Console::processInput()
 	// Shutdown
 	else if (currentInput == "Halt")
 	{
-		exit(0);
+		Logger log;
+		log.logLine("Exiting via console");
+		exit(EXIT_OK);
 	}
 
 	// Clears the console log

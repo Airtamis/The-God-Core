@@ -13,9 +13,7 @@
 #ifndef SAVEMANAGER_H
 #define SAVEMANAGER_H
 
-//#include <vector> saveLevel/loadGame will likely take/output std::vector<std::string> eventually
-
-// Because concatenating char*'s are really hard
+// Because concatenating char*'s is really hard
 #include <string>
 
 class SaveManager

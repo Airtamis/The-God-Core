@@ -66,7 +66,7 @@ void HeadsUpDisplay::drawHelmetBounds()
 
 void HeadsUpDisplay::DisplayAlerts()
 {
-	helmet.openFile(.5 * SCREENRIGHT, .5 * SCREENBOTTOM,
+	helmet.openFile(.45 * SCREENRIGHT, .5 * SCREENBOTTOM,
 		1, 1, 1,
 		"suitAlerts.log", currentAlert);
 }

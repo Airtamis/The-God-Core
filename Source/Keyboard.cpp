@@ -23,8 +23,13 @@
 
 // To recieve and manage global variables
 #include "Globals.h"
-
+// Collision detection
 #include "CollisionEngine.h"
+
+// Return codes
+#include "Return.h"
+// System log
+#include "Logger.h"
 
 using namespace std;
 
@@ -36,6 +41,7 @@ void Keyboard::normal(unsigned char key, int x, int y)
 		inputConsole(key, x, y);
 	}
 
+	// If we're in a computer
 	else if (isInTerminal)
 	{
 		inputTerminal(key, x, y);
@@ -210,7 +216,7 @@ void Keyboard::interact(unsigned char key, int x, int y)
 	case 'w':
 	case 'W':
 		Cam.moveForward(speedMod);
-		if (col.collideWalls())
+		if (col.collide())
 		{
 			Cam.moveBackward(speedMod);
 		}
@@ -218,7 +224,7 @@ void Keyboard::interact(unsigned char key, int x, int y)
 	case 'a':
 	case 'A':
 		Cam.strafeRight();
-		if (col.collideWalls())
+		if (col.collide())
 		{
 			Cam.strafeRight();
 		}
@@ -226,7 +232,7 @@ void Keyboard::interact(unsigned char key, int x, int y)
 	case 's':
 	case 'S':
 		Cam.moveBackward(speedMod);
-		if (col.collideWalls())
+		if (col.collide())
 		{
 			Cam.moveForward(speedMod);
 		}
@@ -234,14 +240,14 @@ void Keyboard::interact(unsigned char key, int x, int y)
 	case 'd':
 	case 'D':
 		Cam.strafeLeft();
-		if (col.collideWalls())
+		if (col.collide())
 		{
 			Cam.strafeRight();
 		}
 		break;
 	case 'e':
 	case 'E':
-		//goDark = true;
+		interact();
 		break;
 	case '~':
 		isInConsole = true;
@@ -267,9 +273,9 @@ void Keyboard::key_up(unsigned char key, int x, int y)
 
 void Keyboard::special(int key, int x, int y)
 {
+	Logger log;
 	// We start in fullscreen
 	static bool fullScreen = true;
-
 	switch (key)
 	{
 	case GLUT_KEY_F1:
@@ -278,7 +284,8 @@ void Keyboard::special(int key, int x, int y)
 
 	case GLUT_KEY_F2:
 		// Only way to exit main loop.
-		exit(0);
+		log.logLine("Exiting via F2");
+		exit(EXIT_OK);
 		break;
 
 	case GLUT_KEY_F3:
@@ -287,6 +294,10 @@ void Keyboard::special(int key, int x, int y)
 
 	case GLUT_KEY_F4:
 		isInMain = !isInMain;
+		break;
+
+	case GLUT_KEY_F5:
+		log.logCamCoords();
 		break;
 
 	case GLUT_KEY_UP:
@@ -321,5 +332,14 @@ void Keyboard::special(int key, int x, int y)
 	{
 		glutReshapeWindow(1367, 767);
 		glutPositionWindow(50, 50);
+	}
+}
+
+void Keyboard::interact()
+{
+	// Only do things if we actually can
+	if (interactivity)
+	{
+		if (activeSwitch != NULL) activeSwitch->toggle();
 	}
 }

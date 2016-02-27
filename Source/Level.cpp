@@ -1,25 +1,25 @@
+/*************************************************************\
+ * Level.cpp                                                 *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the defintion of the Level class.      *
+ * for more information, see Keyboard.h                      *
+\*************************************************************/
+
+// Class declaration
 #include "Level.h"
-
-#include <iostream>
-
+// To use rectangles
 #include "Rectangle.h"
-
-#include "CollisionEngine.h"
-
+// Vectors to plop stuff in
 #include "Globals.h"
+// Return codes
+#include "Return.h"
+// System log
+#include "Logger.h"
 
 using namespace std;
-
-Quad makeQuad(double a, double b, double c, double d)
-{
-	Quad ret;
-	ret.r = a;
-	ret.g = b;
-	ret.b = c;
-	ret.a = d;
-
-	return ret;
-}
 
 void Level::loadWalls(sqlite3 *db)
 {
@@ -27,16 +27,19 @@ void Level::loadWalls(sqlite3 *db)
 	// Prepared Statement
 	sqlite3_stmt *stm;
 	// SQL command
-	char* cmd;
+	string cmd;
 	// Connection Error Test
 	int err;
-	cmd = "SELECT * FROM walls WHERE LEVEL = \"LEVELZERO\"";
+	cmd = "SELECT * FROM walls WHERE LEVEL = \"" + currLevel + "\"";
 
-	err = sqlite3_prepare(db, cmd, -1, &stm, 0);
+	err = sqlite3_prepare(db, cmd.c_str(), -1, &stm, 0);
 
 	if (err != SQLITE_OK)
 	{
-		exit(4);
+		Logger log;
+		vector<string> output = { "FATAL ERROR: failed to load walls from", currLevel };
+		log.logLine(output);
+		exit(STATEMENT_ERROR);
 	}
 
 	// While we still get rows of output
@@ -46,6 +49,7 @@ void Level::loadWalls(sqlite3 *db)
 			y1, y2, y3, y4,
 			z1, z2, z3, z4,
 			r, g, b, a;
+		string axis;
 
 		x1 = sqlite3_column_double(stm, 2);
 		x2 = sqlite3_column_double(stm, 3);
@@ -67,6 +71,14 @@ void Level::loadWalls(sqlite3 *db)
 		b = sqlite3_column_double(stm, 16);
 		a = sqlite3_column_double(stm, 17);
 
+		axis = reinterpret_cast<const char*>(sqlite3_column_text(stm, 18));
+
+		char ax;
+		if (axis == "x") ax = 'x';
+		else if (axis == "y") ax = 'y';
+		else if (axis == "z") ax = 'z';
+		else ax = 0;
+
 		double verts[12] =
 		{
 			x1, y1, z1,
@@ -76,10 +88,14 @@ void Level::loadWalls(sqlite3 *db)
 		};
 		double colors[4] = { r, g, b, a };
 
-		Rectangle rect(verts, colors);
+		Rectangle rect(verts, colors, ax);
 
 		walls.push_back(rect);
 	}
+
+	Logger log;
+	vector<string> output = { "Loaded walls on", currLevel };
+	log.logLine(output);
 
 	// Deconstructs the statement
 	sqlite3_finalize(stm);
@@ -91,16 +107,20 @@ void Level::loadDoors(sqlite3 *db)
 	// Prepared Statement
 	sqlite3_stmt *stm;
 	// SQL command
-	char* cmd;
+	string cmd;
 	// Connection Error Test
 	int err;
-	cmd = "SELECT * FROM doors WHERE LEVEL = \"LEVELZERO\"";
+	cmd = "SELECT * FROM doors WHERE LEVEL = \"" + currLevel + "\"";
 
-	err = sqlite3_prepare(db, cmd, -1, &stm, 0);
+	err = sqlite3_prepare(db, cmd.c_str(), -1, &stm, 0);
 
 	if (err != SQLITE_OK)
 	{
-		exit(4);
+		Logger log;
+		vector<string> output = { "FATAL ERROR: Can't load doors while loading", currLevel };
+		log.logLine(output);
+
+		exit(STATEMENT_ERROR);
 	}
 
 	// While we still get rows of output
@@ -110,7 +130,10 @@ void Level::loadDoors(sqlite3 *db)
 			y1, y2, y3, y4,
 			z1, z2, z3, z4,
 			r, g, b, a;
+		string id;
+		string axis;
 
+		id = reinterpret_cast<const char*>(sqlite3_column_text(stm, 0));
 		x1 = sqlite3_column_double(stm, 2);
 		x2 = sqlite3_column_double(stm, 3);
 		x3 = sqlite3_column_double(stm, 4);
@@ -131,6 +154,16 @@ void Level::loadDoors(sqlite3 *db)
 		b = sqlite3_column_double(stm, 16);
 		a = sqlite3_column_double(stm, 17);
 
+		a = sqlite3_column_double(stm, 17);
+
+		axis = reinterpret_cast<const char*>(sqlite3_column_text(stm, 18));
+
+		char ax;
+		if (axis == "x") ax = 'x';
+		else if (axis == "y") ax = 'y';
+		else if (axis == "z") ax = 'z';
+		else ax = 0;
+
 		double verts[12] =
 		{
 			x1, y1, z1,
@@ -140,10 +173,78 @@ void Level::loadDoors(sqlite3 *db)
 		};
 		double colors[4] = { r, g, b, a };
 
-		Rectangle rect(verts, colors);
+		Rectangle rect(verts, colors, ax);
 
-		doors.push_back(rect);
+		doors.push_back(Door(rect, id));
 	}
+
+	Logger log;
+	vector<string> output = { "Loaded doors on", currLevel };
+	log.logLine(output);
+
+	// Deconstructs the statement
+	sqlite3_finalize(stm);
+}
+
+void Level::loadSwitches(sqlite3 *db)
+{
+	switches.clear();
+	// Prepared Statement
+	sqlite3_stmt *stm;
+	// SQL command
+	string cmd;
+	// Connection Error Test
+	int err;
+	cmd = "SELECT * FROM switches WHERE LEVEL = \"" + currLevel + "\"";
+
+	err = sqlite3_prepare(db, cmd.c_str(), -1, &stm, 0);
+
+	if (err != SQLITE_OK)
+	{
+		Logger log;
+		vector<string> output = { "FATAL ERROR: Can't load switches while loading", currLevel };
+		log.logLine(output);
+
+		exit(STATEMENT_ERROR);
+	}
+
+	// While we still get rows of output
+	while (sqlite3_step(stm) == SQLITE_ROW)
+	{
+		double xt, yt, zt,
+			xr, yr, zr;
+		string target;
+		target = reinterpret_cast<const char*>(sqlite3_column_text(stm, 2));
+		xt = sqlite3_column_double(stm, 3);
+		yt = sqlite3_column_double(stm, 4);
+		zt = sqlite3_column_double(stm, 5);
+
+		xr = sqlite3_column_double(stm, 6);
+		yr = sqlite3_column_double(stm, 7);
+		zr = sqlite3_column_double(stm, 8);
+
+		double translate[3] = { xt, yt, zt };
+		double rotate[3] = { xr, yr, zr };
+
+		switches.push_back(Switch(translate, rotate));
+
+		for (unsigned int i = 0; i < doors.size(); i++)
+		{
+			if (doors[i].getID() == target)
+			{
+				Logger log;
+				vector<string> output = { "Binding switch to door", target };
+				log.logLine(output);
+
+				switches[switches.size() - 1].assign(doors[i]);
+			}
+		}
+	}
+
+
+	Logger log;
+	vector<string> output = { "Loaded switches on", currLevel };
+	log.logLine(output);
 
 	// Deconstructs the statement
 	sqlite3_finalize(stm);
@@ -156,6 +257,8 @@ void Level::loadLevel(std::string levelName)
 		quadratic = gluNewQuadric();
 	}
 
+	currLevel = levelName;
+
 	// Connection to SQL database
 	sqlite3 *db;
 	// 1 if error with DB
@@ -163,11 +266,15 @@ void Level::loadLevel(std::string levelName)
 
 	if (connectErr != SQLITE_OK)
 	{
-		exit(3);
+		Logger log;
+		log.logLine("FATAL ERROR: Can't access database");
+
+		exit(DATABASE_ERROR);
 	}
 
 	loadWalls(db);
 	loadDoors(db);
+	loadSwitches(db);
 	
 	// Closes the database
 	sqlite3_close(db);
@@ -176,13 +283,18 @@ void Level::loadLevel(std::string levelName)
 
 void Level::displayLevel()
 {
-	for (auto it : walls)
+	for (auto i : walls)
 	{
-		it.Display();
+		i.Display();
 	}
 
-	for (auto it : doors)
+	for (auto i : doors)
 	{
-		it.Display();
+		i.Display();
+	}
+
+	for (auto i : switches)
+	{
+		i.Display();
 	}
 }

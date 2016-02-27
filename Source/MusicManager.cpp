@@ -14,7 +14,11 @@
 // Because concatenating char*'s are really hard
 #include <string>
 
-#include <iostream> // cerr
+// Return codes
+#include "Return.h"
+
+// System log
+#include "Logger.h"
 
 using namespace std;
 
@@ -23,15 +27,11 @@ const char* MusicManager::MUSIC_PATH = "Resources\\Music\\";
 
 MusicManager::MusicManager()
 {
+	Logger log;
 	if (FMOD::System_Create(&m_pSystem) != FMOD_OK)
 	{
-		// Report Error
-		cerr << "ERROR: FMOD unable to create system\n"
-			"Press enter to abort";
-		cin.ignore();
-		cin.get();
-
-		exit(1);
+		log.logLine("FATAL ERROR: FMOD unable to create system");
+		exit(FMOD_ERROR);
 	}
 
 	int driverCount = 0;
@@ -41,14 +41,11 @@ MusicManager::MusicManager()
 	if (driverCount == 0)
 	{
 		// Report Error
-		cerr << "ERROR: FMOD unable to detect drivers\n"
-			"Press enter to abort";
-		cin.ignore();
-		cin.get();
-
-		exit(1);
+		log.logLine("ERROR: FMOD unable to detect drivers");
+		exit(FMOD_ERROR);
 	}
 
+	log.logLine("FMOD succesfully initialized");
 	// Initialize our Instance with 36 Channels
 	m_pSystem->init(36, FMOD_INIT_NORMAL, NULL);
 }

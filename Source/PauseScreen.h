@@ -18,8 +18,11 @@
 #ifndef PAUSESCREEN_H
 #define PAUSESCREEN_H
 
+// 2D functionallity
 #include "TwoD.h"
+// std::string
 #include <string>
+// std::vector
 #include <vector>
 
 class PauseScreen : public TwoD

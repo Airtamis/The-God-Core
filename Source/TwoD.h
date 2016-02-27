@@ -1,3 +1,14 @@
+/*************************************************************\
+ * TwoD.h                                                    *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the declaration of the TwoD class      *
+ * Which is used to hold the data and functionality for      *
+ * Drawing in 2D with OpenGL
+\*************************************************************/
+
 #ifndef TWOD
 #define TWOD
 
@@ -22,7 +33,5 @@ protected:
 	void prepare3D();
 
 };
-
-
 
 #endif
