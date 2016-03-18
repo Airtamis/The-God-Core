@@ -12,6 +12,8 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
+#include <shlobj.h>
+
 // std::vector
 #include <vector>
 // std::string
@@ -21,8 +23,11 @@ class Logger
 {
 private:
 	// Path to the log file
-	static const char* LOG_PATH;
+	char CHAR_PATH[MAX_PATH];
+	std::string LOG_PATH;
+
 public:
+	Logger();
 	// Erases the log file, called at the beggining of the program
 	void nuke();
 	// Writes to the log, either multiple lines or one line

@@ -11,7 +11,6 @@
 #include "TwoD.h"
 
 // OpenGL API
-#include <gl\glew.h>
 #include <gl\glut.h>
 
 void TwoD::prepare2D()

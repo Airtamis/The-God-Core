@@ -12,10 +12,12 @@
 vr walls;
 vd doors;
 vs switches;
+vt terminals;
 
 Switch *activeSwitch = NULL;
+Terminal *activeTerminal = NULL;
 
-bool collision = false;
+bool collision = true;
 bool goDim = false;
 bool goDark = false;
 bool loading = true;
@@ -45,8 +47,6 @@ HeadsUpDisplay HUD;
 CameraControl Cam;
 PauseScreen pause;
 Level lvl;
-
-Terminal TEST_TERMINAL; // pointer in future?
 
 int getSongNum(std::string input)
 {

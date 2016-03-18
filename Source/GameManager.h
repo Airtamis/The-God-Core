@@ -24,7 +24,6 @@
 #include <vector>
 
 // OpenGL API
-#include <GL\glew.h>
 #include <GL\glut.h>
 
 // Standard I/O for debugging

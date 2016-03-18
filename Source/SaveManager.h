@@ -14,19 +14,23 @@
 #define SAVEMANAGER_H
 
 // Because concatenating char*'s is really hard
+#include <shlobj.h>
+
 #include <string>
 
 class SaveManager
 {
 private:
 	// The path to core.sav
-	static const char* SAVE_PATH;
+	char CHAR_PATH[MAX_PATH];
+	string SAVE_PATH;
 
 	// Takes an unencrypted string and returns an encrypted string
 	std::string encrytData(std::string data);
 	// Takes an encrypted string and returns a decrypted string
 	std::string decryptData(std::string data);
 public:
+	SaveManager();
 	// Writes the array of encrypted strings to core.sav
 	void saveLevel(std::string);
 	// Reads in an array of encrypted strings from core.sav and decrypts them

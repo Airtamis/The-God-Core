@@ -10,8 +10,8 @@
 
 // Class declaration
 #include "Level.h"
-// To use rectangles
-#include "Rectangle.h"
+// To use Planes
+#include "Plane.h"
 // Vectors to plop stuff in
 #include "Globals.h"
 // Return codes
@@ -88,7 +88,7 @@ void Level::loadWalls(sqlite3 *db)
 		};
 		double colors[4] = { r, g, b, a };
 
-		Rectangle rect(verts, colors, ax);
+		Plane rect(verts, colors, ax);
 
 		walls.push_back(rect);
 	}
@@ -173,7 +173,7 @@ void Level::loadDoors(sqlite3 *db)
 		};
 		double colors[4] = { r, g, b, a };
 
-		Rectangle rect(verts, colors, ax);
+		Plane rect(verts, colors, ax);
 
 		doors.push_back(Door(rect, id));
 	}
@@ -250,8 +250,64 @@ void Level::loadSwitches(sqlite3 *db)
 	sqlite3_finalize(stm);
 }
 
+void Level::loadTerminals(sqlite3 *db)
+{
+	terminals.clear();
+	// Prepared Statement
+	sqlite3_stmt *stm;
+	// SQL command
+	string cmd;
+	// Connection Error Test
+	int err;
+	cmd = "SELECT * FROM terminals WHERE LEVEL = \"" + currLevel + "\"";
+
+	err = sqlite3_prepare(db, cmd.c_str(), -1, &stm, 0);
+
+	if (err != SQLITE_OK)
+	{
+		Logger log;
+		vector<string> output = { "FATAL ERROR: Can't load terminals while loading", currLevel };
+		log.logLine(output);
+
+		exit(STATEMENT_ERROR);
+	}
+
+	// While we still get rows of output
+	while (sqlite3_step(stm) == SQLITE_ROW)
+	{
+		double xt, yt, zt,
+			xr, yr, zr;
+		string file;
+		file = reinterpret_cast<const char*>(sqlite3_column_text(stm, 2));
+		xt = sqlite3_column_double(stm, 3);
+		yt = sqlite3_column_double(stm, 4);
+		zt = sqlite3_column_double(stm, 5);
+
+		xr = sqlite3_column_double(stm, 6);
+		yr = sqlite3_column_double(stm, 7);
+		zr = sqlite3_column_double(stm, 8);
+
+		double translate[3] = { xt, yt, zt };
+		double rotate[3] = { xr, yr, zr };
+
+		terminals.push_back(Terminal(translate, rotate, file));
+	}
+
+
+	Logger log;
+	vector<string> output = { "Loaded terminals on", currLevel };
+	log.logLine(output);
+
+	// Deconstructs the statement
+	sqlite3_finalize(stm);
+}
+
 void Level::loadLevel(std::string levelName)
 {
+	Logger log;
+	vector<string> output = { "Starting to load", levelName };
+	log.logLine(output);
+
 	if (quadratic == NULL)
 	{
 		quadratic = gluNewQuadric();
@@ -275,10 +331,19 @@ void Level::loadLevel(std::string levelName)
 	loadWalls(db);
 	loadDoors(db);
 	loadSwitches(db);
-	
+	loadTerminals(db);
+
 	// Closes the database
 	sqlite3_close(db);
 
+	output[0] = "Finished loading";
+	log.logLine(output);
+
+	// Get out of wall
+	for (unsigned int i = 0; i < 3; i++)
+	{
+		Cam.moveForward(1);
+	}
 }
 
 void Level::displayLevel()
@@ -294,6 +359,11 @@ void Level::displayLevel()
 	}
 
 	for (auto i : switches)
+	{
+		i.Display();
+	}
+
+	for (auto i : terminals)
 	{
 		i.Display();
 	}

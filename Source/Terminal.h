@@ -13,33 +13,69 @@
 #define TERMINAL_H
 
 #include "TwoD.h" // To inherit 2D class
+
+#include <cstdlib>
+
+// For loading pictures
+#include <SOIL.h>
+
 #include "TextEngine.h" // To display text to screen
+
+#include <string>
+
+#include <GL\glut.h>
 
 class Terminal : public TwoD // Inherit 2D functionality
 {
 private:
 	// What the user is typing
-	std::string currentInput, currentText;
+	std::string currentInput, currentText, error, file;
+	std::vector<std::string> history, prompts, content;
+	const double INPUT_LINE = SCREENBOTTOM / 7.0;
+	const double ERROR_LINE = INPUT_LINE - 10;
+	const double PROMPT_START = INPUT_LINE + 10;
+	const double CONTENT_START = PROMPT_START + 100;
+
+	GLint bTexture;
+
+	int num;
 	// Print our text
 	TextEngine text;
+
+	// Translation and rotation matrices
+	double translate[3], rotate[3];
 
 	// Draws the actual terminal
 	void draw();
 
+	void processInput();
+
+	void parseFile();
+
+	static const char* TERM_PATH;
+
 public:
-	void display();
-	// Takes in a string to print to screen
-	void getInput(std::string text);
+	// Draws the 3D object in the world
+	void Display();
+	// Draws the 2D Terminal screen
+	void DisplayScreen();
+	// Shows the currently typed string
+	void getText(std::string text);
 	// Signifies a completed string to process
-	void inputString(std::string text);
+	void getInput(std::string text);
 	// Returns an item in the terminal's log
 	std::string getHist(int count);
 	// Returns the number of items in the terminal's log
 	int getHistNum();
 
-	Terminal(); // What does this take in?
+	// Gets the translation coordinates
+	double getX();
+	double getY();
+	double getZ();
+
+	Terminal(const double(&_translate)[3], const double(&_rotate)[3], std::string _file);
+	 			// What does this take in?
 				// Maybe a string that coresponds to a file?
-				// Such mystery...
 };
 
 #endif

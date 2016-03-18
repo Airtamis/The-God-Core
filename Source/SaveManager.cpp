@@ -16,7 +16,14 @@
 
 using namespace std;
 
-const char* SaveManager::SAVE_PATH = "Resources\\Save Data\\core.sav";
+//const char* SaveManager::SAVE_PATH = "Resources\\Save Data\\core.sav";
+
+SaveManager::SaveManager()
+{
+	HRESULT ret = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, CHAR_PATH);
+	SAVE_PATH = CHAR_PATH;
+	SAVE_PATH += "\\The God Core\\core.sav";
+}
 
 string SaveManager::encrytData(string data)
 {

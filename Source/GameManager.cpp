@@ -140,9 +140,6 @@ void GameManager::changeSize(int w, int h)
 
 void GameManager::draw()
 {
-	//LevelZero level (Cam.x, Cam.y, Cam.z);
-	//return level.display();
-
 	if (loading)
 	{
 		lvl.loadLevel("LEVELZERO");
@@ -175,7 +172,7 @@ void GameManager::manageScenes()
 
 	else if (isInTerminal)
 	{
-		TEST_TERMINAL.display();
+		activeTerminal->DisplayScreen();
 	}
 
 	else if (isInMain)

@@ -5,7 +5,7 @@
  * Tennessee at Martin's University Scholars Organization    *
  *                                                           *
  * This file contains the declaration of the Door class      *
- * It's mostly a fancy wrapper for a rectangle with a bit    *
+ * It's mostly a fancy wrapper for a Plane with a bit        *
  * Of added functionality                                    *
 \*************************************************************/
 
@@ -13,7 +13,7 @@
 #define DOOR_H
 
 // Class decleration
-#include "Rectangle.h"
+#include "Plane.h"
 // std::string
 #include <string>
 
@@ -24,16 +24,16 @@ private:
 	// Name, so a switch can find it
 	std::string id;
 	// The physical door
-	Rectangle rect;
+	Plane rect;
 public:
 	// Is the door open?
 	bool isOpen;
-	// Rectangle's a, b, c, and d.
+	// Plane's a, b, c, and d.
 	// For easier access
 	double a, b, c, d;
 
-	// Takes in the initial rectangle and name
-	Door(Rectangle _rect, std::string _id);
+	// Takes in the initial Plane and name
+	Door(Plane _rect, std::string _id);
 	// Calls rect.Display()
 	void Display();
 	// Returns rect.getNorm()

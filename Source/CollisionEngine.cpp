@@ -1,11 +1,11 @@
 /*************************************************************\
-* CollisionEngine.h                                         *
-* This file was created by Jeremy Greenburg                 *
-* As part of The God Core game for the University of        *
-* Tennessee at Martin's University Scholars Organization    *
-*                                                           *
-* This file contains the definition of the CollisionEngine  *
-* class. For more information, see SaveManager.h            *
+ * CollisionEngine.h                                         *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the definition of the CollisionEngine  *
+ * class. For more information, see SaveManager.h            *
 \*************************************************************/
 
 #include "CollisionEngine.h"
@@ -25,6 +25,8 @@ const double OBJECT_RADIUS = 1; // Object interactivity radius
 
 void CollisionEngine::checkInteract()
 {
+	activeSwitch = NULL;
+	activeTerminal = NULL;
 	// Auto don't work in these parts
 	for (unsigned int i = 0; i < switches.size(); i++)
 	{
@@ -40,6 +42,20 @@ void CollisionEngine::checkInteract()
 		{
 			interactivity = true;
 			activeSwitch = &switches[i];
+			return;
+		}
+	}
+
+	for (unsigned int i = 0; i < terminals.size(); i++)
+	{
+		double distance = pow((terminals[i].getX() + Cam.x), 2) + pow((terminals[i].getY() + Cam.y), 2) + pow((terminals[i].getZ() + Cam.z), 2);
+		distance = sqrt(distance);
+		double radii = (PLAYER_RADIUS + OBJECT_RADIUS);
+
+		if (distance < radii)
+		{
+			interactivity = true;
+			activeTerminal = &terminals[i];
 			return;
 		}
 	}

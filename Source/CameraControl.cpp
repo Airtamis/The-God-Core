@@ -18,7 +18,6 @@
 #include <cstdlib>
 
 // OpenGL API
-#include <GL\glew.h>
 #include <GL\glut.h>
 
 // To display Suit Warnings
@@ -40,7 +39,7 @@ void CameraControl::lookLeft()
 {
 	if (!isPaused)
 	{
-		x_angle -= 2 * turnSpeed;
+		x_angle -= 3 * turnSpeed;
 
 		// To avoid potential underflow errors
 		if (x_angle < 0)
@@ -53,7 +52,7 @@ void CameraControl::lookRight()
 {
 	if (!isPaused)
 	{
-		x_angle += turnSpeed;
+		x_angle += 3 * turnSpeed;
 
 		// To avoid potential overflow errors
 		if (x_angle > 360)
@@ -67,7 +66,7 @@ void CameraControl::lookUp()
 {
 	if (!isPaused)
 	{
-		y_angle -= turnSpeed;
+		y_angle -= 2 * turnSpeed;
 
 		// To avoid potential underflow errors
 		if (y_angle < 0)
@@ -81,7 +80,7 @@ void CameraControl::lookDown()
 {
 	if (!isPaused)
 	{
-		y_angle += turnSpeed;
+		y_angle += 2 * turnSpeed;
 
 		// To avoid potential overflow errors
 		if (y_angle > 360)
@@ -171,6 +170,6 @@ void CameraControl::Display()
 	glRotatef(x_angle, 0, 1, 0);	
 	glRotatef(z_angle, 0, 0, 1);
 
-	// Translate along the Rectangle
+	// Translate along the Plane
 	glTranslatef(x, y, z);
 }

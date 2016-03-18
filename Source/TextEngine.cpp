@@ -18,13 +18,12 @@
 #include <iostream>
 
 // OpenGL API
-#include <gl\glew.h>
 #include <gl\glut.h>
 
 using namespace std;
 
 // Initializing the constants
-const char* TextEngine::TEXT_PATH = "Resources\\Scripts\\";
+const char* TextEngine::TEXT_PATH = "Resources\\Text\\";
 const double TextEngine::LINE_OFFSET = 10;
 
 void TextEngine::displayText(double x, double y,

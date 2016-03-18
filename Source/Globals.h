@@ -20,6 +20,7 @@
 #include "Terminal.h"
 #include "Door.h"
 #include "Switch.h"
+#include "Plane.h"
 
 // Remember that if you're doing anything else, globals are bad.
 // But we're in the hellscape that is graphics
@@ -27,29 +28,32 @@
 // Only madness dwells here
 
 // Typedefs make life easy
-typedef std::vector<Rectangle> vr;
+typedef std::vector<Plane> vr;
 typedef std::vector<Door> vd;
 typedef std::vector<Switch> vs;
+typedef std::vector<Terminal> vt;
 
 // Pointers to various interactive objects
 extern Switch *activeSwitch;
+extern Terminal *activeTerminal;
 
 // Vectors containing all of the level's assets
 extern vr walls;
 extern vd doors;
 extern vs switches;
+extern vt terminals;
 
 extern bool
 	// Are we colliding?
 	collision,
 	// Go dim or go dark?
-	goDim, goDark, 
+	goDim, goDark,
 	// Dunno if I actually need this one
 	loading,
 	// Is in varius different stages of non-normal play
 	isInConsole, isPaused, isInTerminal, isInMain,
 	// Should we change the song?
-	changeSong, 
+	changeSong,
 	// Is something in interaction range?
 	interactivity;
 
@@ -66,9 +70,6 @@ extern HeadsUpDisplay HUD;
 extern CameraControl Cam;
 extern PauseScreen pause;
 extern Level lvl;
-
-// TEST
-extern Terminal TEST_TERMINAL;
 
 // Converts a songname to an integer
 int getSongNum(std::string input);

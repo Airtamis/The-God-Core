@@ -12,14 +12,13 @@
 #include "HeadsUpDisplay.h"
 
 // OpenGL API
-#include <gl\glew.h>
 #include <gl\glut.h>
 
 // For counting seconds
 #include <ctime>
 
-// For displaying Rectangles
-#include "Rectangle.h"
+// For displaying Planes
+#include "Plane.h"
 
 // For displaying triangles
 #include "Triangle.h"
@@ -97,7 +96,7 @@ void HeadsUpDisplay::dim()
 				SCREENRIGHT, SCREENTOP, -1
 			};
 
-			Rectangle black{ dimVert, colors };
+			Plane black{ dimVert, colors };
 			black.Display2D();
 		}
 
@@ -135,7 +134,7 @@ void HeadsUpDisplay::dark()
 				SCREENRIGHT, SCREENTOP, -1
 			};
 
-			Rectangle black{ dimVert, colors };
+			Plane black{ dimVert, colors };
 			black.Display2D();
 		}
 
@@ -158,7 +157,7 @@ void HeadsUpDisplay::drawConsole()
 		SCREENRIGHT, SCREENTOP, -1
 	};
 
-	Rectangle console_tab{ vertices, colors };
+	Plane console_tab{ vertices, colors };
 	console_tab.Display2D();	
 
 	if (currentInput != "")
@@ -184,7 +183,7 @@ void HeadsUpDisplay::drawInfoBox()
 		SCREENRIGHT / 10, SCREENTOP, -1
 	};
 
-	Rectangle info{ vertices, colors };
+	Plane info{ vertices, colors };
 	info.Display2D();
 }
 

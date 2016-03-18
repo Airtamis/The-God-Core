@@ -18,7 +18,6 @@
 #include <cstdlib>
 
 // OpenGL API
-#include <GL\glew.h>
 #include <GL\glut.h>
 
 // To recieve and manage global variables
@@ -138,6 +137,8 @@ void Keyboard::inputConsole(unsigned char key, int x, int y)
 // Just adjust all of these to do terminally stuff I guess
 void Keyboard::inputTerminal(unsigned char key, int x, int y)
 {
+	// TODO: Fix terminal input with active Terminal hijibis
+
 	// User string input
 	static string input;
 	// Number in console history
@@ -146,9 +147,9 @@ void Keyboard::inputTerminal(unsigned char key, int x, int y)
 	// Up arrow, recieves the next older entry in the console's history
 	if (getPrev)
 	{
-		input = TEST_TERMINAL.getHist(count); 
+		input = activeTerminal->getHist(count); 
 
-		if (count < TEST_TERMINAL.getHistNum() - 1)
+		if (count < activeTerminal->getHistNum() - 1)
 		{
 			count++;
 		}
@@ -159,7 +160,7 @@ void Keyboard::inputTerminal(unsigned char key, int x, int y)
 	// Down arrow, recieves the next newer entry in the console's history
 	else if (getNext)
 	{
-		input = TEST_TERMINAL.getHist(count); 
+		input = activeTerminal->getHist(count); 
 
 		if (count > 0)
 		{
@@ -172,7 +173,7 @@ void Keyboard::inputTerminal(unsigned char key, int x, int y)
 	// Enter key, process and clear input
 	else if (key == 13)
 	{
-		TEST_TERMINAL.inputString(input);
+		activeTerminal->getInput(input);
 		input.clear();
 		count = 0;
 	}
@@ -190,7 +191,7 @@ void Keyboard::inputTerminal(unsigned char key, int x, int y)
 	}
 
 	// Print what's been typed so far
-	TEST_TERMINAL.getInput(input); // Drawing handled elsewhere?
+	activeTerminal->getText(input); // Drawing handled elsewhere?
 }
 
 void Keyboard::interact(unsigned char key, int x, int y)
@@ -341,5 +342,9 @@ void Keyboard::interact()
 	if (interactivity)
 	{
 		if (activeSwitch != NULL) activeSwitch->toggle();
+		else if (activeTerminal != NULL)
+		{
+			isInTerminal = true;
+		}
 	}
 }

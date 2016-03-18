@@ -11,7 +11,6 @@
 // Because doth openGL demandeth
 #include <cstdlib>
 // OpenGL API
-#include <GL\glew.h>
 #include <GL\glut.h>
 
 // The Game manger

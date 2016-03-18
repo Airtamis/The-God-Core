@@ -16,8 +16,8 @@
 #include <string>
 // std::vector
 #include <vector>
-// Rectangles for walls/doors/such else
-#include "Rectangle.h"
+// Planes for walls/doors/such else
+#include "Plane.h"
 
 // SQLite API
 #include "sqlite3.h"
@@ -37,6 +37,7 @@ private:
 	void loadWalls(sqlite3 *db);
 	void loadDoors(sqlite3 *db);
 	void loadSwitches(sqlite3 *db);
+	void loadTerminals(sqlite3 *db);
 public:
 	// Manages the loading of the level
 	void loadLevel(std::string levelName);

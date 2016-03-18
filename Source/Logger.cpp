@@ -15,15 +15,21 @@
 // File I/O
 #include <fstream>
 
+#include <iostream>
+
 using namespace std;
 
-const char* Logger::LOG_PATH = "Resources//output.log";
+Logger::Logger()
+{
+	HRESULT ret = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, CHAR_PATH);
+	LOG_PATH = CHAR_PATH;
+	LOG_PATH += "\\The God Core\\output.log";
+}
 
 void Logger::nuke()
 {
 	ofstream outfile(LOG_PATH); // Nukes everything within
 }
-
 
 void Logger::logLine(vector<string> input)
 {

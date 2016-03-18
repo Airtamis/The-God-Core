@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Door::Door(Rectangle _rect, std::string _id) : rect(_rect), id(_id)
+Door::Door(Plane _rect, std::string _id) : rect(_rect), id(_id)
 {
 	isOpen = false;
 	a = rect.a;
