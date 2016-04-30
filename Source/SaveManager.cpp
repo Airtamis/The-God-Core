@@ -16,8 +16,6 @@
 
 using namespace std;
 
-//const char* SaveManager::SAVE_PATH = "Resources\\Save Data\\core.sav";
-
 SaveManager::SaveManager()
 {
 	HRESULT ret = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, CHAR_PATH);

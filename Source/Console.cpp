@@ -36,6 +36,13 @@ Console::Console()
 	INVALID_COLOR = makeTrip(1, 0, 0);
 	// Gray!
 	NEUTRAL_COLOR = makeTrip(1, 1, 1);
+
+	// Get path to documents
+	HRESULT ret = SHGetFolderPath(NULL, CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT, CHAR_PATH);
+	// Assign to SAVE_PATH
+	SAVE_PATH = CHAR_PATH;
+	// Concatenate save file
+	SAVE_PATH += "\\The God Core\\core.sav";
 }
 
 void Console::activate(string input, string text)
@@ -140,6 +147,13 @@ void Console::processInput()
 		playSong(input);
 	}
 
+	else if (currentInput == "Goto Main")
+	{
+		isInMain = true;
+		isInConsole = false;
+		HUD.toggleConsole();
+	}
+
 	// Invalid command
 	else
 	{
@@ -176,8 +190,7 @@ void Console::readFromFile(string input)
 	// Syntax = Read core.sav
 	if (input == "core.sav")
 	{
-		const char* SAVE_FILE = "Resources\\Save Data\\core.sav";
-		ifstream infile(SAVE_FILE);
+		ifstream infile(SAVE_PATH);
 
 		string text;
 
@@ -207,7 +220,7 @@ void Console::readFromFile(string input)
 			string tag = input.substr(0, pos);
 			string file = input.substr(pos + 1); // +1 to avoid the space
 
-			const char* TEXT_PATH = "Resources\\Scripts\\";
+			const char* TEXT_PATH = "Resources\\Text\\";
 			string fullPath = TEXT_PATH + file;
 
 			// Simply to test for the file's existence

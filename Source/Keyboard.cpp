@@ -108,7 +108,7 @@ void Keyboard::inputConsole(unsigned char key, int x, int y)
 	}
 
 	// Tilda, close the console
-	else if (key == '~')
+	else if (key == '~' || isInConsole == false)
 	{
 		input.clear();
 		isInConsole = false;
@@ -227,7 +227,7 @@ void Keyboard::interact(unsigned char key, int x, int y)
 		Cam.strafeRight();
 		if (col.collide())
 		{
-			Cam.strafeRight();
+			Cam.strafeLeft();
 		}
 		break;
 	case 's':

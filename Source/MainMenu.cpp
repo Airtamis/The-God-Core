@@ -23,7 +23,7 @@ MainMenu::MainMenu()
 {
 	texture = SOIL_load_OGL_texture
 			(
-				"Resources\\Images\\TOE.png",   // Image to load
+				"Resources\\Images\\Main.png",   // Image to load
 				SOIL_LOAD_AUTO,					// ???
 				SOIL_CREATE_NEW_ID,
 				SOIL_FLAG_MIPMAPS | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT // !?!?!?!

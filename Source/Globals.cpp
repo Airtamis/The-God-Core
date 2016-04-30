@@ -24,7 +24,7 @@ bool loading = true;
 bool isInConsole = false;
 bool isPaused = false;
 bool isInTerminal = false;
-bool isInMain = false;
+bool isInMain = true;
 bool changeSong = true;
 bool interactivity = false;
 

@@ -13,9 +13,10 @@
 #ifndef SAVEMANAGER_H
 #define SAVEMANAGER_H
 
-// Because concatenating char*'s is really hard
+// Windows API
 #include <shlobj.h>
 
+// Because concatenating char*'s is really hard
 #include <string>
 
 class SaveManager
@@ -23,7 +24,7 @@ class SaveManager
 private:
 	// The path to core.sav
 	char CHAR_PATH[MAX_PATH];
-	string SAVE_PATH;
+	std::string SAVE_PATH;
 
 	// Takes an unencrypted string and returns an encrypted string
 	std::string encrytData(std::string data);

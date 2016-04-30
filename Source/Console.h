@@ -24,6 +24,10 @@
 // For processing text
 #include "TextEngine.h"
 
+// Windows API
+#include <shlobj.h>
+
+
 // To make rgb calues easier to store
 #include "Triple.h"
 
@@ -47,6 +51,12 @@ private:
 	// Console History
 	TextEngine log;
 
+	// Path to core.sav
+	char CHAR_PATH[MAX_PATH];
+	std::string SAVE_PATH;
+
+	bool isActive;
+
 	// The bottom of the console
 	const int SCREENBOTTOM = 500;
 	
@@ -67,7 +77,7 @@ private:
 	void playSong(std::string input);
 
 public:
-	// Initializes VALID_COLOR, INVALID_COLOR, and NEUTRAL_COLOR
+	// Initializes VALID_COLOR, INVALID_COLOR, NEUTRAL_COLOR, and SAVE_PATH
 	Console();
 	// Manages console functions if input has been provided
 	void activate(std::string input, std::string text);
