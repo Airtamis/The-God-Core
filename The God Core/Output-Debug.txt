@@ -1,0 +1,71 @@
+﻿'The God Core.exe' (Win32): Loaded 'C:\Users\JeremyG\Documents\Scholars Project\Code\The God Core\Debug\The God Core.exe'. Symbols loaded.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntdll.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\KernelBase.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Users\JeremyG\Documents\Scholars Project\Code\The God Core\Debug\fmod.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcp140d.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\opengl32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\glu32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\glut32.dll'. Module was built without symbols.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\vcruntime140d.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ucrtbased.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\wsock32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmm.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msacm32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\user32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\advapi32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ole32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msvcrt.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\gdi32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ddraw.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ws2_32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winmmbase.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sechost.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\rpcrt4.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\combase.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\dciman32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\nsi.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cfgmgr32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\devobj.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\cryptbase.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\sspicli.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\bcryptprimitives.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\imm32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msctf.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\kernel.appcore.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\uxtheme.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\clbcatq.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\MMDevAPI.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\wdmaud.drv'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ksuser.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\avrt.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\AudioSes.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\oleaut32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\powrprof.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msacm32.drv'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\midimap.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\dwmapi.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\nvoglv32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\shell32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\setupapi.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\wtsapi32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\version.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\shlwapi.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\wintrust.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\crypt32.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\msasn1.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\ntmarta.dll'. Cannot find or open the PDB file.
+'The God Core.exe' (Win32): Loaded 'C:\Windows\SysWOW64\winsta.dll'. Cannot find or open the PDB file.
+The thread 0x2d3c has exited with code 0 (0x0).
+The thread 0x9f4 has exited with code 0 (0x0).
+The thread 0xfa4 has exited with code 0 (0x0).
+The thread 0x2984 has exited with code 0 (0x0).
+The thread 0x1fb8 has exited with code 0 (0x0).
+The thread 0x2edc has exited with code 0 (0x0).
+The thread 0x2908 has exited with code 0 (0x0).
+The thread 0x23a8 has exited with code 0 (0x0).
+The thread 0x2294 has exited with code 0 (0x0).
+The thread 0x22d8 has exited with code 0 (0x0).
+The thread 0xab4 has exited with code 0 (0x0).
+The thread 0x2ae0 has exited with code 0 (0x0).
+The program '[11224] The God Core.exe' has exited with code 0 (0x0).
