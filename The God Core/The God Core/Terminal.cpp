@@ -128,7 +128,7 @@ void Terminal::DisplayScreen()
 		text.printString(SCREENLEFT, ERROR_LINE, 1, 0, 0, error);
 		text.printString(SCREENLEFT, INPUT_LINE, 0, 1, 0, ":> " + currentText);
 
-		if (num != -1)
+		if (num != -1 && num < content.size())
 		{
 			text.openFile(SCREENLEFT, CONTENT_START, 0, 1, 0, file, content[num]);
 		}
