@@ -73,6 +73,7 @@ int Terminal::getHistNum()
 
 void Terminal::draw()
 {
+	// Completely black background
 	double colors[4] = { 0, 0, 0, 1 };
 	double vertices[12] =
 	{
@@ -109,6 +110,7 @@ void Terminal::DisplayScreen()
 
 	draw();
 
+	// If we need to proces a command
 	if (currentInput != "")
 	{
 		processInput();
@@ -120,22 +122,25 @@ void Terminal::DisplayScreen()
 
 	else
 	{
+		// Print all prompts
 		for (unsigned int i = 0; i < prompts.size(); i++)
 		{
 			text.printString(SCREENLEFT, PROMPT_START + 10 * i, 0, 1, 0, prompts[i]);
 		}
 
+		// Print an error
 		text.printString(SCREENLEFT, ERROR_LINE, 1, 0, 0, error);
+		// Echo user text
 		text.printString(SCREENLEFT, INPUT_LINE, 0, 1, 0, ":> " + currentText);
 
-		if (num != -1 && num < content.size())
+		// If needed, print content
+		if (num != -1 && num < (signed int)content.size())
 		{
 			text.openFile(SCREENLEFT, CONTENT_START, 0, 1, 0, file, content[num]);
 		}
 	}
 
 	prepare3D();
-
 }
 
 void Terminal::processInput()
@@ -152,6 +157,11 @@ void Terminal::processInput()
 		num = -1;
 	}
 
+	else if (currentInput == "help" || currentInput == "Help")
+	{
+		num = 0;
+	}
+
 	else
 	{
 		string first, last;
@@ -163,8 +173,7 @@ void Terminal::processInput()
 		if (first == "read" || first == "Read")
 		{
 			num = atoi(last.c_str());
-			num--; // Because content is one smaller than prompts
-			if (num < 0 || num >= (signed int)prompts.size())
+			if (num <= 0 || num >= (signed int)prompts.size())
 			{
 				error = "ERROR: Invalid file number";
 				num = -1;
@@ -174,6 +183,7 @@ void Terminal::processInput()
 		else
 		{
 			error = "ERROR: Invalid Command: " + currentInput;
+			num = -1;
 		}
 	}
 }
@@ -213,6 +223,8 @@ void Terminal::parseFile()
 {
 	ifstream infile{ TERM_PATH + file };
 	string buff;
+
+	content.push_back("HELP"); // Help text is always the 0th tag in the terminals
 
 	getline(infile, buff);
 	prompts.push_back(buff); // Push back the file tag
@@ -257,7 +269,7 @@ Terminal::Terminal(const double(&_translate)[3], const double(&_rotate)[3], stri
 
 	file = _file;
 
-	num = -1;
+	num = 0;
 
 	parseFile();
 }
