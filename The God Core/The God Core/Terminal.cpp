@@ -7,6 +7,7 @@
  * This file contains the definition of the Terminal class   *
  * For more information, see CameraControl.h                 *
 \*************************************************************/
+
 //
 // Class declaration
 #include "Terminal.h"

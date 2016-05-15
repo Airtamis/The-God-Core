@@ -74,8 +74,7 @@ public:
 	double getZ();
 
 	Terminal(const double(&_translate)[3], const double(&_rotate)[3], std::string _file);
-	 			// What does this take in?
-				// Maybe a string that coresponds to a file?
+	 			
 };
 
 #endif
