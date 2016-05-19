@@ -21,13 +21,17 @@
 
 using namespace std;
 
-Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3])
+Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], bool _visible, int _type)
 {
 	// Copies the color
 	copy(begin(_translate), end(_translate), translate);
 
 	// Copies the vertices
 	copy(begin(_rotate), end(_rotate), rotate);
+
+	visible = _visible;
+
+	targetType = _type;
 
 	target = NULL;
 }
@@ -37,26 +41,44 @@ void Switch::assign(Door &_target)
 	target = &_target;
 }
 
+void Switch::assign(Terminal &_target)
+{
+	target = &_target;
+}
+
 void Switch::toggle()
 {
-	target->isOpen = !target->isOpen;
+	switch (targetType)
+	{
+	case DOOR:
+		Door* t = (Door*)target;
+		t->isOpen = !t->isOpen;
+		break;
+	case TERMINAL:
+		Terminal* t = (Terminal*)target;
+		//t->isOn = !t->isOn;
+		break;
+	}
 }
 
 void Switch::Display()
 {
-	glPushMatrix();
-	glTranslated(translate[0], translate[1], translate[2]);
-	glRotated(rotate[0], 1, 0, 0);
-	glRotated(rotate[1], 0, 1, 0);
-	glRotated(rotate[2], 0, 0, 1);
+	if (visible)
+	{
+		glPushMatrix();
+		glTranslated(translate[0], translate[1], translate[2]);
+		glRotated(rotate[0], 1, 0, 0);
+		glRotated(rotate[1], 0, 1, 0);
+		glRotated(rotate[2], 0, 0, 1);
 
-	glColor3d(0.9, 0.9, 0.9);
-	glutSolidCube(.1);
-	glColor3d(0, 1, 0);
-	glScaled(.5, .5, 1.5);
-	glutSolidCube(.1);
+		glColor3d(0.9, 0.9, 0.9);
+		glutSolidCube(.1);
+		glColor3d(0, 1, 0);
+		glScaled(.5, .5, 1.5);
+		glutSolidCube(.1);
 
-	glPopMatrix();
+		glPopMatrix();
+	}
 }
 
 double Switch::getX()

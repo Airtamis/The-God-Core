@@ -226,7 +226,7 @@ void Level::loadSwitches(sqlite3 *db)
 		double translate[3] = { xt, yt, zt };
 		double rotate[3] = { xr, yr, zr };
 
-		switches.push_back(Switch(translate, rotate));
+		switches.push_back(Switch(translate, rotate, true, DOOR));
 
 		for (unsigned int i = 0; i < doors.size(); i++)
 		{
@@ -330,8 +330,10 @@ void Level::loadLevel(std::string levelName)
 
 	loadWalls(db);
 	loadDoors(db);
-	loadSwitches(db);
 	loadTerminals(db);
+
+	// Loading switches must be last to properly bind targets
+	loadSwitches(db);
 
 	// Closes the database
 	sqlite3_close(db);
