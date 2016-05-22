@@ -52,7 +52,7 @@ void CollisionEngine::checkInteract()
 		distance = sqrt(distance);
 		double radii = (PLAYER_RADIUS + OBJECT_RADIUS);
 
-		if (distance < radii)
+		if (distance < radii && terminals[i].isOn)
 		{
 			interactivity = true;
 			activeTerminal = &terminals[i];

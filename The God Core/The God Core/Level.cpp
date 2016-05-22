@@ -239,8 +239,20 @@ void Level::loadSwitches(sqlite3 *db)
 				switches[switches.size() - 1].assign(doors[i]);
 			}
 		}
-	}
 
+		/*
+		for (unsigned int i = 0; i < terminals.size(); i++)
+		{
+			if (terminals[i].getID() == target)
+			{
+				Logger log;
+				vector<string> output = { "Binding switch to terminal", target };
+				log.logLine(output);
+
+				switches[switches.size() - 1].assign(terminals[i]);
+			}
+		*/
+	}
 
 	Logger log;
 	vector<string> output = { "Loaded switches on", currLevel };

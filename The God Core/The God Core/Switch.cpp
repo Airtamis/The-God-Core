@@ -50,19 +50,25 @@ void Switch::toggle()
 {
 	switch (targetType)
 	{
-	case DOOR:
-		Door* t = (Door*)target;
-		t->isOpen = !t->isOpen;
-		break;
-	case TERMINAL:
-		Terminal* t = (Terminal*)target;
-		//t->isOn = !t->isOn;
-		break;
+		case DOOR:
+		{
+			Door* t = (Door*)target;
+			t->isOpen = !t->isOpen;
+			break;
+		}
+		case TERMINAL:
+		{
+			Terminal* t = (Terminal*)target;
+			t->isOn = !t->isOn;
+			break;
+		}
 	}
 }
 
 void Switch::Display()
 {
+	// THOUGHT: Have a different switch display for power?
+
 	if (visible)
 	{
 		glPushMatrix();

@@ -74,6 +74,8 @@ public:
 	double getY();
 	double getZ();
 
+	bool isOn = true;
+
 	Terminal(const double(&_translate)[3], const double(&_rotate)[3], std::string _file);
 	 			
 };
