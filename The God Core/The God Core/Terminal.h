@@ -28,9 +28,10 @@
 class Terminal : public TwoD // Inherit 2D functionality
 {
 private:
-	// What the user is typing
+	// text = what the user is typing, input = completed input
 	std::string currentInput, currentText, error, file;
 	std::vector<std::string> history, prompts, content;
+	// Where to print each item
 	const double INPUT_LINE = SCREENBOTTOM / 7.0;
 	const double ERROR_LINE = INPUT_LINE - 10;
 	const double PROMPT_START = INPUT_LINE + 10;
@@ -72,6 +73,8 @@ public:
 	double getX();
 	double getY();
 	double getZ();
+
+	bool isOn = true;
 
 	Terminal(const double(&_translate)[3], const double(&_rotate)[3], std::string _file);
 	 			

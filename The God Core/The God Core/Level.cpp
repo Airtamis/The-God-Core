@@ -226,7 +226,7 @@ void Level::loadSwitches(sqlite3 *db)
 		double translate[3] = { xt, yt, zt };
 		double rotate[3] = { xr, yr, zr };
 
-		switches.push_back(Switch(translate, rotate));
+		switches.push_back(Switch(translate, rotate, true, DOOR));
 
 		for (unsigned int i = 0; i < doors.size(); i++)
 		{
@@ -239,8 +239,20 @@ void Level::loadSwitches(sqlite3 *db)
 				switches[switches.size() - 1].assign(doors[i]);
 			}
 		}
-	}
 
+		/*
+		for (unsigned int i = 0; i < terminals.size(); i++)
+		{
+			if (terminals[i].getID() == target)
+			{
+				Logger log;
+				vector<string> output = { "Binding switch to terminal", target };
+				log.logLine(output);
+
+				switches[switches.size() - 1].assign(terminals[i]);
+			}
+		*/
+	}
 
 	Logger log;
 	vector<string> output = { "Loaded switches on", currLevel };
@@ -330,8 +342,10 @@ void Level::loadLevel(std::string levelName)
 
 	loadWalls(db);
 	loadDoors(db);
-	loadSwitches(db);
 	loadTerminals(db);
+
+	// Loading switches must be last to properly bind targets
+	loadSwitches(db);
 
 	// Closes the database
 	sqlite3_close(db);

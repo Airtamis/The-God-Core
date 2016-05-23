@@ -12,21 +12,32 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
+// Switch targets
+#define DOOR 0
+#define TERMINAL 1
+
 // Door class
 #include "Door.h"
+// Terminal Class
+#include "Terminal.h"
 
 class Switch
 {
 private:
-	Door* target; // The door that this switch activates
+	void* target; // The door that this switch activates
 	// Translation and rotation coordinates
 	double translate[3], rotate[3];
 
+	// One of the predefined types
+	int targetType;
+	bool visible;
+
 public:
 	// Initializes the translation and rotation matrices
-	Switch(const double(&_translate)[3], const double(&_rotate)[3]);
+	Switch(const double(&_translate)[3], const double(&_rotate)[3], bool _visible, int _type);
 	// Bimds the target pointer to a door
 	void assign(Door &_target);
+	void assign(Terminal &_target);
 	// Opens/Closes the door
 	void toggle();
 	// Actually draws the switch
