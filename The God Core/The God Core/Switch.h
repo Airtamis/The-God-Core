@@ -13,8 +13,8 @@
 #define SWITCH_H
 
 // Switch targets
-#define DOOR 0
-#define TERMINAL 1
+#define T_DOOR 0
+#define T_TERMINAL 1
 
 // Door class
 #include "Door.h"
@@ -30,11 +30,10 @@ private:
 
 	// One of the predefined types
 	int targetType;
-	bool visible;
 
 public:
 	// Initializes the translation and rotation matrices
-	Switch(const double(&_translate)[3], const double(&_rotate)[3], bool _visible, int _type);
+	Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type);
 	// Bimds the target pointer to a door
 	void assign(Door &_target);
 	void assign(Terminal &_target);

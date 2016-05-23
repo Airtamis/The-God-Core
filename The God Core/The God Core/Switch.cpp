@@ -21,15 +21,13 @@
 
 using namespace std;
 
-Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], bool _visible, int _type)
+Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type)
 {
 	// Copies the color
 	copy(begin(_translate), end(_translate), translate);
 
 	// Copies the vertices
 	copy(begin(_rotate), end(_rotate), rotate);
-
-	visible = _visible;
 
 	targetType = _type;
 
@@ -50,13 +48,13 @@ void Switch::toggle()
 {
 	switch (targetType)
 	{
-		case DOOR:
+		case T_DOOR:
 		{
 			Door* t = (Door*)target;
 			t->isOpen = !t->isOpen;
 			break;
 		}
-		case TERMINAL:
+		case T_TERMINAL:
 		{
 			Terminal* t = (Terminal*)target;
 			t->isOn = !t->isOn;
@@ -69,22 +67,19 @@ void Switch::Display()
 {
 	// THOUGHT: Have a different switch display for power?
 
-	if (visible)
-	{
-		glPushMatrix();
-		glTranslated(translate[0], translate[1], translate[2]);
-		glRotated(rotate[0], 1, 0, 0);
-		glRotated(rotate[1], 0, 1, 0);
-		glRotated(rotate[2], 0, 0, 1);
+	glPushMatrix();
+	glTranslated(translate[0], translate[1], translate[2]);
+	glRotated(rotate[0], 1, 0, 0);
+	glRotated(rotate[1], 0, 1, 0);
+	glRotated(rotate[2], 0, 0, 1);
 
-		glColor3d(0.9, 0.9, 0.9);
-		glutSolidCube(.1);
-		glColor3d(0, 1, 0);
-		glScaled(.5, .5, 1.5);
-		glutSolidCube(.1);
+	glColor3d(0.9, 0.9, 0.9);
+	glutSolidCube(.1);
+	glColor3d(0, 1, 0);
+	glScaled(.5, .5, 1.5);
+	glutSolidCube(.1);
 
-		glPopMatrix();
-	}
+	glPopMatrix();
 }
 
 double Switch::getX()

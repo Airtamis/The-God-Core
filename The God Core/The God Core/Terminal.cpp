@@ -191,9 +191,13 @@ void Terminal::processInput()
 
 void Terminal::Display()
 {
+	if (isOn)
+		glColor3d(1, 0, 0);
+	else
+		glColor3d(0, 0, 1);
+
 	glPushMatrix();
 
-	glColor3d(1, 0, 0);
 	glTranslated(translate[0], translate[1], translate[2]);
 	glRotated(rotate[0], 1, 0, 0);
 	glRotated(rotate[1], 0, 1, 0);
@@ -244,7 +248,12 @@ void Terminal::parseFile()
 
 }
 
-Terminal::Terminal(const double(&_translate)[3], const double(&_rotate)[3], string _file)
+string Terminal::getID()
+{
+	return id;
+}
+
+Terminal::Terminal(const double(&_translate)[3], const double(&_rotate)[3], string _file, string _id)
 {
 	// Copies the color
 	copy(begin(_translate), end(_translate), translate);
@@ -269,6 +278,8 @@ Terminal::Terminal(const double(&_translate)[3], const double(&_rotate)[3], stri
 	}
 
 	file = _file;
+
+	id = _id;
 
 	num = 0;
 

@@ -213,7 +213,10 @@ void Level::loadSwitches(sqlite3 *db)
 	{
 		double xt, yt, zt,
 			xr, yr, zr;
-		string target;
+		string target, s_type;
+		int i_type, id;
+
+		id = sqlite3_column_int(stm, 0);
 		target = reinterpret_cast<const char*>(sqlite3_column_text(stm, 2));
 		xt = sqlite3_column_double(stm, 3);
 		yt = sqlite3_column_double(stm, 4);
@@ -223,35 +226,70 @@ void Level::loadSwitches(sqlite3 *db)
 		yr = sqlite3_column_double(stm, 7);
 		zr = sqlite3_column_double(stm, 8);
 
+		s_type = reinterpret_cast<const char*>(sqlite3_column_text(stm, 9));
+
 		double translate[3] = { xt, yt, zt };
 		double rotate[3] = { xr, yr, zr };
 
-		switches.push_back(Switch(translate, rotate, true, DOOR));
-
-		for (unsigned int i = 0; i < doors.size(); i++)
+		if (s_type == "DOOR")
+			i_type = T_DOOR;
+		else if (s_type == "TERMINAL")
+			i_type = T_TERMINAL;
+		else
 		{
-			if (doors[i].getID() == target)
-			{
-				Logger log;
-				vector<string> output = { "Binding switch to door", target };
-				log.logLine(output);
+			Logger log;
+			vector<string> output = { "Failed to evaluate string type entry: ", s_type, "for switch ", to_string(id) };
+			log.logLine(output);
 
-				switches[switches.size() - 1].assign(doors[i]);
+			exit(DATA_ENTRY_ERROR);
+		}
+
+		switches.push_back(Switch(translate, rotate, i_type));
+
+		bool assigned = false;
+
+		if (s_type == "DOOR")
+		{
+			for (unsigned int i = 0; i < doors.size(); i++)
+			{
+				if (doors[i].getID() == target)
+				{
+					Logger log;
+					vector<string> output = { "Binding switch ", to_string(id), " to door", target };
+					log.logLine(output);
+
+					switches[switches.size() - 1].assign(doors[i]);
+
+					assigned = true;
+				}
 			}
 		}
 
-		/*
-		for (unsigned int i = 0; i < terminals.size(); i++)
+		else if (s_type == "TERMINAL")
 		{
-			if (terminals[i].getID() == target)
+			for (unsigned int i = 0; i < terminals.size(); i++)
 			{
-				Logger log;
-				vector<string> output = { "Binding switch to terminal", target };
-				log.logLine(output);
+				if (terminals[i].getID() == target)
+				{
+					Logger log;
+					vector<string> output = { "Binding switch ", to_string(id), " to terminal", target };
+					log.logLine(output);
 
-				switches[switches.size() - 1].assign(terminals[i]);
+					switches[switches.size() - 1].assign(terminals[i]);
+
+					assigned = true;
+				}
 			}
-		*/
+		}
+
+		if (!assigned)
+		{
+			Logger log;
+			vector<string> output = { "Failed to bind switch ", to_string(id), " to a ", s_type };
+			log.logLine(output);
+
+			exit(BINDING_ERROR);
+		}
 	}
 
 	Logger log;
@@ -289,7 +327,8 @@ void Level::loadTerminals(sqlite3 *db)
 	{
 		double xt, yt, zt,
 			xr, yr, zr;
-		string file;
+		string file, id;
+		id = reinterpret_cast<const char*>(sqlite3_column_text(stm, 0));
 		file = reinterpret_cast<const char*>(sqlite3_column_text(stm, 2));
 		xt = sqlite3_column_double(stm, 3);
 		yt = sqlite3_column_double(stm, 4);
@@ -302,7 +341,10 @@ void Level::loadTerminals(sqlite3 *db)
 		double translate[3] = { xt, yt, zt };
 		double rotate[3] = { xr, yr, zr };
 
-		terminals.push_back(Terminal(translate, rotate, file));
+		Logger log;
+		log.logLine(id);
+
+		terminals.push_back(Terminal(translate, rotate, file, id));
 	}
 
 

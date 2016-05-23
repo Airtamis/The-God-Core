@@ -18,5 +18,7 @@
 #define DATABASE_ERROR 3 // sqlite can't load database
 #define STATEMENT_ERROR 4 // sqlite statement fails to execute
 #define SOIL_ERROR 5 // SOIl fails to load image
+#define DATA_ENTRY_ERROR 6
+#define BINDING_ERROR 7
 
 #endif

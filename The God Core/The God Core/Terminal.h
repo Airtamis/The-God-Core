@@ -31,6 +31,7 @@ private:
 	// text = what the user is typing, input = completed input
 	std::string currentInput, currentText, error, file;
 	std::vector<std::string> history, prompts, content;
+	std::string id;
 	// Where to print each item
 	const double INPUT_LINE = SCREENBOTTOM / 7.0;
 	const double ERROR_LINE = INPUT_LINE - 10;
@@ -74,9 +75,11 @@ public:
 	double getY();
 	double getZ();
 
+	std::string getID();
+
 	bool isOn = true;
 
-	Terminal(const double(&_translate)[3], const double(&_rotate)[3], std::string _file);
+	Terminal(const double(&_translate)[3], const double(&_rotate)[3], std::string _file, std::string _id);
 	 			
 };
 
