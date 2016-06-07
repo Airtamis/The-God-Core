@@ -69,21 +69,66 @@ void MainMenu::drawClickBoxes()
 	glVertex2d(SCREENRIGHT / 3.0, SCREENBOTTOM / 2.2);
 	glEnd();
 
+	// Load game
 	glBegin(GL_LINE_LOOP);
-	glVertex2d(SCREENRIGHT / 20.0, SCREENBOTTOM / 2.2);
-	glVertex2d(SCREENRIGHT / 20.0, SCREENBOTTOM / 1.9);
-	glVertex2d(SCREENRIGHT / 3.0, SCREENBOTTOM / 1.9);
-	glVertex2d(SCREENRIGHT / 3.0, SCREENBOTTOM / 2.2);
+	glVertex2d(SCREENRIGHT / 10.0, SCREENBOTTOM / 1.57);
+	glVertex2d(SCREENRIGHT / 10.0, SCREENBOTTOM / 1.75);
+	glVertex2d(SCREENRIGHT / 3.5, SCREENBOTTOM / 1.75);
+	glVertex2d(SCREENRIGHT / 3.5, SCREENBOTTOM / 1.57);
+	glEnd();
+
+	// Options
+	glBegin(GL_LINE_LOOP);
+	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.35);
+	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.45);
+	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.45);
+	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.35);
+	glEnd();
+
+	// Options
+	glBegin(GL_LINE_LOOP);
+	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.35);
+	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.45);
+	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.45);
+	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.35);
 	glEnd();
 }
 
 void MainMenu::getClick(double x, double y)
 {
+	// Start new game
 	if (x >= SCREENRIGHT / 20.0 && x <= SCREENRIGHT / 3.0)
 	{
 		if (y >= SCREENBOTTOM / 2.2 && y <= SCREENBOTTOM / 1.9)
 		{
 			isInMain = false;
+		}
+	}
+
+	// Load Game
+	if (x >= SCREENRIGHT / 10.0 && x <= SCREENRIGHT / 3.5)
+	{
+		if (y >= SCREENBOTTOM / 1.75 && y <= SCREENBOTTOM / 1.57)
+		{
+			isInMain = false;
+		}
+	}
+
+	// Options
+	if (x >= SCREENRIGHT / 8.5 && x <= SCREENRIGHT / 3.9)
+	{
+		if (y >= SCREENBOTTOM / 1.45 && y <= SCREENBOTTOM / 1.35)
+		{
+			//
+		}
+	}
+
+	// Exit
+	if (x >= SCREENRIGHT / 20.0 && x <= SCREENRIGHT / 3.0)
+	{
+		if (y >= SCREENBOTTOM / 2.2 && y <= SCREENBOTTOM / 1.9)
+		{
+			exit(0);
 		}
 	}
 }
