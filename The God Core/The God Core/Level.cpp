@@ -93,9 +93,11 @@ void Level::loadWalls(sqlite3 *db)
 		walls.push_back(rect);
 	}
 
+	/*
 	Logger log;
 	vector<string> output = { "Loaded walls on", currLevel };
 	log.logLine(output);
+	*/
 
 	// Deconstructs the statement
 	sqlite3_finalize(stm);

@@ -126,7 +126,7 @@ void Terminal::DisplayScreen()
 		// Print all prompts
 		for (unsigned int i = 0; i < prompts.size(); i++)
 		{
-			text.printString(SCREENLEFT, PROMPT_START + 10 * i, 0, 1, 0, prompts[i]);
+			text.printString(SCREENLEFT, PROMPT_START + 15 * i, 0, 1, 0, prompts[i]);
 		}
 
 		// Print an error

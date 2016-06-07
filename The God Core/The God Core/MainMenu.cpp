@@ -61,19 +61,27 @@ void MainMenu::drawClickBoxes()
 {
 	glColor3d(1, 0, 0);
 
+	// Start a new game
 	glBegin(GL_LINE_LOOP);
-	glVertex2d(SCREENLEFT, SCREENTOP);
-	glVertex2d(SCREENLEFT, SCREENBOTTOM / 19.0);
-	glVertex2d(SCREENRIGHT / 19.0, SCREENBOTTOM / 19.0);
-	glVertex2d(SCREENRIGHT / 19.0, SCREENTOP);
+	glVertex2d(SCREENRIGHT / 20.0, SCREENBOTTOM / 2.2);
+	glVertex2d(SCREENRIGHT / 20.0, SCREENBOTTOM / 1.9);
+	glVertex2d(SCREENRIGHT / 3.0, SCREENBOTTOM / 1.9);
+	glVertex2d(SCREENRIGHT / 3.0, SCREENBOTTOM / 2.2);
+	glEnd();
+
+	glBegin(GL_LINE_LOOP);
+	glVertex2d(SCREENRIGHT / 20.0, SCREENBOTTOM / 2.2);
+	glVertex2d(SCREENRIGHT / 20.0, SCREENBOTTOM / 1.9);
+	glVertex2d(SCREENRIGHT / 3.0, SCREENBOTTOM / 1.9);
+	glVertex2d(SCREENRIGHT / 3.0, SCREENBOTTOM / 2.2);
 	glEnd();
 }
 
-void MainMenu::getClick(int x, int y)
+void MainMenu::getClick(double x, double y)
 {
-	if (x >= SCREENLEFT && x <= SCREENRIGHT / 15.0)
+	if (x >= SCREENRIGHT / 20.0 && x <= SCREENRIGHT / 3.0)
 	{
-		if (y >= SCREENTOP && y <= SCREENBOTTOM / 15.0)
+		if (y >= SCREENBOTTOM / 2.2 && y <= SCREENBOTTOM / 1.9)
 		{
 			isInMain = false;
 		}

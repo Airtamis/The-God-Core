@@ -31,7 +31,7 @@ public:
 	// Handles drawing to the screen
 	void display();
 	// Handles and processes mouse clicks
-	void getClick(int x, int y);
+	void getClick(double x, double y);
 
 private:
 	// Draws the main picture

@@ -17,6 +17,10 @@
 // Main Menu
 #include "MainMenu.h"
 
+#include "Logger.h"
+
+using namespace std;
+
 void GameManager::mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_RIGHT_BUTTON)
@@ -49,6 +53,9 @@ void GameManager::mouse(int button, int state, int x, int y)
 				processClick = true;
 			}
 
+			Logger log;
+			vector<string> output = { "X: ", to_string(x), " ", "Y:", to_string(y) };
+			log.logLine(output);
 		}
 
 		else

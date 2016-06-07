@@ -75,7 +75,7 @@ void Console::printInput()
 	}
 
 	// Prints whatever the user is typing
-	log.printString(0, SCREENBOTTOM / 3.5, 1, 1, 1, currentText);
+	log.printString(0, SCREENBOTTOM / 2.4, 1, 1, 1, currentText);
 }
 
 void Console::processInput()

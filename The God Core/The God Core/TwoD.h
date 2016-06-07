@@ -23,8 +23,8 @@ protected:
 	// My warning to you: comment as you code. 
 	// Because a year later I have no idea where 767 and 1367 came from
 	// And I'm to scared to change them now.
-	const double SCREENTOP = 0, SCREENBOTTOM = 767,
-		SCREENLEFT = 0, SCREENRIGHT = 1367;
+	const double SCREENTOP = 0, SCREENBOTTOM = 1080,
+		SCREENLEFT = 0, SCREENRIGHT = 1920;
 
 	// Prepares OpenGL draw in 2D
 	void prepare2D();

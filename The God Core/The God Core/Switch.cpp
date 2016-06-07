@@ -75,7 +75,19 @@ void Switch::Display()
 
 	glColor3d(0.9, 0.9, 0.9);
 	glutSolidCube(.1);
-	glColor3d(0, 1, 0);
+
+	switch (targetType)
+	{
+	case T_DOOR:
+		glColor3d(0, 1, 0);
+		break;
+	case T_TERMINAL:
+		glColor3d(1, 0, 0);
+		break;
+	default:
+		glColor3d(0, 0, 1);
+	}
+
 	glScaled(.5, .5, 1.5);
 	glutSolidCube(.1);
 

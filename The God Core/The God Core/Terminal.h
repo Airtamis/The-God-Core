@@ -34,8 +34,8 @@ private:
 	std::string id;
 	// Where to print each item
 	const double INPUT_LINE = SCREENBOTTOM / 7.0;
-	const double ERROR_LINE = INPUT_LINE - 10;
-	const double PROMPT_START = INPUT_LINE + 10;
+	const double ERROR_LINE = INPUT_LINE - 30;
+	const double PROMPT_START = INPUT_LINE + 30;
 	const double CONTENT_START = PROMPT_START + 100;
 
 	GLint bTexture;
