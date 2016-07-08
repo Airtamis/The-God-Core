@@ -31,6 +31,7 @@ bool interactivity = false;
 
 int songNum = 0;
 
+int levelNum = 0;
 std::string curr_level = "LEVELZERO";
 
 const char* SONG0 = "Dark Fog.mp3";
@@ -100,6 +101,38 @@ std::string getSongName(int input)
 	case 9: ret = SONG9;
 		break;
 	default: ret = "\0";;
+		break;
+	}
+
+	return ret;
+}
+
+std::string getLevelString(int input)
+{
+	std::string ret;
+	switch (input)
+	{
+	case 0: ret = "LEVELZERO";
+		break;
+	case 1: ret = "LEVELONE";
+		break;
+	case 2: ret = "LEVELTWO";
+		break;
+	case 3: ret = "LEVELTHREE";
+		break;
+	case 4: ret = "LEVELFOUR";
+		break;
+	case 5: ret = "LEVELFIVE";
+		break;
+	case 6: ret = "LEVELSIX";
+		break;
+	case 7: ret = "LEVELSEVEN";
+		break;
+	case 8: ret = "LEVELEIGHT";
+		break;
+	case 9: ret = "LEVELNINE";
+		break;
+	default: ret = "ERROR";;
 		break;
 	}
 

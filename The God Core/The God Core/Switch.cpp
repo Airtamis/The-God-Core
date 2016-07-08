@@ -16,6 +16,8 @@
 #include <utility>
 #include <algorithm>
 
+#include "Globals.h"
+
 // OpenGL API
 #include <GL\glut.h>
 
@@ -59,6 +61,16 @@ void Switch::toggle()
 			Terminal* t = (Terminal*)target;
 			t->isOn = !t->isOn;
 			break;
+		}
+		case T_LEVEL_END:
+		{
+			levelNum++;
+			curr_level = getLevelString(levelNum);
+			loading = true;
+			
+			// TEMP
+			songNum++;
+			changeSong = true;
 		}
 	}
 }

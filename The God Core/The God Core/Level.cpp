@@ -237,6 +237,8 @@ void Level::loadSwitches(sqlite3 *db)
 			i_type = T_DOOR;
 		else if (s_type == "TERMINAL")
 			i_type = T_TERMINAL;
+		else if (s_type == "LEVEL_END")
+			i_type = T_LEVEL_END;
 		else
 		{
 			Logger log;
@@ -250,7 +252,16 @@ void Level::loadSwitches(sqlite3 *db)
 
 		bool assigned = false;
 
-		if (s_type == "DOOR")
+		if (s_type == "LEVEL_END")
+		{
+			assigned = true;
+
+			Logger log;
+			vector<string> output = { "Switch ", to_string(id), " bound to end level" };
+			log.logLine(output);
+		}
+
+		else if (s_type == "DOOR")
 		{
 			for (unsigned int i = 0; i < doors.size(); i++)
 			{

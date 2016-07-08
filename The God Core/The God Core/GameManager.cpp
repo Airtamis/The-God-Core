@@ -149,7 +149,7 @@ void GameManager::draw()
 {
 	if (loading)
 	{
-		lvl.loadLevel("LEVELZERO");
+		lvl.loadLevel(curr_level);
 
 		loading = false;
 	}
