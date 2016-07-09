@@ -12,15 +12,13 @@
 #ifndef SWITCH_H
 #define SWITCH_H
 
-// Switch targets
-#define T_DOOR 0
-#define T_TERMINAL 1
-#define T_LEVEL_END 2
-
 // Door class
 #include "Door.h"
 // Terminal Class
 #include "Terminal.h"
+
+// Types
+#include "GCTypes.h"
 
 class Switch
 {
@@ -32,11 +30,11 @@ private:
 	// One of the predefined types
 	int targetType;
 
-	string id;
+	std::string id;
 
 public:
 	// Initializes the translation and rotation matrices
-	Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, string _id);
+	Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, std::string _id);
 	// Bimds the target pointer to a door
 	void assign(Door &_target);
 	void assign(Terminal &_target);

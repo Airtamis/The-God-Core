@@ -93,6 +93,7 @@
     <ClCompile Include="Terminal.cpp" />
     <ClCompile Include="TextEngine.cpp" />
     <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="Trigger.cpp" />
     <ClCompile Include="Triple.cpp" />
     <ClCompile Include="TwoD.cpp" />
   </ItemGroup>
@@ -102,6 +103,7 @@
     <ClInclude Include="Console.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GCTypes.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="HeadsUpDisplay.h" />
     <ClInclude Include="Keyboard.h" />
@@ -118,6 +120,7 @@
     <ClInclude Include="Terminal.h" />
     <ClInclude Include="TextEngine.h" />
     <ClInclude Include="Triangle.h" />
+    <ClInclude Include="Trigger.h" />
     <ClInclude Include="Triple.h" />
     <ClInclude Include="TwoD.h" />
   </ItemGroup>

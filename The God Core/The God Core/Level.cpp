@@ -18,6 +18,8 @@
 #include "Return.h"
 // System log
 #include "Logger.h"
+// Oject Types
+#include "GCTypes.h"
 
 using namespace std;
 
@@ -215,10 +217,10 @@ void Level::loadSwitches(sqlite3 *db)
 	{
 		double xt, yt, zt,
 			xr, yr, zr;
-		string target, s_type;
-		int i_type, id;
+		string target, s_type, id;
+		int i_type;
 
-		id = sqlite3_column_int(stm, 0);
+		id = reinterpret_cast<const char*>(sqlite3_column_int(stm, 0));
 		target = reinterpret_cast<const char*>(sqlite3_column_text(stm, 2));
 		xt = sqlite3_column_double(stm, 3);
 		yt = sqlite3_column_double(stm, 4);
@@ -242,13 +244,13 @@ void Level::loadSwitches(sqlite3 *db)
 		else
 		{
 			Logger log;
-			vector<string> output = { "Failed to evaluate string type entry: ", s_type, "for switch ", to_string(id) };
+			vector<string> output = { "Failed to evaluate string type entry: ", s_type, "for switch ", id };
 			log.logLine(output);
 
 			exit(DATA_ENTRY_ERROR);
 		}
 
-		switches.push_back(Switch(translate, rotate, i_type, to_string(id)));
+		switches.push_back(Switch(translate, rotate, i_type, id));
 
 		bool assigned = false;
 
@@ -257,7 +259,7 @@ void Level::loadSwitches(sqlite3 *db)
 			assigned = true;
 
 			Logger log;
-			vector<string> output = { "Switch ", to_string(id), " bound to end level" };
+			vector<string> output = { "Switch ", id, " bound to end level" };
 			log.logLine(output);
 		}
 
@@ -268,7 +270,7 @@ void Level::loadSwitches(sqlite3 *db)
 				if (doors[i].getID() == target)
 				{
 					Logger log;
-					vector<string> output = { "Binding switch ", to_string(id), " to door", target };
+					vector<string> output = { "Binding switch ", id, " to door", target };
 					log.logLine(output);
 
 					switches[switches.size() - 1].assign(doors[i]);
@@ -285,7 +287,7 @@ void Level::loadSwitches(sqlite3 *db)
 				if (terminals[i].getID() == target)
 				{
 					Logger log;
-					vector<string> output = { "Binding switch ", to_string(id), " to terminal", target };
+					vector<string> output = { "Binding switch ", id, " to terminal", target };
 					log.logLine(output);
 
 					switches[switches.size() - 1].assign(terminals[i]);
@@ -298,7 +300,7 @@ void Level::loadSwitches(sqlite3 *db)
 		if (!assigned)
 		{
 			Logger log;
-			vector<string> output = { "Failed to bind switch ", to_string(id), " to a ", s_type };
+			vector<string> output = { "Failed to bind switch ", id, " to a ", s_type };
 			log.logLine(output);
 
 			exit(BINDING_ERROR);

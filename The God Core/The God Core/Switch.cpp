@@ -23,7 +23,7 @@
 
 using namespace std;
 
-Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, int _id)
+Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, string _id)
 {
 	// Copies the color
 	copy(begin(_translate), end(_translate), translate);
