@@ -23,7 +23,7 @@
 
 using namespace std;
 
-Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type)
+Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, int _id)
 {
 	// Copies the color
 	copy(begin(_translate), end(_translate), translate);
@@ -34,6 +34,8 @@ Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _typ
 	targetType = _type;
 
 	target = NULL;
+
+	_id = id;
 }
 
 void Switch::assign(Door &_target)

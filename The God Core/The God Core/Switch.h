@@ -32,9 +32,11 @@ private:
 	// One of the predefined types
 	int targetType;
 
+	string id;
+
 public:
 	// Initializes the translation and rotation matrices
-	Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type);
+	Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, string _id);
 	// Bimds the target pointer to a door
 	void assign(Door &_target);
 	void assign(Terminal &_target);

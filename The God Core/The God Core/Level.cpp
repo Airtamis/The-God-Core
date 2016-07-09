@@ -248,7 +248,7 @@ void Level::loadSwitches(sqlite3 *db)
 			exit(DATA_ENTRY_ERROR);
 		}
 
-		switches.push_back(Switch(translate, rotate, i_type));
+		switches.push_back(Switch(translate, rotate, i_type, to_string(id)));
 
 		bool assigned = false;
 
