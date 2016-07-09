@@ -33,8 +33,10 @@ private:
 	std::string id;
 
 public:
+	bool isOn;
+
 	// Initializes the translation and rotation matrices
-	Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, std::string _id);
+	Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, std::string _id, bool _isOn);
 	// Bimds the target pointer to a door
 	void assign(Door &_target);
 	void assign(Terminal &_target);

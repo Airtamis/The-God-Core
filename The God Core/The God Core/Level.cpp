@@ -21,6 +21,8 @@
 // Oject Types
 #include "GCTypes.h"
 
+#include <iostream>
+
 using namespace std;
 
 void Level::loadWalls(sqlite3 *db)
@@ -219,8 +221,9 @@ void Level::loadSwitches(sqlite3 *db)
 			xr, yr, zr;
 		string target, s_type, id;
 		int i_type;
+		bool isOn;
 
-		id = reinterpret_cast<const char*>(sqlite3_column_int(stm, 0));
+		id = reinterpret_cast<const char*>(sqlite3_column_text(stm, 0));
 		target = reinterpret_cast<const char*>(sqlite3_column_text(stm, 2));
 		xt = sqlite3_column_double(stm, 3);
 		yt = sqlite3_column_double(stm, 4);
@@ -231,6 +234,11 @@ void Level::loadSwitches(sqlite3 *db)
 		zr = sqlite3_column_double(stm, 8);
 
 		s_type = reinterpret_cast<const char*>(sqlite3_column_text(stm, 9));
+
+		isOn = sqlite3_column_int(stm, 10);
+		
+		Logger log;
+		log.logLine(to_string(isOn));
 
 		double translate[3] = { xt, yt, zt };
 		double rotate[3] = { xr, yr, zr };
@@ -250,7 +258,7 @@ void Level::loadSwitches(sqlite3 *db)
 			exit(DATA_ENTRY_ERROR);
 		}
 
-		switches.push_back(Switch(translate, rotate, i_type, id));
+		switches.push_back(Switch(translate, rotate, i_type, id, isOn));
 
 		bool assigned = false;
 

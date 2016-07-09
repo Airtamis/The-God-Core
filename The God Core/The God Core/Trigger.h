@@ -1,6 +1,9 @@
 #ifndef TRIGGER_H
 #define TRIGGER_H
 
+#include "Terminal.h"
+#include "Switch.h"
+
 #include "GCTypes.h"
 
 class Trigger
@@ -11,7 +14,14 @@ private:
 
 	int triggerType; // The type (defined from GCtypes.h) of the trigger
 	int targetType;  // The type(defined from GCtypes.h) of the target
+
+	void activateTarget();
+
 public:
+
+	int getTriggerType();
+	bool tryToTrigger(Terminal* input);
+	bool tryToTrigger(Switch* input);
 	Trigger();
 	
 };

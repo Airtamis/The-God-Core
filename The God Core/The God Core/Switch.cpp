@@ -23,7 +23,7 @@
 
 using namespace std;
 
-Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, string _id)
+Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, string _id, bool _isOn)
 {
 	// Copies the color
 	copy(begin(_translate), end(_translate), translate);
@@ -36,6 +36,8 @@ Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _typ
 	target = NULL;
 
 	_id = id;
+
+	isOn = _isOn;
 }
 
 void Switch::assign(Door &_target)
@@ -101,6 +103,9 @@ void Switch::Display()
 	default:
 		glColor3d(0, 0, 1);
 	}
+
+	// If powered off, recolor to black
+	if (!isOn) glColor3d(0, 0, 0);
 
 	glScaled(.5, .5, 1.5);
 	glutSolidCube(.1);
