@@ -28,7 +28,7 @@ private:
 	double translate[3], rotate[3];
 
 	// One of the predefined types
-	int targetType;
+	GCtype targetType;
 
 	std::string id;
 
@@ -36,10 +36,9 @@ public:
 	bool isOn;
 
 	// Initializes the translation and rotation matrices
-	Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, std::string _id, bool _isOn);
-	// Bimds the target pointer to a door
-	void assign(Door &_target);
-	void assign(Terminal &_target);
+	Switch(const double(&_translate)[3], const double(&_rotate)[3], GCtype _type, std::string _id, bool _isOn);
+	// Binds the target pointer to an object
+	void assign(void* _target);
 	// Opens/Closes the door
 	void toggle();
 	// Actually draws the switch

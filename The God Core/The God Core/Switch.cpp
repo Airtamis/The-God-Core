@@ -23,7 +23,7 @@
 
 using namespace std;
 
-Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _type, string _id, bool _isOn)
+Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], GCtype _type, string _id, bool _isOn)
 {
 	// Copies the color
 	copy(begin(_translate), end(_translate), translate);
@@ -40,14 +40,9 @@ Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], int _typ
 	isOn = _isOn;
 }
 
-void Switch::assign(Door &_target)
+void Switch::assign(void* _target)
 {
-	target = &_target;
-}
-
-void Switch::assign(Terminal &_target)
-{
-	target = &_target;
+	target = _target;
 }
 
 void Switch::toggle()

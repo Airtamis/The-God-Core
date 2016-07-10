@@ -9,4 +9,6 @@
 #define T_SWITCH 3
 #define T_LEVEL_END 4
 
+typedef int GCtype;
+
 #endif

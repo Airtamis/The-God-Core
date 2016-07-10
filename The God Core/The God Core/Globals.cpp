@@ -13,6 +13,7 @@ vr walls;
 vd doors;
 vs switches;
 vt terminals;
+vtr triggers;
 
 Switch *activeSwitch = NULL;
 Terminal *activeTerminal = NULL;

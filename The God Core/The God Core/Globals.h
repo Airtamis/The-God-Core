@@ -21,6 +21,7 @@
 #include "Door.h"
 #include "Switch.h"
 #include "Plane.h"
+#include "Trigger.h"
 
 // Remember that if you're doing anything else, globals are bad.
 // But we're in the hellscape that is graphics
@@ -32,6 +33,7 @@ typedef std::vector<Plane> vr;
 typedef std::vector<Door> vd;
 typedef std::vector<Switch> vs;
 typedef std::vector<Terminal> vt;
+typedef std::vector<Trigger> vtr;
 
 // Pointers to various interactive objects
 extern Switch *activeSwitch;
@@ -42,6 +44,7 @@ extern vr walls;
 extern vd doors;
 extern vs switches;
 extern vt terminals;
+extern vtr triggers;
 
 extern bool
 	// Are we colliding / Can we die?

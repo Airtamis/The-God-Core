@@ -19,7 +19,7 @@ void Trigger::activateTarget()
 		case T_SWITCH:
 		{
 			Switch* s = (Switch*)target;
-			// Activate Target
+			s->isOn = true;
 			break;
 		}
 		default:
@@ -59,11 +59,21 @@ bool Trigger::tryToTrigger(Switch* input)
 	return true;
 }
 
-Trigger::Trigger()
+void Trigger::bindTrigger(void* _trigger)
+{
+	trigger = _trigger;
+}
+
+void Trigger::bindTarget(void* _target)
+{
+	target = _target;
+}
+
+Trigger::Trigger(GCtype _triggerType, GCtype _targetType)
 {
 	trigger = NULL;
 	target = NULL;
-	triggerType = NULL;
-	targetType = T_NULL;
+	triggerType = _triggerType;
+	targetType = _targetType;
 }
 

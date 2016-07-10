@@ -236,9 +236,6 @@ void Level::loadSwitches(sqlite3 *db)
 		s_type = reinterpret_cast<const char*>(sqlite3_column_text(stm, 9));
 
 		isOn = sqlite3_column_int(stm, 10);
-		
-		Logger log;
-		log.logLine(to_string(isOn));
 
 		double translate[3] = { xt, yt, zt };
 		double rotate[3] = { xr, yr, zr };
@@ -281,7 +278,7 @@ void Level::loadSwitches(sqlite3 *db)
 					vector<string> output = { "Binding switch ", id, " to door", target };
 					log.logLine(output);
 
-					switches[switches.size() - 1].assign(doors[i]);
+					switches[switches.size() - 1].assign(&(doors[i]));
 
 					assigned = true;
 				}
@@ -298,7 +295,7 @@ void Level::loadSwitches(sqlite3 *db)
 					vector<string> output = { "Binding switch ", id, " to terminal", target };
 					log.logLine(output);
 
-					switches[switches.size() - 1].assign(terminals[i]);
+					switches[switches.size() - 1].assign(&(terminals[i]));
 
 					assigned = true;
 				}
@@ -379,6 +376,156 @@ void Level::loadTerminals(sqlite3 *db)
 	sqlite3_finalize(stm);
 }
 
+void Level::loadTriggers(sqlite3 *db)
+{
+	triggers.clear();
+	// Prepared Statement
+	sqlite3_stmt *stm;
+	// SQL command
+	string cmd;
+	// Connection Error Test
+	int err;
+	cmd = "SELECT * FROM triggers WHERE LEVEL = \"" + currLevel + "\"";
+
+	err = sqlite3_prepare(db, cmd.c_str(), -1, &stm, 0);
+
+	if (err != SQLITE_OK)
+	{
+		Logger log;
+		vector<string> output = { "FATAL ERROR: Can't load triggers while loading", currLevel };
+		log.logLine(output);
+
+		exit(STATEMENT_ERROR);
+	}
+
+	// While we still get rows of output
+	while (sqlite3_step(stm) == SQLITE_ROW)
+	{
+		string target, trigger, targetType, triggerType, id;
+		int i_targetType, i_triggerType;
+		
+		id = reinterpret_cast<const char*>(sqlite3_column_text(stm, 0));
+		trigger = reinterpret_cast<const char*>(sqlite3_column_text(stm, 2));
+		target = reinterpret_cast<const char*>(sqlite3_column_text(stm, 3));
+		triggerType = reinterpret_cast<const char*>(sqlite3_column_text(stm, 4));
+		targetType = reinterpret_cast<const char*>(sqlite3_column_text(stm, 5));
+
+		if (triggerType == "SWITCH")
+			i_triggerType = T_SWITCH;
+		else if (triggerType == "TERMINAL")
+			i_triggerType = T_TERMINAL;
+		else
+		{
+			Logger log;
+			vector<string> output = { "Failed to evaluate string trigger type entry: ", triggerType, "for trigger ", id };
+			log.logLine(output);
+
+			exit(DATA_ENTRY_ERROR);
+		}
+
+		if (targetType == "SWITCH")
+			i_targetType = T_SWITCH;
+		else if (targetType == "TERMINAL")
+			i_targetType = T_TERMINAL;
+		else
+		{
+			Logger log;
+			vector<string> output = { "Failed to evaluate string trigger type entry: ", targetType, "for trigger ", id };
+			log.logLine(output);
+
+			exit(DATA_ENTRY_ERROR);
+		}
+
+		triggers.push_back(Trigger(i_triggerType, i_targetType));
+	}
+
+	Logger log;
+	vector<string> output = { "Loaded trigger on", currLevel };
+	log.logLine(output);
+
+	// Deconstructs the statement
+	sqlite3_finalize(stm);
+}
+
+bool Level::bindTrigger(string id, string trigger)
+{
+	if (trigger == "SWITCH")
+	{
+		for (unsigned int i = 0; i < switches.size(); i++)
+		{
+			if (terminals[i].getID() == trigger)
+			{
+				Logger log;
+				vector<string> output = { "Binding trigger ", id, " to trigger-switch", trigger };
+				log.logLine(output);
+
+				triggers[triggers.size() - 1].bindTrigger(&(switches[i]));
+
+				return true;
+			}
+		}
+	}
+
+	else if (trigger == "TERMINAL")
+	{
+		for (unsigned int i = 0; i < terminals.size(); i++)
+		{
+			if (terminals[i].getID() == trigger)
+			{
+				Logger log;
+				vector<string> output = { "Binding trigger ", id, " to trigger-terminal", trigger };
+				log.logLine(output);
+
+				triggers[triggers.size() - 1].bindTrigger(&(terminals[i]));
+
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+bool Level::bindTarget(string id, string target)
+{
+
+	if (target == "SWITCH")
+	{
+		for (unsigned int i = 0; i < switches.size(); i++)
+		{
+			if (terminals[i].getID() == target)
+			{
+				Logger log;
+				vector<string> output = { "Binding trigger ", id, " to target-switch", target };
+				log.logLine(output);
+
+				triggers[triggers.size() - 1].bindTrigger(&(switches[i]));
+
+				return true;
+			}
+		}
+	}
+
+	else if (target == "TERMINAL")
+	{
+		for (unsigned int i = 0; i < terminals.size(); i++)
+		{
+			if (terminals[i].getID() == target)
+			{
+				Logger log;
+				vector<string> output = { "Binding trigger ", id, " to target-terminal", target };
+				log.logLine(output);
+
+				triggers[triggers.size() - 1].bindTrigger(&(terminals[i]));
+
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 void Level::loadLevel(std::string levelName)
 {
 	Logger log;
@@ -409,8 +556,11 @@ void Level::loadLevel(std::string levelName)
 	loadDoors(db);
 	loadTerminals(db);
 
-	// Loading switches must be last to properly bind targets
+	// Loading switches must be after doors/terminals to properly bind
 	loadSwitches(db);
+
+	// Loading triggers must be done last to properly bind
+	loadTriggers(db);
 
 	// Closes the database
 	sqlite3_close(db);
