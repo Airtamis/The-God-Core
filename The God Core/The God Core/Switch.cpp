@@ -35,7 +35,7 @@ Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], GCtype _
 
 	target = NULL;
 
-	_id = id;
+	id = _id;
 
 	isOn = _isOn;
 }
@@ -106,6 +106,11 @@ void Switch::Display()
 	glutSolidCube(.1);
 
 	glPopMatrix();
+}
+
+string Switch::getID()
+{
+	return id;
 }
 
 double Switch::getX()

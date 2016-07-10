@@ -46,6 +46,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\JeremyG\Documents\Simple OpenGL Image Library\src;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;C:\Users\JeremyG\Documents\SQlite API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -63,6 +64,7 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>C:\Users\JeremyG\Documents\Simple OpenGL Image Library\src;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;C:\Users\JeremyG\Documents\SQlite API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>No</GenerateDebugInformation>

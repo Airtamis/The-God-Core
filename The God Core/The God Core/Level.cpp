@@ -437,6 +437,17 @@ void Level::loadTriggers(sqlite3 *db)
 		}
 
 		triggers.push_back(Trigger(i_triggerType, i_targetType));
+
+		bool assigned = bindTrigger(id, trigger, triggerType) && bindTarget(id, target, targetType);
+
+		if (!assigned)
+		{
+			Logger log;
+			vector<string> output = { "Failed to bind trigger ", id };
+			log.logLine(output);
+
+			exit(BINDING_ERROR);
+		}
 	}
 
 	Logger log;
@@ -447,13 +458,13 @@ void Level::loadTriggers(sqlite3 *db)
 	sqlite3_finalize(stm);
 }
 
-bool Level::bindTrigger(string id, string trigger)
+bool Level::bindTrigger(string id, string trigger, string triggerType)
 {
-	if (trigger == "SWITCH")
+	if (triggerType == "SWITCH")
 	{
 		for (unsigned int i = 0; i < switches.size(); i++)
 		{
-			if (terminals[i].getID() == trigger)
+			if (switches[i].getID() == trigger)
 			{
 				Logger log;
 				vector<string> output = { "Binding trigger ", id, " to trigger-switch", trigger };
@@ -466,7 +477,7 @@ bool Level::bindTrigger(string id, string trigger)
 		}
 	}
 
-	else if (trigger == "TERMINAL")
+	else if (triggerType == "TERMINAL")
 	{
 		for (unsigned int i = 0; i < terminals.size(); i++)
 		{
@@ -486,27 +497,27 @@ bool Level::bindTrigger(string id, string trigger)
 	return false;
 }
 
-bool Level::bindTarget(string id, string target)
+bool Level::bindTarget(string id, string target, string targetType)
 {
 
-	if (target == "SWITCH")
+	if (targetType == "SWITCH")
 	{
 		for (unsigned int i = 0; i < switches.size(); i++)
 		{
-			if (terminals[i].getID() == target)
+			if (switches[i].getID() == target)
 			{
 				Logger log;
 				vector<string> output = { "Binding trigger ", id, " to target-switch", target };
 				log.logLine(output);
 
-				triggers[triggers.size() - 1].bindTrigger(&(switches[i]));
+				triggers[triggers.size() - 1].bindTarget(&(switches[i]));
 
 				return true;
 			}
 		}
 	}
 
-	else if (target == "TERMINAL")
+	else if (targetType == "TERMINAL")
 	{
 		for (unsigned int i = 0; i < terminals.size(); i++)
 		{
@@ -516,7 +527,7 @@ bool Level::bindTarget(string id, string target)
 				vector<string> output = { "Binding trigger ", id, " to target-terminal", target };
 				log.logLine(output);
 
-				triggers[triggers.size() - 1].bindTrigger(&(terminals[i]));
+				triggers[triggers.size() - 1].bindTarget(&(terminals[i]));
 
 				return true;
 			}

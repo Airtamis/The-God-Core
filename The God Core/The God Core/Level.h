@@ -40,8 +40,8 @@ private:
 	void loadTerminals(sqlite3 *db);
 	void loadTriggers(sqlite3 *db);
 
-	bool bindTrigger(std::string id, std::string trigger);
-	bool bindTarget(std::string id, std::string target);
+	bool bindTrigger(std::string id, std::string trigger, std::string triggerType);
+	bool bindTarget(std::string id, std::string target, std::string targetType);
 public:
 	// Manages the loading of the level
 	void loadLevel(std::string levelName);

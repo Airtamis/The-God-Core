@@ -341,10 +341,26 @@ void Keyboard::interact()
 	// Only do things if we actually can
 	if (interactivity)
 	{
-		if (activeSwitch != NULL) activeSwitch->toggle();
+		if (activeSwitch != NULL)
+		{
+			activeSwitch->toggle();
+
+			for (unsigned int i = 0; i < triggers.size(); i++)
+			{
+				triggers[i].tryToTrigger(activeSwitch);
+			}
+		}
+
 		else if (activeTerminal != NULL)
 		{
 			isInTerminal = true;
+
+			for (unsigned int i = 0; i < triggers.size(); i++)
+			{
+				triggers[i].tryToTrigger(activeTerminal);
+			}
 		}
+
+
 	}
 }

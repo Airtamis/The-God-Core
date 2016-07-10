@@ -44,6 +44,8 @@ public:
 	// Actually draws the switch
 	void Display();
 
+	std::string getID();
+
 	// Gets the translation coordinates
 	double getX();
 	double getY();
