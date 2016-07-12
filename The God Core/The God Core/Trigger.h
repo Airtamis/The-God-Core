@@ -20,8 +20,7 @@ private:
 public:
 
 	int getTriggerType();
-	bool tryToTrigger(Terminal* input);
-	bool tryToTrigger(Switch* input);
+	bool tryToTrigger(void* input, GCtype type);
 	void bindTrigger(void* _trigger);
 	void bindTarget(void* _target);
 	Trigger(GCtype _triggerType, GCtype _targetType);

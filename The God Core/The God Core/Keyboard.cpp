@@ -347,7 +347,7 @@ void Keyboard::interact()
 
 			for (unsigned int i = 0; i < triggers.size(); i++)
 			{
-				triggers[i].tryToTrigger(activeSwitch);
+				triggers[i].tryToTrigger(activeSwitch, T_SWITCH);
 			}
 		}
 
@@ -357,7 +357,7 @@ void Keyboard::interact()
 
 			for (unsigned int i = 0; i < triggers.size(); i++)
 			{
-				triggers[i].tryToTrigger(activeTerminal);
+				triggers[i].tryToTrigger(activeTerminal, T_TERMINAL);
 			}
 		}
 

@@ -29,30 +29,13 @@ void Trigger::activateTarget()
 	}
 }
 
-bool Trigger::tryToTrigger(Terminal* input)
+bool Trigger::tryToTrigger(void* input, GCtype type)
 {
 	// If this trigger is not a terminal, return false
-	if (triggerType != T_TERMINAL) return false;
-
-	Terminal* t = (Terminal*)trigger;
+	if (triggerType != type) return false;
 
 	// If this trigger is not the right terminal, return false
-	if (t != input) return false;
-
-	activateTarget();
-
-	return true;
-}
-
-bool Trigger::tryToTrigger(Switch* input)
-{
-	// If this trigger is not a switch, return false
-	if (triggerType != T_SWITCH) return false;
-
-	Switch* s = (Switch*)trigger;
-
-	// If this trigger is not the correct switch, return false
-	if (s != input) return false;
+	if (trigger != input) return false;
 
 	activateTarget();
 
