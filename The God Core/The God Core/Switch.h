@@ -14,13 +14,14 @@
 
 // Door class
 #include "Door.h"
+#include "PoweredObject.h"
 // Terminal Class
 #include "Terminal.h"
 
 // Types
 #include "GCTypes.h"
 
-class Switch
+class Switch  : public PoweredObject
 {
 private:
 	void* target; // The door that this switch activates
@@ -33,14 +34,12 @@ private:
 	std::string id;
 
 public:
-	bool isOn;
-
 	// Initializes the translation and rotation matrices
 	Switch(const double(&_translate)[3], const double(&_rotate)[3], GCtype _type, std::string _id, bool _isOn);
 	// Binds the target pointer to an object
 	void assign(void* _target);
 	// Opens/Closes the door
-	void toggle();
+	void toggleTarget();
 	// Actually draws the switch
 	void Display();
 

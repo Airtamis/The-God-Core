@@ -90,6 +90,7 @@
     <ClCompile Include="MusicManager.cpp" />
     <ClCompile Include="PauseScreen.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="PoweredObject.cpp" />
     <ClCompile Include="SaveManager.cpp" />
     <ClCompile Include="Switch.cpp" />
     <ClCompile Include="Terminal.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="MusicManager.h" />
     <ClInclude Include="PauseScreen.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="PoweredObject.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Return.h" />
     <ClInclude Include="SaveManager.h" />

@@ -13,6 +13,7 @@
 #define TERMINAL_H
 
 #include "TwoD.h" // To inherit 2D class
+#include "PoweredObject.h"
 
 #include <cstdlib>
 
@@ -25,7 +26,7 @@
 
 #include <GL\glut.h>
 
-class Terminal : public TwoD // Inherit 2D functionality
+class Terminal : public TwoD, public PoweredObject // Inherit 2D functionality
 {
 private:
 	// text = what the user is typing, input = completed input
@@ -76,8 +77,6 @@ public:
 	double getZ();
 
 	std::string getID();
-
-	bool isOn = true;
 
 	Terminal(const double(&_translate)[3], const double(&_rotate)[3], std::string _file, std::string _id);
 	 			

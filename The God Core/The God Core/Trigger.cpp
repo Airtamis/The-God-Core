@@ -19,7 +19,7 @@ void Trigger::activateTarget()
 		case T_SWITCH:
 		{
 			Switch* s = (Switch*)target;
-			s->isOn = true;
+			s->activate();
 			break;
 		}
 		default:

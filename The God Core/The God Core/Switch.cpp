@@ -37,7 +37,9 @@ Switch::Switch(const double(&_translate)[3], const double(&_rotate)[3], GCtype _
 
 	id = _id;
 
-	isOn = _isOn;
+	if (_isOn) activate();
+	else deactivate();
+
 }
 
 void Switch::assign(void* _target)
@@ -45,7 +47,7 @@ void Switch::assign(void* _target)
 	target = _target;
 }
 
-void Switch::toggle()
+void Switch::toggleTarget()
 {
 	switch (targetType)
 	{
@@ -58,7 +60,7 @@ void Switch::toggle()
 		case T_TERMINAL:
 		{
 			Terminal* t = (Terminal*)target;
-			t->isOn = !t->isOn;
+			t->toggle();
 			break;
 		}
 		case T_LEVEL_END:
@@ -100,7 +102,7 @@ void Switch::Display()
 	}
 
 	// If powered off, recolor to black
-	if (!isOn) glColor3d(0, 0, 0);
+	if (!checkIfOn()) glColor3d(0, 0, 0);
 
 	glScaled(.5, .5, 1.5);
 	glutSolidCube(.1);

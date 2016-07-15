@@ -38,7 +38,7 @@ void CollisionEngine::checkInteract()
 		distance = sqrt(distance);
 		double radii = (PLAYER_RADIUS + OBJECT_RADIUS);
 
-		if (distance < radii && switches[i].isOn)
+		if (distance < radii && switches[i].checkIfOn())
 		{
 			interactivity = true;
 			activeSwitch = &switches[i];
@@ -52,7 +52,7 @@ void CollisionEngine::checkInteract()
 		distance = sqrt(distance);
 		double radii = (PLAYER_RADIUS + OBJECT_RADIUS);
 
-		if (distance < radii && terminals[i].isOn)
+		if (distance < radii && terminals[i].checkIfOn())
 		{
 			interactivity = true;
 			activeTerminal = &terminals[i];

@@ -191,7 +191,7 @@ void Terminal::processInput()
 
 void Terminal::Display()
 {
-	if (isOn)
+	if (checkIfOn())
 		glColor3d(1, 0, 0);
 	else
 		glColor3d(0, 0, 1);

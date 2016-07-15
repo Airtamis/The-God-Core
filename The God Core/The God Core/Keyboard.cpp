@@ -343,7 +343,7 @@ void Keyboard::interact()
 	{
 		if (activeSwitch != NULL)
 		{
-			activeSwitch->toggle();
+			activeSwitch->toggleTarget();
 
 			for (unsigned int i = 0; i < triggers.size(); i++)
 			{
@@ -360,7 +360,5 @@ void Keyboard::interact()
 				triggers[i].tryToTrigger(activeTerminal, T_TERMINAL);
 			}
 		}
-
-
 	}
 }
