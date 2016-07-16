@@ -1,3 +1,13 @@
+/*************************************************************\
+ * Trigger.cpp                                               *
+ * This file was created by Jeremy Greenburg                 *
+ * As part of The God Core game for the University of        *
+ * Tennessee at Martin's University Scholars Organization    *
+ *                                                           *
+ * This file contains the definition of the Trigger class    *
+ * For more information, see Trigger.h                       *
+\*************************************************************/
+
 #include <cstdlib>
 #include "Trigger.h"
 

@@ -5,7 +5,7 @@
  * Tennessee at Martin's University Scholars Organization    *
  *                                                           *
  * This file contains the definition of the Switch class     *
- * For more information, see CameraControl.h                 *
+ * For more information, see Switch.h                        *
 \*************************************************************/
 
 // Class decleration

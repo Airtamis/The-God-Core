@@ -1,6 +1,3 @@
-#ifndef CONSOLE_H
-#define CONSOLE_H
-
 /*************************************************************\
  * Connsole.h                                                *
  * This file was created by Jeremy Greenburg                 *
@@ -14,6 +11,8 @@
  * Typed in.                                                 *
 \*************************************************************/
 
+#ifndef CONSOLE_H
+#define CONSOLE_H
 
 // To act as a circular buffer for console history
 #include <deque>
