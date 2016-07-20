@@ -15,8 +15,9 @@
 
 void TwoD::prepare2D()
 {
-	// Disable writing to the z buffer
+	// Disable depth testing
 	glDisable(GL_DEPTH_TEST);
+	// Disable writing to the z buffer
 	glDepthMask(GL_FALSE);
 	// Disables lighting
 	glDisable(GL_LIGHTING);
@@ -39,8 +40,9 @@ void TwoD::prepare3D()
 	glMatrixMode(GL_MODELVIEW);
 	glPopMatrix();
 
-	// Enables writing to the z buffer
+	// Enable depth testing
 	glEnable(GL_DEPTH_TEST);
+	// Enables writing to the z buffer
 	glDepthMask(GL_TRUE);
 	// Renable lighting
 	glEnable(GL_LIGHTING);

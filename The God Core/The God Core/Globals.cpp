@@ -108,6 +108,31 @@ std::string getSongName(int input)
 	return ret;
 }
 
+int getLevelNum(std::string input)
+{
+	if (input == "LEVELZERO" || input == "LEVELZERO\n")
+		return 0;
+	if (input == "LEVELONE" || input == "LEVELONE\n")
+		return 1;
+	if (input == "LEVELTWO")
+		return 2;
+	if (input == "LEVELTHREE")
+		return 3;
+	if (input == "LEVELFOUR")
+		return 4;
+	if (input == "LEVELFIVE")
+		return 5;
+	if (input == "LEVELSIX")
+		return 6;
+	if (input == "LEVELSEVEN")
+		return 7;
+	if (input == "LEVELEIGHT")
+		return 8;
+	if (input == "LEVELNINE")
+		return 9;
+	return -1; // Invalid song
+}
+
 std::string getLevelString(int input)
 {
 	std::string ret;

@@ -17,6 +17,8 @@
 // System log
 #include "Logger.h"
 
+#include "SaveManager.h"
+
 using namespace std;
 
 MainMenu::MainMenu()
@@ -85,13 +87,14 @@ void MainMenu::drawClickBoxes()
 	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.35);
 	glEnd();
 
-	// Options
+	// Exit
+	/*
 	glBegin(GL_LINE_LOOP);
 	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.35);
 	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.45);
 	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.45);
 	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.35);
-	glEnd();
+	glEnd();*/
 }
 
 void MainMenu::getClick(double x, double y)
@@ -110,7 +113,9 @@ void MainMenu::getClick(double x, double y)
 	{
 		if (y >= SCREENBOTTOM / 1.75 && y <= SCREENBOTTOM / 1.57)
 		{
-			isInMain = false;
+			SaveManager Jesus; // Jesus Saves
+			if (!Jesus.loadGame()) isInMain = true;
+			else isInMain = false;
 		}
 	}
 
@@ -124,13 +129,14 @@ void MainMenu::getClick(double x, double y)
 	}
 
 	// Exit
+	/*
 	if (x >= SCREENRIGHT / 20.0 && x <= SCREENRIGHT / 3.0)
 	{
 		if (y >= SCREENBOTTOM / 2.2 && y <= SCREENBOTTOM / 1.9)
 		{
 			exit(0);
 		}
-	}
+	}*/
 }
 
 void MainMenu::display()

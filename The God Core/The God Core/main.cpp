@@ -59,9 +59,6 @@ using namespace std;
 
 int main(int argc, char **argv) 
 {
-	SaveManager s;
-	s.saveLevel("Hello");
-
 	Overlord.canContinue = initGame(argc, argv);
 
 	// Begin the game

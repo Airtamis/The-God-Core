@@ -235,7 +235,7 @@ void Level::loadSwitches(sqlite3 *db)
 
 		s_type = reinterpret_cast<const char*>(sqlite3_column_text(stm, 9));
 
-		isOn = sqlite3_column_int(stm, 10);
+		isOn = (bool)sqlite3_column_int(stm, 10);
 
 		double translate[3] = { xt, yt, zt };
 		double rotate[3] = { xr, yr, zr };

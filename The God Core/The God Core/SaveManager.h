@@ -33,9 +33,9 @@ private:
 public:
 	SaveManager();
 	// Writes the array of encrypted strings to core.sav
-	void saveLevel(std::string);
-	// Reads in an array of encrypted strings from core.sav and decrypts them
-	std::string loadGame();
+	void saveLevel(std::string input);
+	// Sets global variables to load game
+	bool loadGame();
 	// Returns true if core.save exists
 	bool checkSave();
 };

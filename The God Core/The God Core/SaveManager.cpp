@@ -14,6 +14,10 @@
 // File I/O
 #include <fstream> 
 
+#include "Globals.h"
+
+#include "Logger.h"
+
 using namespace std;
 
 SaveManager::SaveManager()
@@ -46,11 +50,11 @@ string SaveManager::decryptData(string data)
 	return ret_str;
 }
 
-void SaveManager::saveLevel(string curr_level)
+void SaveManager::saveLevel(string input)
 {
 	ofstream save(SAVE_PATH);
 
-	string encr_str = encrytData(curr_level);
+	string encr_str = encrytData(input);
 
 	save << encr_str;
 
@@ -58,18 +62,30 @@ void SaveManager::saveLevel(string curr_level)
 
 }
 
-string SaveManager::loadGame()
+bool SaveManager::loadGame()
 {
-	ifstream save(SAVE_PATH);
+	Logger log;
 
-	string test;
-	string dcr_str;
-	save >> test;
-	dcr_str = decryptData(test);
+	ifstream save(SAVE_PATH);
+	log.logLine("Checking Save integrity.");
+
+	string enc_data; // Encrypted Data
+	string dcr_data; // Decrypted Data
+	save >> enc_data;// Read encrypted data from file
+	dcr_data = decryptData(enc_data); // Decrypt data
+	
+	vector<string> output{ "Decrypted Data: ", dcr_data };
+	log.logLine(output);
+
+	int temp_levelNum = getLevelNum(dcr_data);
+
+	if (temp_levelNum == -1) return false;
+	levelNum = temp_levelNum;
+	curr_level = getLevelString(levelNum);
+	loading = true;
 		
 	save.close();
-
-	return dcr_str;
+	return true;
 }
 
 bool SaveManager::checkSave()

@@ -63,7 +63,7 @@ extern bool
 // Number of song to change to
 extern int songNum;
 
-
+// Current level (int and string)
 extern int levelNum;
 extern std::string curr_level;
 
@@ -81,6 +81,8 @@ extern Level lvl;
 int getSongNum(std::string input);
 // Converts an integer to a songname
 std::string getSongName(int input);
+// Converts a level name to an integer
+int getLevelNum(std::string input);
 // Converts level_num to a string in curr_level
 std::string getLevelString(int input);
 
