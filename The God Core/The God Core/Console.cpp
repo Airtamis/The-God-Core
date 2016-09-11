@@ -244,9 +244,8 @@ void Console::toggleGod()
 void Console::decrpytSave()
 {
 	SaveManager Jesus;
-	//string sData = Jesus.checkSave();
-	string sData = "TEMP";
-	console_log.push_back(sData);
+	
+	console_log.push_back(Jesus.readSave());
 	console_color.push_back(VALID_COLOR);
 }
 

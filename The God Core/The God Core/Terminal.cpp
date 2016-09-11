@@ -24,6 +24,9 @@
 // Global variables
 #include "Globals.h"
 
+// Logger
+#include "Logger.h"
+
 // File I/O
 #include <fstream>
 
@@ -226,8 +229,16 @@ double Terminal::getZ()
 
 void Terminal::parseFile()
 {
-	ifstream infile{ TERM_PATH + file };
+	ifstream infile{ TERM_PATH + file + ".txt" };
 	string buff;
+
+	if (!infile)
+	{
+		Logger log;
+		vector<string> output = { "FATAL ERROR: File ", file, " NOT FOUND" };
+		log.logLine(output);
+		exit(FILE_NOT_FOUND);
+	}
 
 	content.push_back("HELP"); // Help text is always the 0th tag in the terminals
 

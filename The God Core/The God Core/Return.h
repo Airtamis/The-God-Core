@@ -20,5 +20,6 @@
 #define SOIL_ERROR 5 // SOIl fails to load image
 #define DATA_ENTRY_ERROR 6
 #define BINDING_ERROR 7
+#define FILE_NOT_FOUND 8
 
 #endif

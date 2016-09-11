@@ -50,19 +50,7 @@ string SaveManager::decryptData(string data)
 	return ret_str;
 }
 
-void SaveManager::saveLevel(string input)
-{
-	ofstream save(SAVE_PATH);
-
-	string encr_str = encrytData(input);
-
-	save << encr_str;
-
-	save.close();
-
-}
-
-bool SaveManager::loadGame()
+string SaveManager::readSave()
 {
 	Logger log;
 
@@ -73,18 +61,38 @@ bool SaveManager::loadGame()
 	string dcr_data; // Decrypted Data
 	save >> enc_data;// Read encrypted data from file
 	dcr_data = decryptData(enc_data); // Decrypt data
-	
+
 	vector<string> output{ "Decrypted Data: ", dcr_data };
 	log.logLine(output);
 
-	int temp_levelNum = getLevelNum(dcr_data);
+	save.close();
+
+	return dcr_data;
+}
+
+void SaveManager::saveLevel(string input)
+{
+	ofstream save(SAVE_PATH);
+
+	string encr_str = encrytData(input);
+
+	save << encr_str;
+
+	save.close();
+}
+
+bool SaveManager::loadGame()
+{
+	// might change to vector<string> later
+	string data = readSave();
+
+	int temp_levelNum = getLevelNum(data);
 
 	if (temp_levelNum == -1) return false;
 	levelNum = temp_levelNum;
 	curr_level = getLevelString(levelNum);
 	loading = true;
 		
-	save.close();
 	return true;
 }
 

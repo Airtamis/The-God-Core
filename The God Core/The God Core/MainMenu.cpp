@@ -114,8 +114,8 @@ void MainMenu::getClick(double x, double y)
 		if (y >= SCREENBOTTOM / 1.75 && y <= SCREENBOTTOM / 1.57)
 		{
 			SaveManager Jesus; // Jesus Saves
-			if (!Jesus.loadGame()) isInMain = true;
-			else isInMain = false;
+			/*if (!Jesus.loadGame()) isInMain = true;
+			else*/ isInMain = false;
 		}
 	}
 

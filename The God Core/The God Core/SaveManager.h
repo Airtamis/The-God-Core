@@ -36,6 +36,8 @@ public:
 	void saveLevel(std::string input);
 	// Sets global variables to load game
 	bool loadGame();
+	// Returns the decrypted string in core.sav
+	std::string readSave();
 	// Returns true if core.save exists
 	bool checkSave();
 };
