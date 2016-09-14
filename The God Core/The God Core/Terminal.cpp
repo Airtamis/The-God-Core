@@ -194,22 +194,63 @@ void Terminal::processInput()
 
 void Terminal::Display()
 {
-	if (checkIfOn())
-		glColor3d(1, 0, 0);
-	else
-		glColor3d(0, 0, 1);
-
+	// Add two styles - Standing and wall mounted
 	glPushMatrix();
 
+	// Initial Positioning and rotation
 	glTranslated(translate[0], translate[1], translate[2]);
 	glRotated(rotate[0], 1, 0, 0);
 	glRotated(rotate[1], 0, 1, 0);
 	glRotated(rotate[2], 0, 0, 1);
 
-	// Do stuff here
-	glutSolidCube(.1);
+	drawStanding();
 
 	glPopMatrix();
+}
+
+void Terminal::drawStanding()
+{
+	// Steel grey
+	glColor3d(.1, .1, .1);
+
+	// Draw Floor mount
+	glPushMatrix();
+	glTranslated(0, -1, 0);
+	glScaled(.5, .1, 1);
+	glutSolidCube(.5);
+	glPopMatrix();
+
+	// Draw leg
+	glPushMatrix();
+	glTranslated(0, -.6, 0);
+	glScaled(.1, .75, .1);
+	glutSolidCube(1);
+	glPopMatrix();
+
+	// Draw Monitor
+	glPushMatrix();
+	glScaled(.1, .5, .7);
+	glutSolidCube(1);
+
+	// Draw Screen
+	glPushMatrix();
+	// Change Screen based on power
+	if (checkIfOn())
+		glColor3d(0, 1, 1);
+	else
+		glColor3d(0, 0, 0);
+
+	glTranslated(-.3, 0, 0);
+	glutSolidCube(.7);
+
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+void Terminal::drawWallMounted()
+{
+
 }
 
 double Terminal::getX()
@@ -229,7 +270,7 @@ double Terminal::getZ()
 
 void Terminal::parseFile()
 {
-	ifstream infile{ TERM_PATH + file + ".txt" };
+	ifstream infile{ TERM_PATH + file};
 	string buff;
 
 	if (!infile)

@@ -51,6 +51,12 @@ private:
 	// Draws the actual terminal
 	void draw();
 
+	// Draws a standing terminal
+	void drawStanding();
+
+	// Draws a wall mounter terminal
+	void drawWallMounted();
+
 	void processInput();
 
 	void parseFile();
