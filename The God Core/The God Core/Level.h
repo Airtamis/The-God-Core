@@ -36,6 +36,7 @@ private:
 	// Look, the names are self-explanatory
 	void loadWalls(sqlite3 *db);
 	void loadDoors(sqlite3 *db);
+	void loadCylinders(sqlite3 *db);
 	void loadSwitches(sqlite3 *db);
 	void loadTerminals(sqlite3 *db);
 	void loadTriggers(sqlite3 *db);

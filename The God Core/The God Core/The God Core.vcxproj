@@ -78,6 +78,7 @@
     <ClCompile Include="CameraControl.cpp" />
     <ClCompile Include="CollisionEngine.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Globals.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="CameraControl.h" />
     <ClInclude Include="CollisionEngine.h" />
     <ClInclude Include="Console.h" />
+    <ClInclude Include="Cylinder.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GCTypes.h" />

@@ -28,7 +28,15 @@ Verification Code: oxHG0yBjOs2Y
 $END$
 
 $MISSION$
-Content 3
+Constable Riker,
+One of our research dreadnaughts, The Archimedes, has cut off communications. This is
+an X class research station, and is filled with numerous dangerous and secret projects.
+We have dispatched a squadron of marines, but you will arrive a few hours ahead of them.
+Your mission is to conduct reconnaisance, discover what has taken place, and secure the 
+ship for the ground team.
+
+By the grace of God Almighty,
+Queen Victoria IX
 $END$
 
 $QUARTER$

@@ -14,6 +14,7 @@ vd doors;
 vs switches;
 vt terminals;
 vtr triggers;
+vc cylinders;
 
 Switch *activeSwitch = NULL;
 Terminal *activeTerminal = NULL;

@@ -192,6 +192,75 @@ void Level::loadDoors(sqlite3 *db)
 	sqlite3_finalize(stm);
 }
 
+void Level::loadCylinders(sqlite3 *db)
+{
+	cylinders.clear();
+	// Prepared Statement
+	sqlite3_stmt *stm;
+	// SQL command
+	string cmd;
+	// Connection Error Test
+	int err;
+	cmd = "SELECT * FROM cylinders WHERE LEVEL = \"" + currLevel + "\"";
+
+	err = sqlite3_prepare(db, cmd.c_str(), -1, &stm, 0);
+
+	if (err != SQLITE_OK)
+	{
+		Logger log;
+		vector<string> output = { "FATAL ERROR: Can't load cylinders while loading", currLevel };
+		log.logLine(output);
+
+		exit(STATEMENT_ERROR);
+	}
+
+	// While we still get rows of output
+	while (sqlite3_step(stm) == SQLITE_ROW)
+	{
+		double xt, yt, zt,
+			xr, yr, zr,
+			r, g, b, a,
+			baseRadius, topRadius, height;
+		int stacks, slices;
+		
+
+		xt = sqlite3_column_double(stm, 2);
+		yt = sqlite3_column_double(stm, 3);
+		zt = sqlite3_column_double(stm, 4);
+
+		xr = sqlite3_column_double(stm, 5);
+		yr = sqlite3_column_double(stm, 6);
+		zr = sqlite3_column_double(stm, 7);
+
+		baseRadius = sqlite3_column_double(stm, 8);
+		topRadius = sqlite3_column_double(stm, 9);
+		height = sqlite3_column_double(stm, 10);
+
+		stacks = sqlite3_column_int(stm, 11);
+		slices = sqlite3_column_int(stm, 12);
+
+		r = sqlite3_column_double(stm, 13);
+		g = sqlite3_column_double(stm, 14);
+		b = sqlite3_column_double(stm, 15);
+		a = sqlite3_column_double(stm, 16);
+
+
+		double translate[3] = { xt, yt, zt };
+		double rotate[3] = { xr, yr, zr };
+		double colors[4] = { r, g, b, a };
+
+		cylinders.push_back(Cylinder(baseRadius, topRadius, height, stacks, slices, translate, rotate, colors));
+	}
+
+	Logger log;
+	vector<string> output = { "Loaded cylinders on", currLevel };
+	log.logLine(output);
+
+	// Deconstructs the statement
+	sqlite3_finalize(stm);
+}
+
+
 void Level::loadSwitches(sqlite3 *db)
 {
 	switches.clear();
@@ -565,6 +634,7 @@ void Level::loadLevel(std::string levelName)
 
 	loadWalls(db);
 	loadDoors(db);
+	loadCylinders(db);
 	loadTerminals(db);
 
 	// Loading switches must be after doors/terminals to properly bind
@@ -594,6 +664,11 @@ void Level::displayLevel()
 	}
 
 	for (auto i : doors)
+	{
+		i.Display();
+	}
+
+	for (auto i : cylinders)
 	{
 		i.Display();
 	}
