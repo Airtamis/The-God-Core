@@ -203,6 +203,7 @@ void Terminal::Display()
 	glRotated(rotate[1], 0, 1, 0);
 	glRotated(rotate[2], 0, 0, 1);
 
+	//drawWallMounted();
 	drawStanding();
 
 	glPopMatrix();
@@ -250,7 +251,8 @@ void Terminal::drawStanding()
 
 void Terminal::drawWallMounted()
 {
-
+	glColor3d(0, 1, 1);
+	glutSolidSphere(1, 50, 50);
 }
 
 double Terminal::getX()

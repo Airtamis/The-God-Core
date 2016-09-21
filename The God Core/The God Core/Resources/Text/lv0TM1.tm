@@ -13,13 +13,19 @@ Type Help to see this message again
 $END$
 
 $INTRO$
-Content 1
+Introduction
 $END$
 
 $COMMLETTER$
-Content 2
-2 Content
-$END$	
+Queen Victoria IX of the United Commonwealth of Earth, the Intra Solar Network and
+Outer Colonies, by the grace of God Almighty, Hereby appoints Jacob Riker to the
+position of Royal Constable, and authorizes all powers and priveleges bestowed upon
+the office.
+
+This appointment is recognized by the Minister of Solar Defense, Richard Gabriels
+
+Verification Code: oxHG0yBjOs2Y
+$END$
 
 $MISSION$
 Content 3

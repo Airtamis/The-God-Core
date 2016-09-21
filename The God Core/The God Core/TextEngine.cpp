@@ -24,7 +24,7 @@ using namespace std;
 
 // Initializing the constants
 const char* TextEngine::TEXT_PATH = "Resources\\Text\\";
-const double TextEngine::LINE_OFFSET = 10;
+const double TextEngine::LINE_OFFSET = 15;
 
 void TextEngine::displayText(double x, double y,
 	double r, double g, double b,

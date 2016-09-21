@@ -47,10 +47,10 @@ bool initGame(int argc, char **argv);
 // Manages the game's scenes
 void manageScenes();
 
-GLfloat light_diffuse[] = { 0.3f, 0.3f, 0.3f, 0.5f };
-GLfloat light_position[] = { 0.0f, 1.0f, 0.0f, 0.0f };
-GLfloat mat_specular[] = { 0.3f, 0.2f, 0.3f, 0.5f };
-GLfloat mat_shininess[] = { 3.0f };
+GLfloat light_diffuse[] = { 0.3f, 0.3f, 0.3f, 0.3f };
+GLfloat light_position[] = { 0.0f, 0.0f, 0.0f, 0.0f }; // Currently nonexistant until I can figure out how lighting works
+GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+GLfloat mat_shininess[] = { 75 };
 GLfloat lmodel_ambient[] = { 0.6f, 0.6f, 0.6f, 1.0f };
 
 using namespace std;
@@ -108,12 +108,15 @@ bool initGame(int argc, char **argv)
 	glEnable(GL_LIGHTING);
 	// First light source
 	glEnable(GL_LIGHT0);
-	// Light doesnt turn everything grey
-	glEnable(GL_COLOR_MATERIAL);
+	
 	// Light properties
-	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+	glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+
+	// Light doesnt turn everything grey
+	glEnable(GL_COLOR_MATERIAL);
+	
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
