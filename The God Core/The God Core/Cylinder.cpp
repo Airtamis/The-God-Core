@@ -24,7 +24,7 @@ Cylinder::Cylinder(double _baseRadius, double _topRadius, double _height, int _s
 
 Cylinder::~Cylinder()
 {
-	gluDeleteQuadric(quad);
+	//gluDeleteQuadric(quad);
 }
 
 void Cylinder::Display()

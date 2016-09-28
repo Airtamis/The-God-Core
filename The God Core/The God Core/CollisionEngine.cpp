@@ -20,8 +20,9 @@
 
 using namespace std;
 
-const double PLAYER_RADIUS = .3;
-const double OBJECT_RADIUS = 1; // Object interactivity radius
+const double PLAYER_RADIUS = 0.5;
+const double INTERACT_RADIUS = 1; // Object interactivity radius
+const double COLLIDE_RADIUS = 0.5;
 
 void CollisionEngine::checkInteract()
 {
@@ -30,13 +31,9 @@ void CollisionEngine::checkInteract()
 	// Auto don't work in these parts
 	for (unsigned int i = 0; i < switches.size(); i++)
 	{
-		// Apprently. Somehow. Values are mirrored here.
-		// So you have to do addition instead of subtraction to get the proper distance
-		// As I noticed after observing the distance increase as I moved towards an object.
-		// And I am stumped as to why this happens.
 		double distance = pow((switches[i].getX() + Cam.x), 2) + pow((switches[i].getY() + Cam.y), 2) + pow((switches[i].getZ() + Cam.z), 2);
 		distance = sqrt(distance);
-		double radii = (PLAYER_RADIUS + OBJECT_RADIUS);
+		double radii = (PLAYER_RADIUS + INTERACT_RADIUS);
 
 		if (distance < radii && switches[i].checkIfOn())
 		{
@@ -50,7 +47,7 @@ void CollisionEngine::checkInteract()
 	{
 		double distance = pow((terminals[i].getX() + Cam.x), 2) + pow((terminals[i].getY() + Cam.y), 2) + pow((terminals[i].getZ() + Cam.z), 2);
 		distance = sqrt(distance);
-		double radii = (PLAYER_RADIUS + OBJECT_RADIUS);
+		double radii = (PLAYER_RADIUS + INTERACT_RADIUS);
 
 		if (distance < radii && terminals[i].checkIfOn())
 		{
@@ -65,26 +62,23 @@ void CollisionEngine::checkInteract()
 
 bool CollisionEngine::collideObjects()
 {
-	/*
-	// If bounding spheres intersect
-	double distance = pow((x + Cam.x), 2) + pow((y + Cam.y), 2) + pow((z + Cam.z), 2);
-	distance = sqrt(distance);
-	double radii = (PLAYER_RADIUS + .1);
-	if (distance < radii) // Figure out a standard radius for player, dynamically take radius from object
+	for (unsigned int i = 0; i < terminals.size(); i++)
 	{
-		return true;
+		double distance = pow((terminals[i].getX() + Cam.x), 2) + pow((terminals[i].getY() + Cam.y), 2) + pow((terminals[i].getZ() + Cam.z), 2);
+		distance = sqrt(distance);
+		double radii = (PLAYER_RADIUS + COLLIDE_RADIUS);
+
+		if (distance < radii && terminals[i].checkIfOn())
+		{
+			return true;
+		}
 	}
-	*/
+
 	return false;
 }
 
 bool CollisionEngine::collideWalls()
 {
-	if (collision == false)
-	{
-		return false;
-	}
-
 	// Gotta check doors first
 	// And if you hit an open door
 	// You just ignore collision
@@ -112,6 +106,11 @@ bool CollisionEngine::collideWalls()
 
 bool CollisionEngine::collide()
 {
+	if (!collision)
+	{
+		return false;
+	}
+
 	checkInteract();
 	return (collideWalls() || collideObjects());
 }

@@ -224,25 +224,25 @@ void Level::loadCylinders(sqlite3 *db)
 		int stacks, slices;
 		
 
-		xt = sqlite3_column_double(stm, 2);
-		yt = sqlite3_column_double(stm, 3);
-		zt = sqlite3_column_double(stm, 4);
+		xt = sqlite3_column_double(stm, 1);
+		yt = sqlite3_column_double(stm, 2);
+		zt = sqlite3_column_double(stm, 3);
 
-		xr = sqlite3_column_double(stm, 5);
-		yr = sqlite3_column_double(stm, 6);
-		zr = sqlite3_column_double(stm, 7);
+		xr = sqlite3_column_double(stm, 4);
+		yr = sqlite3_column_double(stm, 5);
+		zr = sqlite3_column_double(stm, 6);
 
-		baseRadius = sqlite3_column_double(stm, 8);
-		topRadius = sqlite3_column_double(stm, 9);
-		height = sqlite3_column_double(stm, 10);
+		baseRadius = sqlite3_column_double(stm, 7);
+		topRadius = sqlite3_column_double(stm, 8);
+		height = sqlite3_column_double(stm, 9);
 
-		stacks = sqlite3_column_int(stm, 11);
-		slices = sqlite3_column_int(stm, 12);
+		stacks = sqlite3_column_int(stm, 10);
+		slices = sqlite3_column_int(stm, 11);
 
-		r = sqlite3_column_double(stm, 13);
-		g = sqlite3_column_double(stm, 14);
-		b = sqlite3_column_double(stm, 15);
-		a = sqlite3_column_double(stm, 16);
+		r = sqlite3_column_double(stm, 12);
+		g = sqlite3_column_double(stm, 13);
+		b = sqlite3_column_double(stm, 14);
+		a = sqlite3_column_double(stm, 15);
 
 
 		double translate[3] = { xt, yt, zt };
@@ -650,7 +650,7 @@ void Level::loadLevel(std::string levelName)
 	log.logLine(output);
 
 	// Get out of wall
-	for (unsigned int i = 0; i < 3; i++)
+	for (unsigned int i = 0; i < 10; i++)
 	{
 		Cam.moveForward(1);
 	}
