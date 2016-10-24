@@ -39,19 +39,21 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IgnoreImportLibrary>true</IgnoreImportLibrary>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\JeremyG\Documents\Simple OpenGL Image Library\src;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;C:\Users\JeremyG\Documents\SQlite API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\jerrgree\Documents\Simple OpenGL Image Library\src;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;C:\Users\JeremyG\Documents\SQlite API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\JeremyG\Documents\Scholars Project\Code\Simple OpenGL Image Library\src;C:\Users\JeremyG\Documents\Scholars Project\Code\Simple OpenGL Image Library\lib;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod_vc.lib;C:\Users\JeremyG\Documents\Simple OpenGL Image Library\projects\VC9\Debug\SOIL.lib;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\shell32.lib;C:\Users\JeremyG\Documents\Additions\sqlite3.obj</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\jerrgree\Documents\Simple OpenGL Image Library\src;C:\Users\jerrgree\Documents\Simple OpenGL Image Library\lib;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\inc;C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod_vc.lib;C:\Users\jerrgree\Documents\Simple OpenGL Image Library\projects\VC9\Debug\SOIL.lib;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\shell32.lib</AdditionalDependencies>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
@@ -70,7 +72,7 @@
       <GenerateDebugInformation>No</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod_vc.lib;C:\Users\JeremyG\Documents\Simple OpenGL Image Library\projects\VC9\Debug\SOIL.lib;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\shell32.lib;C:\Users\JeremyG\Documents\Additions\sqlite3.obj</AdditionalDependencies>
+      <AdditionalDependencies>C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\lowlevel\lib\fmod_vc.lib;C:\Users\jerrgree\Documents\Simple OpenGL Image Library\projects\VC9\Debug\SOIL.lib;C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x86\shell32.lib;C:\Users\JeremyG\Documents\Additions\sqlite3.obj</AdditionalDependencies>
       <TargetMachine>MachineX86</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
@@ -93,6 +95,8 @@
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PoweredObject.cpp" />
     <ClCompile Include="SaveManager.cpp" />
+    <ClCompile Include="shell.c" />
+    <ClCompile Include="sqlite3.c" />
     <ClCompile Include="Switch.cpp" />
     <ClCompile Include="Terminal.cpp" />
     <ClCompile Include="TextEngine.cpp" />
@@ -122,6 +126,8 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="Return.h" />
     <ClInclude Include="SaveManager.h" />
+    <ClInclude Include="sqlite3.h" />
+    <ClInclude Include="sqlite3ext.h" />
     <ClInclude Include="Switch.h" />
     <ClInclude Include="Terminal.h" />
     <ClInclude Include="TextEngine.h" />
