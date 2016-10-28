@@ -34,7 +34,8 @@ bool interactivity = false;
 int songNum = 0;
 
 int levelNum = 0;
-std::string curr_level = "LEVELZERO";
+//std::string curr_level = "LEVELZERO";
+std::string curr_level = "LEVELONE";
 
 const char* SONG0 = "Dark Fog.mp3";
 const char* SONG1 = "Mismer.mp3";
