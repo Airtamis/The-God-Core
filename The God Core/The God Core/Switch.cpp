@@ -78,8 +78,6 @@ void Switch::toggleTarget()
 
 void Switch::Display()
 {
-	// THOUGHT: Have a different switch display for power?
-
 	glPushMatrix();
 	glTranslated(translate[0], translate[1], translate[2]);
 	glRotated(rotate[0], 1, 0, 0);

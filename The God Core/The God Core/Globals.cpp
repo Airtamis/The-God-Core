@@ -33,7 +33,8 @@ bool interactivity = false;
 
 int songNum = 0;
 
-int levelNum = 0;
+//int levelNum = 0;
+int levelNum = 1;
 //std::string curr_level = "LEVELZERO";
 std::string curr_level = "LEVELONE";
 
