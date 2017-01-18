@@ -23,7 +23,7 @@ void Trigger::activateTarget()
 		case T_TERMINAL:
 		{
 			Terminal* t = (Terminal*)target;
-			// Activate Target
+			t->activate();
 			break;
 		}
 		case T_SWITCH:
@@ -41,10 +41,10 @@ void Trigger::activateTarget()
 
 bool Trigger::tryToTrigger(void* input, GCtype type)
 {
-	// If this trigger is not a terminal, return false
+	// If this trigger is the correct type
 	if (triggerType != type) return false;
 
-	// If this trigger is not the right terminal, return false
+	// If this trigger is the correct object
 	if (trigger != input) return false;
 
 	activateTarget();

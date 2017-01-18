@@ -290,7 +290,7 @@ void Keyboard::special(int key, int x, int y)
 		break;
 
 	case GLUT_KEY_F3:
-		isInTerminal = !isInTerminal;
+		Cam.resetCam();
 		break;
 
 	case GLUT_KEY_F4:

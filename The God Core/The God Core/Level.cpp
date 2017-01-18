@@ -649,6 +649,8 @@ void Level::loadLevel(std::string levelName)
 	output[0] = "Finished loading";
 	log.logLine(output);
 
+	Cam.resetCam();
+
 	// Get out of wall
 	for (unsigned int i = 0; i < 10; i++)
 	{

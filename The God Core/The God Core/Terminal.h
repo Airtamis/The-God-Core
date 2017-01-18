@@ -26,7 +26,7 @@
 
 #include <GL\glut.h>
 
-class Terminal : public TwoD, public PoweredObject // Inherit 2D functionality
+class Terminal : public TwoD, public PoweredObject // Inherit 2D functionality and power functionality
 {
 private:
 	// text = what the user is typing, input = completed input

@@ -1,8 +1,6 @@
 <FILES>
-[01] Introduction -- INTRO
-[02] Commision letter -- COMMLETTER
-[03] Mission Statement -- MISSION
-[04] Note from the Quartermaster -- QUARTER
+[01] Intake Report 44 -- IR44
+[02] Intake Report 45 -- IR45
 
 <TAGS>
 $HELP$
@@ -12,37 +10,19 @@ Type Exit to exit the terminal
 Type Help to see this message again
 $END$
 
-$INTRO$
-Introduction
+$IR44$
+Intake 003 - Week 44 Intake Report
+No shipments recieved this week. The Crown has scheduled a shipment to arrive next week.
+
+Officer Fries
 $END$
 
-$COMMLETTER$
-Queen Victoria IX of the United Commonwealth of Earth, the Intra Solar Network and
-Outer Colonies, by the grace of God Almighty, Hereby appoints Jacob Riker to the
-position of Royal Constable, and authorizes all powers and priveleges bestowed upon
-the office.
 
-This appointment is recognized by the Minister of Solar Defense, Richard Gabriels
+$IR45$
+Intake 003 - Week 45 Intake Report
+The Crown shippment arrived on schedule. The crew delivering it, naturally, had little idea of what they were moving,
+but they seemed spooked nontheless. The manifest lists it as a Markoff class object, security code black. It's been a while
+since we recieved a shipment like this.
 
-Verification Code: oxHG0yBjOs2Y
-$END$
-
-$MISSION$
-Constable Riker,
-One of our research dreadnaughts, The Archimedes, has cut off communications. This is
-an X class research station, and is filled with numerous dangerous and secret projects.
-We have dispatched a squadron of marines, but you will arrive a few hours ahead of them.
-Your mission is to conduct reconnaisance, discover what has taken place, and secure the 
-ship for the ground team.
-
-By the grace of God Almighty,
-Queen Victoria IX
-$END$
-
-$QUARTER$
-You should find in your possesion, upon waking, the newest model of our RC PDA. It can
-crack into any computer terminal produced by an affiliated company of the Royal Empire,
-giving you unlimited access to all files through your text interface. Good luck on your
-next mission Constable.
-- The Quartermaster
+Officer Fries
 $END$
