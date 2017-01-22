@@ -34,58 +34,52 @@
 
 \section{Preamble}
 
-\section{Setting}
-
 \section{Programming}
 
 \subsection{The Language}
 
-\subsection{OpenGL}
-OpenGL, or the Open Graphics Library, is one of the most popular graphics libraries out there. It gives access to linear algebra functions for matrix manipulation (which is important, as 3D graphics relies heavily upon matrix transformations), keyboard and mouse input, and windowing. 
+\subsection{APIs}
 
-\subsection{SOIL}
-SOIL, or the Simple OpenGL Interface Library, is a small extension to OpenGL that I picked up along the way. It is a texture library that can load .jpg and .png images and bind them to an OpenGL texture.
+\subsubsection{OpenGL}
+OpenGL, or the Open Graphics Library, is one of the most popular graphics libraries out there. It gives access to linear algebra functions for matrix manipulation (which is important, as 3D graphics relies heavily upon matrix transformations), keyboard and mouse input, and windowing. I chose to use OpenGL over a different graphics library, such as Microsoft's DirectX, because it is open source and cross platform, which would make porting my game to a different Operating System a much easier task if I ever decide to in the future.
 
-\subsection{FMOD}
-Between SFML and FMOD
+\subsubsection{SOIL}
+SOIL, or the Simple OpenGL Interface Library, is a small extension to OpenGL that I picked up along the way. It is a texture library that can load .jpg and .png images and bind them to an OpenGL texture, making it very simple to incorporate such images into my game.
 
-\subsection{SQlite}
+\subsubsection{FMOD}
+I chose FMOD as the base for my game's audio as it is a simple, lightweight, and free to use sound API, and most other audio APIs that I looked at lacked support for MP3 files. 
+
+\subsubsection{SQlite}
+I decided to use SQLite for my database because it is a lightweight simplified version of a SQL database, allowing the game data to be stored and embedded in the application without taking much room or take a great deal of time to perform a query.
 
 \subsection{Game Engine}
 
-Of the two years of my project, I have constructed \textbf{\textit{CLASSNUM}} classes, across \textbf{\textit{2CLASSNUM}} files. I will describe the classes and there methods here in brief, but the complete files can be found in Appendix 4.1 for your viewing pleasure.
+I crafted the engine of my game in C++ over two years starting in my second semester sophomore year and ending the first semester of my senior year.
 
-\subsubsection{CameraControl}
-The CameraControl class is designed to control and manipulate the player's perspective as they navigate through the game. It contains two ordered triples of floating point numbers: The xyz location of the player, and the rotation along the x axis (looking left/right), the y axis (up/down), and the z axis (barrel roll). It also contains two additional floating point values the, movement speed and the turning speed. 
+\subsubsection{Camera Control}
+The CameraControl class is designed to control and manipulate the player's perspective as they navigate through the game. It contains two ordered triples of floating point numbers: The xyz location of the player, and the rotation along the x axis (looking left/right), the y axis (up/down), and the z axis (barrel roll). It also contains two additional floating point values, the movement speed and the turning speed. 
 
-The CameraControl class contains four methods for rotating the camera, lookUp and lookDown which affect the y rotation, as well as lookLeft and lookRight which affect the x rotation.
-
-There are six movement methods, moveForward and moveBackward are designed to move the camera forward and backwards in respect to where the player is looking currently. This proved quite frustrating to find and I had to ask many math majors for their input until Robert Deyoso was able to help me pin down a formula. These functions adjust the the x and  z coordinates as follows:
+The player can move forwards and backwards, as well as strafe left and right. To correctly formulate the player's movement, I had to envision a circle centered on the player with a radius of the player's movement speed. Based on the angle from the x and z rotation, the next place that the player move is simply a spot on the circumference of the circle based on the rotation angle, and moving forward can be derived from this formula:
 
 z := z $\pm$ moveSpeed * cos(radian(x\_angle))
 
 x := x $\mp$ moveSpeed * sin(radian(x\_angle))
 
-strafeLeft and strafeRight, again, move the camera directly left and directly right according to where the camera is looking. The formula is similar to the above, except the angle is increased or decreased by 90$\degree$.
+Following that formula, it's simple to implement movement to the left, right by adding or subtracting 90$\degree$, and backwards movement by adding 180$\degree$.
 
-moveUp and moveDown were the easiest functions to derive, as up and down are independent of the direction the camera is facing, so it is simply increasing and decreasing the y value respectively. 
+Whenever OpenGL renders a new frame, the 'camera' is always returned to the origin of the map, so after drawing the level and before flushing the buffer, the Camera Control calls glTranslate to move the camera to the correct location, and then calls glRotate 3 times, once for each axis, to orient the camera in the correct direction.
 
-invertCam increases the z angle by 180$\degree$ to flip the world upside down.
-resetCam resets the 3-tuples to their default values (0, 0, -1) for the position and (0, 0, 0) for the angles.
+\subsubsection{Heads Up Display}
+The Heads Up Display is drawn after the level is draw, so that it overlays information to the player. It primarily is used to add a bit of flavor to the game by drawing the helmet for the player, but it also serves to display the developer console when activated.
 
-While those functions work to modify the values within the class, Display is the method that actually moves and rotates the camera within the world. It calls glRotate three times to rotate the camera along the respective axis, and then calls glTranslate to move the camera into the correct position.
+The display also delivers a prompt to the user whenever they are in range of an object that can be interacted with.
 
-\subsubsection{HeadsUpDisplay}
+\subsubsection{Rectangles and Triangles}
+Rectangles and triangles are the two fundamental polygons that build up my game. Rectangles in particular make up the walls, floors, ceilings, doors, terminals, and most of the HUD and menu. They started as simply two arrays- one that holds all 9 (for triangles) or 12 (for rectangles) values describing the coordinates in the game that they inhabit, as well as a 4 value vector containing the objects RGBA values.
 
-The HeadsUpDisplay class is a complex class that overlays a display to present information or display aesthetics such as the helmet's bounds to the player. The class contains four constant integers to designate the boundaries of the screen (bottom, top, left right), as well as two more integers dimTime and darkTime to control the length of the dim and dark functions. There are three strings held by the class, currentAlert dictates information that will be printed to the center of the screen, currentText is what the user is typing, and currentInput is what the user has entered as input into the developer console (for more information, see the next section). The developer console dev, as well as a TextEngine helmet, also reside in this class.
+For collision purposes, when a rectangle class is expanded with the ability to calculate and store its norm and Plane equation (Form $ax + by + cz + d = 0$).
 
-DisplayHud is the activation method, it calls prepare2D, drawHUD, and prepare3D. This is called in the main function every frame unless the player is in a screen. 
-
-prepare2D prepares openGL for rendering 2D images (the HUD is the last item that is drawn to the screen every frame, therefore nothing can cover it) by disabling everything related to the depth buffer and projecting everything onto a matrix that is orthogonal to the screen bounds.
-
-\subsubsection{Rectangle} For collision purposes, when a Rectangle is created it calculates the Plane equation of the rectangle (Form $ax + by + cz + d = 0$).
-
-This equation is calculated using the first three corners of the rectangle (Calling them A, B, and C) as follows:
+This equation is calculated using the any three corners of the rectangle (Calling them A, B, and C) as follows:
 
 \noindent
 $
@@ -105,9 +99,13 @@ c = \vec{AB}_1 * \vec{AC}_2 - \vec{AB}_2 * \vec{AC}_1 \\
 d = aAx + bAy + cAz
 $
 
-We can also derive the norm of the plane using the equation $\sqrt{a^2 + b^2 + c^2}$
+The norm of the plane can then be derived using the equation $\sqrt{a^2 + b^2 + c^2}$
 
-\subsubsection{CollisionEngine}
+\subsubsection{2D}
+
+\subsubsection{Powered Objects}
+
+\subsubsection{Collision Engine}
 This determines when the player has collided with an object in the world. There are two types of collisions: player-object collisions and player-wall collisions.
 
 Player object collisions are simple to detect, as both the player and the object can be placed within imaginary "bounding spheres" that extend around the player and object. Collision can be detected with this formula:
@@ -122,8 +120,6 @@ In the broad phase, we use the plane equation $ax + by + cz + d$ that is derived
 
 In the narrow phase, each wall is aligned on an axis: x, y, or z. We simply take the largest and smallest values of the coordinates on that axis (for instance, if the wall is x aligned, we take the largest and smallest x value). If the sphere is in between the two values, the player has hit the wall. Otherwise, they hit the plane but not the wall.
 
-\subsubsection{Console}
-
 \subsubsection{MusicManager}
 
 \subsubsection{TextEngine}
@@ -132,9 +128,9 @@ In the narrow phase, each wall is aligned on an axis: x, y, or z. We simply take
 
 \subsubsection{Keyboard}
 
-\subsubsection{Rectangle and Triangle}
+\subsubsection{Level Loading}
 
-\subsection{Problems and Frustrations}
+\subsubsection{Console and Logging}
 
 \section{Appendices}
 

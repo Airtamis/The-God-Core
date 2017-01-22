@@ -21,13 +21,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_02F3A34CC5C942F3AB0D507D25007EA9"
+        "MsmKey" = "8:_063B2DC0DBB24466B3928B88C56FEAEC"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_063B2DC0DBB24466B3928B88C56FEAEC"
+        "MsmKey" = "8:_07D21F3CFA5D4FE7A7ECE3629337E1EA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -40,18 +40,6 @@
         "Entry"
         {
         "MsmKey" = "8:_1F206A45AA1F4471B44F02CB806B5CFC"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_219EDB101A05453BBCF97CE0365E137E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_22FD0C1F0AAB47A7B6826419EBD99F08"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,7 +69,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_4451BA01F29C4894BEF3977B82CE9DDF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5144389CE9C54B5FA7F30924901AC12C"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_56AAA476DF274E0D9EECE34508BEE5C8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_584CA1C9120C42C080E0F2F8B197CA8F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -93,7 +99,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_66F912E011E9496CB37B035245E0A910"
+        "MsmKey" = "8:_665C85BC0536473F86E7382B5D79694D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -129,13 +135,25 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_87BA82A83E6348A89B252E561A498A81"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_90D52CC9BB7F4D3E9992D791E85916CE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B6B52868ED9A44B89BAE661B21C8ECA6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D418FE3D2CD44DE6A486B1297F336A20"
+        "MsmKey" = "8:_DCF7A060A0D245D49832BF3AD7CDB0EB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -172,12 +190,6 @@
         "Entry"
         {
         "MsmKey" = "8:_F550BB6F556C481A9D177320DC8F3D74"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FC898D9F641C4EB08E309DFAD583D991"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -288,10 +300,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_02F3A34CC5C942F3AB0D507D25007EA9"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_063B2DC0DBB24466B3928B88C56FEAEC"
             {
-            "SourcePath" = "8:..\\The God Core\\Data.db"
-            "TargetName" = "8:Data.db"
+            "SourcePath" = "8:..\\..\\DLLS\\glut32.dll"
+            "TargetName" = "8:glut32.dll"
             "Tag" = "8:"
             "Folder" = "8:_700DB7F888944B80B41CCB877AEC7DA6"
             "Condition" = "8:"
@@ -308,12 +320,12 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_063B2DC0DBB24466B3928B88C56FEAEC"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_07D21F3CFA5D4FE7A7ECE3629337E1EA"
             {
-            "SourcePath" = "8:..\\..\\DLLS\\glut32.dll"
-            "TargetName" = "8:glut32.dll"
+            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\lv0TM1.tm"
+            "TargetName" = "8:lv0TM1.tm"
             "Tag" = "8:"
-            "Folder" = "8:_700DB7F888944B80B41CCB877AEC7DA6"
+            "Folder" = "8:_7E131DBDC3804C6FB17486DD6F02518C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -354,46 +366,6 @@
             "TargetName" = "8:Core.ico"
             "Tag" = "8:"
             "Folder" = "8:_066994C23EEC41EE8C04FB8479D1D7F9"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_219EDB101A05453BBCF97CE0365E137E"
-            {
-            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\termAttributes.tm"
-            "TargetName" = "8:termAttributes.tm"
-            "Tag" = "8:"
-            "Folder" = "8:_7E131DBDC3804C6FB17486DD6F02518C"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_22FD0C1F0AAB47A7B6826419EBD99F08"
-            {
-            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\lv0TM1.tm"
-            "TargetName" = "8:lv0TM1.tm"
-            "Tag" = "8:"
-            "Folder" = "8:_7E131DBDC3804C6FB17486DD6F02518C"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -488,12 +460,72 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4451BA01F29C4894BEF3977B82CE9DDF"
+            {
+            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\lvl1TM2.tm"
+            "TargetName" = "8:lvl1TM2.tm"
+            "Tag" = "8:"
+            "Folder" = "8:_7E131DBDC3804C6FB17486DD6F02518C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5144389CE9C54B5FA7F30924901AC12C"
             {
             "SourcePath" = "8:..\\The God Core\\Resources\\Music\\Story of Life.mp3"
             "TargetName" = "8:Story of Life.mp3"
             "Tag" = "8:"
             "Folder" = "8:_90E5C24C94804FA49DE446DBA124377B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_56AAA476DF274E0D9EECE34508BEE5C8"
+            {
+            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\suitAlerts.log"
+            "TargetName" = "8:suitAlerts.log"
+            "Tag" = "8:"
+            "Folder" = "8:_7E131DBDC3804C6FB17486DD6F02518C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_584CA1C9120C42C080E0F2F8B197CA8F"
+            {
+            "SourcePath" = "8:..\\The God Core\\Data.db"
+            "TargetName" = "8:Data.db"
+            "Tag" = "8:"
+            "Folder" = "8:_700DB7F888944B80B41CCB877AEC7DA6"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -528,10 +560,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_66F912E011E9496CB37B035245E0A910"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_665C85BC0536473F86E7382B5D79694D"
             {
-            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\test.tm"
-            "TargetName" = "8:test.tm"
+            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\lvl1TM0.tm"
+            "TargetName" = "8:lvl1TM0.tm"
             "Tag" = "8:"
             "Folder" = "8:_7E131DBDC3804C6FB17486DD6F02518C"
             "Condition" = "8:"
@@ -628,10 +660,50 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D418FE3D2CD44DE6A486B1297F336A20"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87BA82A83E6348A89B252E561A498A81"
             {
-            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\suitAlerts.log"
-            "TargetName" = "8:suitAlerts.log"
+            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\termAttributes.tm"
+            "TargetName" = "8:termAttributes.tm"
+            "Tag" = "8:"
+            "Folder" = "8:_7E131DBDC3804C6FB17486DD6F02518C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_90D52CC9BB7F4D3E9992D791E85916CE"
+            {
+            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\test.tm"
+            "TargetName" = "8:test.tm"
+            "Tag" = "8:"
+            "Folder" = "8:_7E131DBDC3804C6FB17486DD6F02518C"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DCF7A060A0D245D49832BF3AD7CDB0EB"
+            {
+            "SourcePath" = "8:..\\The God Core\\Resources\\Text\\lvl1TM1.tm"
+            "TargetName" = "8:lvl1TM1.tm"
             "Tag" = "8:"
             "Folder" = "8:_7E131DBDC3804C6FB17486DD6F02518C"
             "Condition" = "8:"
@@ -732,26 +804,6 @@
             {
             "SourcePath" = "8:..\\The God Core\\Resources\\Images\\banner.png"
             "TargetName" = "8:banner.png"
-            "Tag" = "8:"
-            "Folder" = "8:_066994C23EEC41EE8C04FB8479D1D7F9"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FC898D9F641C4EB08E309DFAD583D991"
-            {
-            "SourcePath" = "8:..\\The God Core\\Resources\\Images\\termLogIn.png"
-            "TargetName" = "8:termLogIn.png"
             "Tag" = "8:"
             "Folder" = "8:_066994C23EEC41EE8C04FB8479D1D7F9"
             "Condition" = "8:"

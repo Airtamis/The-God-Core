@@ -138,7 +138,7 @@ void Console::writeToSave(string input)
 
 	SaveManager Jesus;
 
-	Jesus.saveLevel(input);
+	Jesus.saveLevel();
 
 	console_log.push_back("Saved: " + input);
 	console_color.push_back(VALID_COLOR);

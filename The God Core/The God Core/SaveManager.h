@@ -33,7 +33,7 @@ private:
 public:
 	SaveManager();
 	// Writes the array of encrypted strings to core.sav
-	void saveLevel(std::string input);
+	void saveLevel();
 	// Sets global variables to load game
 	bool loadGame();
 	// Returns the decrypted string in core.sav

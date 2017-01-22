@@ -152,6 +152,10 @@ void GameManager::draw()
 		lvl.loadLevel(curr_level);
 
 		loading = false;
+
+		// Save current progress after loading level
+		SaveManager Jesus; // saves
+		Jesus.saveLevel();
 	}
 
 	else

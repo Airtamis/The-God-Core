@@ -70,9 +70,11 @@ string SaveManager::readSave()
 	return dcr_data;
 }
 
-void SaveManager::saveLevel(string input)
+void SaveManager::saveLevel()
 {
 	ofstream save(SAVE_PATH);
+
+	string input = curr_level + " " + to_string(songNum);
 
 	string encr_str = encrytData(input);
 
@@ -85,13 +87,22 @@ bool SaveManager::loadGame()
 {
 	// might change to vector<string> later
 	string data = readSave();
+	size_t pos = data.find(' ');
 
-	int temp_levelNum = getLevelNum(data);
+	if (pos == string::npos) return false;
+	string savedLevel = data.substr(0, pos);
+	int savedSong = stoi(data.substr(pos + 1));
+
+	int temp_levelNum = getLevelNum(savedLevel);
 
 	if (temp_levelNum == -1) return false;
+
 	levelNum = temp_levelNum;
 	curr_level = getLevelString(levelNum);
+	songNum = savedSong;
+
 	loading = true;
+	changeSong = true;
 		
 	return true;
 }
