@@ -40,11 +40,11 @@ std::string curr_level = "LEVELZERO";
 
 const char* SONG0 = "Dark Fog.mp3";
 const char* SONG1 = "Mismer.mp3";
-const char* SONG2 = "Cold Hope.mp3";
-const char* SONG3 = "One Sly Move.mp3";
-const char* SONG4 = "Hypnothis.mp3";
-const char* SONG5 = "Lightless Dawn.mp3";
-const char* SONG6 = "Spacial Harvest.mp3";
+const char* SONG2 = "One Sly Move.mp3";
+const char* SONG3 = "Hypnothis.mp3";
+const char* SONG4 = "Cold Hope.mp3";
+const char* SONG5 = "Spacial Harvest.mp3";
+const char* SONG6 = "Lightless Dawn.mp3";
 const char* SONG7 = "Zombie Flood.mp3";
 const char* SONG8 = "Get on my Level.mp3";
 const char* SONG9 = "Story of Life.mp3";
