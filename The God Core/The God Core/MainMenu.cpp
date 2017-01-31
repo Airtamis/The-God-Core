@@ -88,13 +88,13 @@ void MainMenu::drawClickBoxes()
 	glEnd();
 
 	// Exit
-	/*
+	
 	glBegin(GL_LINE_LOOP);
 	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.35);
 	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.45);
 	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.45);
 	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.35);
-	glEnd();*/
+	glEnd();
 }
 
 void MainMenu::getClick(double x, double y)

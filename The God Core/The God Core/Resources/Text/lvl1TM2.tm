@@ -11,7 +11,7 @@ Type Help to see this message again
 $END$
 
 $MR$
-Introduction
+Some of the ship's power units have started to malfunction. This wouldn't normally be a big deal, but if we lose power to some of these containment units we'll be in trouble.
 $END$
 
 $CDP$

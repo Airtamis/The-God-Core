@@ -102,6 +102,9 @@ $
 The norm of the plane can then be derived using the equation $\sqrt{a^2 + b^2 + c^2}$
 
 \subsubsection{2D}
+As multiple different objects required the ability to \textbf{2D IT UP CHANGE THIS SOON}, I extracted the ability to draw in 2D into it's own class and it was inherited whenever it was needed.
+
+To convert OpenGL into 2D frame, I needed to first disable lighting, depth testing and depth masking. Next I pushed an \emph{orthogonal} matrix onto OpenGL's matrix stack using the length and width of the screen.
 
 \subsubsection{Powered Objects}
 
@@ -131,6 +134,22 @@ In the narrow phase, each wall is aligned on an axis: x, y, or z. We simply take
 \subsubsection{Level Loading}
 
 \subsubsection{Console and Logging}
+
+\subsubsection{In Game Terminals}
+In game terminals are each bound to a \emph{terminal file}, a unique file that contains the contents of its respective terminal.
+
+The terminal file is divided into two sections: the file names and the file contents. This is an example terminal file:
+
+\lstinputlisting[
+	basicstyle=\ttfamily \small,
+	numbers=left,
+	breaklines=true,
+	linerange={1-1000},
+	firstnumber = 1]{../Resources/Text/test.tm}
+	
+The program parses the file by first separating the in game content (the bracketed number and name) that should be displayed to the user from it's tag. The tags are stored in an array, where its index is equal to the bracketed number. The help display is always stored at the 0th index.
+
+Then, whenever the player types in a read command (E.G. Read 1), the program will send the terminal file and the correct tag to the text engine to be displayed to the screen.
 
 \section{Appendices}
 

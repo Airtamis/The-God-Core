@@ -17,5 +17,8 @@ $END$
 
 $TAG2$
 Content 2
-2 Content
+$END$
+
+$TAG3$
+Content 3
 $END$	
