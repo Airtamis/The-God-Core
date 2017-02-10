@@ -1,0 +1,7 @@
+$TAG 1$
+Content 1
+$END$
+
+$Tag 2$
+Content 2
+$END$
