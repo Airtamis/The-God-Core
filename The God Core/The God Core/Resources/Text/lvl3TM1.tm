@@ -11,7 +11,7 @@ Type Help to see this message again
 $END$
 
 $OS$
-Object Name: The Euclidean Object
+Object Name: 
 Object Class: Benign
 Description: This object cycles shape roughly once every two hours.
 Each cycle it begins as a sphere, and then it morphs into a flat disk,

@@ -1,6 +1,7 @@
 <FILES>
 [01] Object Summary -- OS
-[02] Object Access -- OA
+[02] Object Description -- OD
+[03] Object Access -- OA
 
 <TAGS>
 $HELP$
@@ -11,16 +12,22 @@ Type Help to see this message again
 $END$
 
 $OS$
-Object Name: The Euclidean Object
+Object Name: The Shroud of Healing
 Object Class: Benign
-Description: This object cycles shape roughly once every two hours.
-Each cycle it begins as a sphere, and then it morphs into a flat disk,
-next a cylinder, each form increasing in the number of sides it has.
-The cycle ends as a 24 sided polygon, and it's next form returns to a sphere.
+Description: This ancient object is dated approximately 
+3000 years old. When layed upon a person with any injury or illness, 
+the person is immediately healed to their full health,
+with no scars or other remaining symptoms of trauma.
+However, with each use the shroud decays around the edge.
 
-The object appears to be composed of solid steel. When in a certain form it
-is solid and unable to be damaged by any known material or force. While cycling,
-it appears to be fluid steel, cool to the touch.
+As such, all future testing on the shroud has been forbidden,
+and it is saved for a crisis of Her Imperial Majestie's health.
+$END$
+
+$OD$
+The shroud is an otherwise unimpressive looking object, it is a 
+piece of linen cloth, 3.9 meters by 0.9 meter (Upon initial inventory,
+it was 4.2 by 1.2 meters).
 $END$
 
 $OA$
