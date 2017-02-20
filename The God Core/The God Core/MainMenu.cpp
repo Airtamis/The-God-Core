@@ -149,7 +149,7 @@ void MainMenu::display()
 	drawMainPic();
 
 	// Disable once finished
-	drawClickBoxes();
+	//drawClickBoxes();
 
 	glEnd();
 

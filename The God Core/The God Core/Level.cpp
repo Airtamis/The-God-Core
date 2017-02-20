@@ -651,6 +651,8 @@ void Level::loadLevel(std::string levelName)
 
 	Cam.resetCam();
 
+	interactivity = false;
+
 	// Get out of wall
 	for (unsigned int i = 0; i < 10; i++)
 	{
