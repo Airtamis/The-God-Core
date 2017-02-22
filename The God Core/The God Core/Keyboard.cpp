@@ -47,23 +47,10 @@ void Keyboard::normal(unsigned char key, int x, int y)
 	}
 
 	// Otherwise (as long we aren't in a menu)
-	else if (!isPaused && !isInMain)
+	else if (!isInMain)
 	{
 		interact(key, x, y);
 	}
-
-	else
-	{
-		switch (key)
-		{
-			// Escape
-		case 27:
-			isPaused = false;
-			//pause.reset();
-			break;
-		}
-	}
-
 }
 
 void Keyboard::inputConsole(unsigned char key, int x, int y)
@@ -262,7 +249,9 @@ void Keyboard::interact(unsigned char key, int x, int y)
 
 		// Escape
 	case 27:
-		isPaused = true;
+		isInMain = true;
+		songNum = 0;
+		changeSong = true;
 		break;
 	}
 }

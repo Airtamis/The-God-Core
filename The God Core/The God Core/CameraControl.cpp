@@ -37,56 +37,44 @@ double toRadian(double angle)
 
 void CameraControl::lookLeft()
 {
-	if (!isPaused)
-	{
-		x_angle -= 3 * turnSpeed;
+	x_angle -= 3 * turnSpeed;
 
-		// To avoid potential underflow errors
-		if (x_angle < 0)
-		{
-			x_angle += 360;
-		}
+	// To avoid potential underflow errors
+	if (x_angle < 0)
+	{
+		x_angle += 360;
 	}
 }
 void CameraControl::lookRight()
 {
-	if (!isPaused)
+	x_angle += 3 * turnSpeed;
+		
+	// To avoid potential overflow errors
+	if (x_angle > 360)
 	{
-		x_angle += 3 * turnSpeed;
-
-		// To avoid potential overflow errors
-		if (x_angle > 360)
-		{
-			x_angle -= 360;
-		}
+		x_angle -= 360;
 	}
 }
 
 void CameraControl::lookUp()
 {
-	if (!isPaused)
-	{
-		y_angle -= 2 * turnSpeed;
+	y_angle -= 2 * turnSpeed;
 
-		// To avoid potential underflow errors
-		if (y_angle < 0)
-		{
-			y_angle += 360;
-		}
+	// To avoid potential underflow errors
+	if (y_angle < 0)
+	{
+		y_angle += 360;
 	}
 }
 
 void CameraControl::lookDown()
 {
-	if (!isPaused)
-	{
-		y_angle += 2 * turnSpeed;
+	y_angle += 2 * turnSpeed;
 
-		// To avoid potential overflow errors
-		if (y_angle > 360)
-		{
-			y_angle -= 360;
-		}
+	// To avoid potential overflow errors
+	if (y_angle > 360)
+	{
+		y_angle -= 360;
 	}
 }
 

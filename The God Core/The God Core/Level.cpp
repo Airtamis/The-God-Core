@@ -658,15 +658,13 @@ void Level::loadLevel(std::string levelName)
 	{
 		Cam.moveForward(1);
 	}
+
+	// Go dim for 5 seconds
+	HUD.goDim(5);
 }
 
 void Level::displayLevel()
 {
-	for (auto i : walls)
-	{
-		i.Display();
-	}
-
 	for (auto i : doors)
 	{
 		i.Display();
@@ -683,6 +681,11 @@ void Level::displayLevel()
 	}
 
 	for (auto i : terminals)
+	{
+		i.Display();
+	}
+
+	for (auto i : walls)
 	{
 		i.Display();
 	}

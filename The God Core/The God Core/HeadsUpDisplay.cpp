@@ -65,7 +65,7 @@ void HeadsUpDisplay::drawHelmetBounds()
 
 void HeadsUpDisplay::DisplayAlerts()
 {
-	helmet.openFile(.45 * SCREENRIGHT, .5 * SCREENBOTTOM,
+	helmet.openFile(.5 * SCREENRIGHT, .5 * SCREENBOTTOM,
 		1, 1, 1,
 		"suitAlerts.log", currentAlert);
 }
@@ -104,6 +104,49 @@ void HeadsUpDisplay::dim()
 		{
 			dimNow = false;
 			timeSet = false;
+		}
+	}
+}
+
+void HeadsUpDisplay::fade()
+{
+	static int startTime;
+	static bool timeSet = false;
+	if (fadeNow)
+	{
+		if (!timeSet)
+		{
+			startTime = time(NULL);
+			timeSet = true;
+		}
+
+		int currentTime = time(NULL);
+		int timeElapsed = currentTime - startTime;
+		if (timeElapsed < fadeTime)
+		{
+			// A black square that grows more transparent as time passes
+			double colors[4] = { 0, 0, 0, 1 - ((double)(fadeTime - timeElapsed) / fadeTime) };
+			double dimVert[12] =
+			{
+				SCREENLEFT, SCREENTOP, -1,
+				SCREENLEFT, SCREENBOTTOM, -1,
+				SCREENRIGHT, SCREENBOTTOM, -1,
+				SCREENRIGHT, SCREENTOP, -1
+			};
+
+			Plane black{ dimVert, colors };
+			black.Display2D();
+		}
+
+		else
+		{
+			fadeNow = false;
+			timeSet = false;
+
+
+			// Go dark till game ends
+			darkNow = true;
+			darkTime = 1000;
 		}
 	}
 }
@@ -205,6 +248,12 @@ void HeadsUpDisplay::goDark(int time)
 	darkNow = true;
 }
 
+void HeadsUpDisplay::goFade(int time)
+{
+	fadeTime = time;
+	fadeNow = true;
+}
+
 void HeadsUpDisplay::displayWarning(std::string warning)
 {
 	currentAlert = warning;
@@ -234,7 +283,13 @@ void HeadsUpDisplay::drawHUD()
 		dim();
 	}
 
-	else if (darkNow)
+	else if (fadeNow)
+	{
+		fade();
+	}
+
+	// Not else if due to fade -> dark transition
+	if (darkNow)
 	{
 		dark();
 	}

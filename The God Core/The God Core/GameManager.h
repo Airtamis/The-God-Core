@@ -62,8 +62,10 @@ public:
 	void changeSize(int w, int h);
 	// Manages scene display
 	void manageScenes();
-	// Sample drawing function
+	// Displaying function
 	void draw();
+	// Function to bring about game end on Level 4
+	void endGame();
 	// Normal key presses
 	void normal(unsigned char key, int x, int y);
 	// Key releases

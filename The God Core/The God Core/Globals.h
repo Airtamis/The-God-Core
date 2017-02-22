@@ -15,7 +15,6 @@
 // ALLLLLLL the classes
 #include "HeadsUpDisplay.h"
 #include "CameraControl.h"
-#include "PauseScreen.h"
 #include "Level.h"
 #include "Terminal.h"
 #include "Door.h"
@@ -57,7 +56,7 @@ extern bool
 	// Dunno if I actually need this one
 	loading,
 	// Is in varius different stages of non-normal play
-	isInConsole, isPaused, isInTerminal, isInMain,
+	isInConsole, isInTerminal, isInMain,
 	// Should we change the song?
 	changeSong,
 	// Is something in interaction range?
@@ -77,7 +76,6 @@ extern const char *SONG0, *SONG1, *SONG2, *SONG3, *SONG4, *SONG5,
 // Lots of global objects
 extern HeadsUpDisplay HUD;
 extern CameraControl Cam;
-extern PauseScreen pause;
 extern Level lvl;
 
 // Converts a songname to an integer

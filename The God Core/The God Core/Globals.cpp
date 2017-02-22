@@ -25,7 +25,6 @@ bool goDim = false;
 bool goDark = false;
 bool loading = true;
 bool isInConsole = false;
-bool isPaused = false;
 bool isInTerminal = false;
 bool isInMain = true;
 bool changeSong = true;
@@ -51,7 +50,6 @@ const char* SONG9 = "Story of Life.mp3";
 
 HeadsUpDisplay HUD;
 CameraControl Cam;
-PauseScreen pause;
 Level lvl;
 
 int getSongNum(std::string input)

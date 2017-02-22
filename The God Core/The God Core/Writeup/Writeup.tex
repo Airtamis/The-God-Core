@@ -18,6 +18,9 @@
 
 \usepackage{fullpage}
 
+\usepackage{csvsimple}
+\usepackage{longtable}
+
 % Subsection numbering
 \setcounter{secnumdepth}{3}
 
@@ -420,22 +423,6 @@ The OpenGL display function calls upon the Level class to display all in game ob
 	 				linerange={1-1000},
 	 				firstnumber = 1]{../MusicManager.cpp}
 	 				
-\subsubsection{PauseScreen.h}
-	 \lstinputlisting[
-					basicstyle=\ttfamily \small,
-	 				numbers=left,
-	 				breaklines=true,
-	 				linerange={1-1000},
-	 				firstnumber = 1]{../PauseScreen.h}
-	 				
-\subsubsection{PauseScreen.cpp}	
-	 \lstinputlisting[
-					basicstyle=\ttfamily \small,
-	 				numbers=left,
-	 				breaklines=true,
-	 				linerange={1-1000},
-	 				firstnumber = 1]{../PauseScreen.cpp}
-	 				
 \subsubsection{Plane.h}
 	\lstinputlisting[
 					basicstyle=\ttfamily \small,
@@ -598,18 +585,30 @@ The OpenGL display function calls upon the Level class to display all in game ob
 					firstnumber = 1]{../TwoD.cpp}
 
 \subsection{Database}
-
+	
 \subsubsection{Walls}
-	\includegraphics[width=18cm]{WALLS}
+
+\tiny{}
+
+\setlength{\tabcolsep}{2.5pt}
+\csvautolongtable[respect all]{walls.csv}
 
 \subsubsection{Doors}
+\csvautotabular[respect all]{doors.csv}
 
 \subsubsection{Switches}
+\csvautotabular[respect all]{switches.csv}
 
 \subsubsection{Terminals}
+\csvautotabular[respect all]{terminals.csv}
 
 \subsubsection{Triggers}
+\csvautotabular[respect all]{triggers.csv}
 
+\subsubsection{Cylinders}
+\csvautotabular[respect all]{cylinders.csv}
+
+\small{}
 \subsection{Images}
 
 \subsubsection{Main Menu}

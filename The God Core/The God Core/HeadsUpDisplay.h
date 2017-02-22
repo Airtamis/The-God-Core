@@ -29,10 +29,14 @@ private:
 	int dimTime = 0;
 	// Duration of time to go dark (completely black)
 	int darkTime = 0;
+	// Duration of the time to fade the screen (goes from clear to black as time progresses)
+	int fadeTime = 0;
 	// Wether or not to dim
 	bool dimNow = false;
 	// Wether or not to darken
 	bool darkNow = false;
+	// Wether or not to fade
+	bool fadeNow = false;
 	// Wether or not we are in developer console
 	bool devConsole = false;
 	
@@ -58,6 +62,8 @@ private:
 	void dim();
 	// Manages the darkening of the screen
 	void dark();
+	// Manages the fading of the screen
+	void fade();
 	// Draws the box which stores the info text
 	void drawInfoBox();
 	// Draws the developer console window
@@ -78,7 +84,8 @@ public:
 
 	//Tells the HUD how long to go dark
 	void goDark(int time);
-
+	// Tels the HUD how long to fade for
+	void goFade(int time);
 	// Flips dev_console
 	void toggleConsole();
 
