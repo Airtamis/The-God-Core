@@ -12,6 +12,8 @@
 #include <cstdlib>
 // OpenGL API
 #include <GL\glut.h>
+// time
+#include <ctime>
 
 // The Game manger
 #include "GameManager.h"
@@ -22,6 +24,8 @@ GameManager Overlord;
 #include "Return.h"
 // System log
 #include "Logger.h"
+// Global variables
+#include "Globals.h"
 
 // Normal key presses
 void normal(unsigned char key, int x, int y);
@@ -125,6 +129,10 @@ bool initGame(int argc, char **argv)
 
 	// Start in Fullscreen
 	glutFullScreen();
+
+	srand(time(NULL));
+
+	HUD.setStatus("INFO-WELL");
 
 	SaveManager SaveSystem;
 	return SaveSystem.checkSave();

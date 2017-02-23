@@ -136,3 +136,21 @@ double Plane::getNorm()
 {
 	return sqrt(a * a + b * b + c * c);
 }
+
+void Plane::mutate()
+{
+	// We're gonna mess stuff up, disable the axis so nothing funky happens with collision
+	axis = ' ';
+
+	for (unsigned int i = 0; i < 12; i++)
+	{
+		// 0 <= mutator <= 200
+		double mutator = rand() % 201;
+		// -100 <= mutator <= 100
+		mutator -= 100;
+		// -.01 <= mutator <= .01
+		mutator /= 10000;
+
+		vertices[i] += mutator;
+	}
+}

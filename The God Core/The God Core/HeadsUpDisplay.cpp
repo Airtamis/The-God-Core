@@ -230,10 +230,10 @@ void HeadsUpDisplay::drawInfoBox()
 	info.Display2D();
 }
 
-void HeadsUpDisplay::displayInfo(char* tag)
+void HeadsUpDisplay::displayInfo(string tag)
 {
 	helmet.openFile(SCREENLEFT, SCREENTOP +  20, 1, 1, 1,
-		"suitAlerts.log", "INFO-WELL");
+		"suitAlerts.log", currentStatus);
 }
 
 void HeadsUpDisplay::goDim(int time)
@@ -257,6 +257,11 @@ void HeadsUpDisplay::goFade(int time)
 void HeadsUpDisplay::displayWarning(std::string warning)
 {
 	currentAlert = warning;
+}
+
+void HeadsUpDisplay::setStatus(std::string status)
+{
+	currentStatus = status;
 }
 
 void HeadsUpDisplay::printToConsole(std::string text)
@@ -295,7 +300,7 @@ void HeadsUpDisplay::drawHUD()
 	}
 
 	drawInfoBox();
-	displayInfo("SUIT-WELL");
+	displayInfo(currentStatus);
 
 	if (devConsole)
 	{

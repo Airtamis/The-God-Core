@@ -1,6 +1,8 @@
 <FILES>
 [01] Object Summary -- OS
-[02] Object Access -- OA
+[02] Object Description -- OD
+[03] Note 1 -- N1
+[04] Object Access -- OA
 
 <TAGS>
 $HELP$
@@ -11,16 +13,31 @@ Type Help to see this message again
 $END$
 
 $OS$
-Object Name: 
+Object Name: The Holes in Space
 Object Class: Anomalous
-Description: This object cycles shape roughly once every two hours.
-Each cycle it begins as a sphere, and then it morphs into a flat disk,
-next a cylinder, each form increasing in the number of sides it has.
-The cycle ends as a 24 sided polygon, and it's next form returns to a sphere.
+Description: The Holes in Space consist of a set
+of two stone rings that are connected to each other.
+Anything that passes in one hole exits through the other
+with no delay (tested up to 50 light years of distance).
 
-The object appears to be composed of solid steel. When in a certain form it
-is solid and unable to be damaged by any known material or force. While cycling,
-it appears to be fluid steel, cool to the touch.
+It should be noted that each Hole has two faces, and each face
+is linked directly to a face of the other Hole. That is, input
+of one face will always output through the same corresponding face
+of the other Hole.
+$END$
+
+$OD$
+The Holes conist of two rings, 1 meter in diameter each,
+hewn from marble. The marble is unremarkable in any form.
+
+The two rings are identical, except where the research teams
+have damaged them for testing.
+$END$
+
+$N1$
+A test subject lied in the Holes, one half protruding from each face,
+for an hour with no ill effects during or after the procedure, other
+than citing "an extreme discomfort from looking up and seeing himself."
 $END$
 
 $OA$

@@ -33,9 +33,7 @@ bool interactivity = false;
 int songNum = 0;
 
 int levelNum = 0;
-//int levelNum = 2;
 std::string curr_level = "LEVELZERO";
-//std::string curr_level = "LEVELTWO";
 
 const char* SONG0 = "Dark Fog.mp3";
 const char* SONG1 = "Mismer.mp3";
@@ -43,10 +41,6 @@ const char* SONG2 = "One Sly Move.mp3";
 const char* SONG3 = "Hypnothis.mp3";
 const char* SONG4 = "Cold Hope.mp3";
 const char* SONG5 = "Spacial Harvest.mp3";
-const char* SONG6 = "Lightless Dawn.mp3";
-const char* SONG7 = "Zombie Flood.mp3";
-const char* SONG8 = "Get on my Level.mp3";
-const char* SONG9 = "Story of Life.mp3";
 
 HeadsUpDisplay HUD;
 CameraControl Cam;
@@ -66,14 +60,6 @@ int getSongNum(std::string input)
 		return 4;
 	if (input == SONG5 || input == "5")
 		return 5;
-	if (input == SONG6 || input == "6")
-		return 6;
-	if (input == SONG7 || input == "7")
-		return 7;
-	if (input == SONG8 || input == "8")
-		return 8;
-	if (input == SONG9 || input == "9")
-		return 9;
 	return -1; // Invalid song
 }
 
@@ -94,14 +80,6 @@ std::string getSongName(int input)
 		break;
 	case 5: ret = SONG5;
 		break;
-	case 6: ret = SONG6;
-		break;
-	case 7: ret = SONG7;
-		break;
-	case 8: ret = SONG8;
-		break;
-	case 9: ret = SONG9;
-		break;
 	default: ret = "\0";;
 		break;
 	}
@@ -121,16 +99,6 @@ int getLevelNum(std::string input)
 		return 3;
 	if (input == "LEVELFOUR")
 		return 4;
-	if (input == "LEVELFIVE")
-		return 5;
-	if (input == "LEVELSIX")
-		return 6;
-	if (input == "LEVELSEVEN")
-		return 7;
-	if (input == "LEVELEIGHT")
-		return 8;
-	if (input == "LEVELNINE")
-		return 9;
 	return -1; // Invalid song
 }
 
@@ -148,16 +116,6 @@ std::string getLevelString(int input)
 	case 3: ret = "LEVELTHREE";
 		break;
 	case 4: ret = "LEVELFOUR";
-		break;
-	case 5: ret = "LEVELFIVE";
-		break;
-	case 6: ret = "LEVELSIX";
-		break;
-	case 7: ret = "LEVELSEVEN";
-		break;
-	case 8: ret = "LEVELEIGHT";
-		break;
-	case 9: ret = "LEVELNINE";
 		break;
 	default: ret = "ERROR";;
 		break;

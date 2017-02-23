@@ -24,7 +24,7 @@ using namespace std;
 
 // Initializing the constants
 const char* TextEngine::TEXT_PATH = "Resources\\Text\\";
-const double TextEngine::LINE_OFFSET = 15;
+const double TextEngine::LINE_OFFSET = 20;
 
 void TextEngine::displayText(double x, double y,
 	double r, double g, double b,
@@ -89,7 +89,7 @@ void TextEngine::openFile(double x, double y,
 	vector<string> input = findText(fileName, tag);
 
 	displayText(x, y, r, g, b,
-		GLUT_BITMAP_HELVETICA_12,
+		GLUT_BITMAP_HELVETICA_18,
 		input);
 }
 
@@ -108,7 +108,7 @@ void TextEngine::printString(double x, double y, double r, double g, double b,
 
 	for (unsigned int i = 0; i < text.length(); i++)
 	{
-		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, text[i]);
+		glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, text[i]);
 	}
 
 	// Vertical spacing

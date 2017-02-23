@@ -42,6 +42,8 @@ private:
 	
 	// Tag to current alert
 	std::string currentAlert;
+	// Tag to current status
+	std::string currentStatus;
 	// Text to print to the screen
 	std::string currentText;
 	// What the user is typing
@@ -69,7 +71,7 @@ private:
 	// Draws the developer console window
 	void drawConsole();
 	// Displays standard info in the top left corner 
-	void displayInfo(char* tag);
+	void displayInfo(std::string tag);
 	
 
 public:
@@ -91,6 +93,9 @@ public:
 
 	// Takes in a tag to print to screen
 	void displayWarning(std::string warning);
+
+	// Takes in a string to display in the status box
+	void setStatus(std::string status);
 
 	// Takes in a string to print to screen
 	void printToConsole(std::string text);

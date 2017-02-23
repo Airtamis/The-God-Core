@@ -33,15 +33,19 @@ private:
 	std::string currentInput, currentText, error, file;
 	std::vector<std::string> history, prompts, content;
 	std::string id;
+
 	// Where to print each item
 	const double INPUT_LINE = SCREENBOTTOM / 7.0;
 	const double ERROR_LINE = INPUT_LINE - 30;
 	const double PROMPT_START = INPUT_LINE + 30;
-	const double CONTENT_START = PROMPT_START + 100;
+	const double CONTENT_START = PROMPT_START + 150;
 
+	// The banner texture
 	GLint bTexture;
 
+	// The user inputed number
 	int num;
+
 	// Print our text
 	TextEngine text;
 
@@ -57,10 +61,13 @@ private:
 	// Draws a wall mounter terminal
 	void drawWallMounted();
 
+	// Processes the user input
 	void processInput();
 
+	// Parse the terminal file
 	void parseFile();
 
+	// The path to the Terminal Files
 	static const char* TERM_PATH;
 
 public:
@@ -82,8 +89,10 @@ public:
 	double getY();
 	double getZ();
 
+	// Get the terminal's ID
 	std::string getID();
 
+	// To construct and initialize the terminal
 	Terminal(const double(&_translate)[3], const double(&_rotate)[3], std::string _file, std::string _id);
 	 			
 };

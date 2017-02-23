@@ -5,7 +5,7 @@
  * Tennessee at Martin's University Scholars Organization    *
  *                                                           *
  * This file contains the defintion of the Level class.      *
- * for more information, see Keyboard.h                      *
+ * for more information, see Level.h                         *
 \*************************************************************/
 
 // Class declaration

@@ -37,6 +37,9 @@ public:
 	// Returns the plane norm (Perpindicular line)
 	double getNorm();
 	
+	// Mutate's the rectangles coordinates for the end of the game
+	void mutate();
+
 	// Print a Plane in 3D
 	void Display();
 	// Print a Plane in 2D

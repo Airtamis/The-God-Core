@@ -73,7 +73,7 @@ extern std::string curr_level;
 extern const char *SONG0, *SONG1, *SONG2, *SONG3, *SONG4, *SONG5,
 					*SONG6, *SONG7, *SONG8, *SONG9;
 
-// Lots of global objects
+// A few global objects
 extern HeadsUpDisplay HUD;
 extern CameraControl Cam;
 extern Level lvl;

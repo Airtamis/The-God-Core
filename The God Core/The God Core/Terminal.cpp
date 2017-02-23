@@ -5,7 +5,7 @@
  * Tennessee at Martin's University Scholars Organization    *
  *                                                           *
  * This file contains the definition of the Terminal class   *
- * For more information, see CameraControl.h                 *
+ * For more information, see Terminal.h                      *
 \*************************************************************/
 
 //
@@ -129,7 +129,7 @@ void Terminal::DisplayScreen()
 		// Print all prompts
 		for (unsigned int i = 0; i < prompts.size(); i++)
 		{
-			text.printString(SCREENLEFT, PROMPT_START + 15 * i, 0, 1, 0, prompts[i]);
+			text.printString(SCREENLEFT, PROMPT_START + 20 * i, 0, 1, 0, prompts[i]);
 		}
 
 		// Print an error

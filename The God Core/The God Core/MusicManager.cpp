@@ -1,5 +1,5 @@
 /*************************************************************\
- * FILENAME                                                  *
+ * MusicManager.cpp                                          *
  * This file was created by Jeremy Greenburg                 *
  * As part of The God Core game for the University of        *
  * Tennessee at Martin's University Scholars Organization    *

@@ -1,6 +1,9 @@
 <FILES>
 [01] Object Summary -- OS
-[02] Object Access -- OA
+[02] Object Description -- OD
+[03] Note 1 -- N1
+[04] Note 2 -- N2
+[03] Object Access -- OA
 
 <TAGS>
 $HELP$
@@ -11,16 +14,27 @@ Type Help to see this message again
 $END$
 
 $OS$
-Object Name: 
+Object Name: The Obsidian Knife
 Object Class: Anomalous
-Description: This object cycles shape roughly once every two hours.
-Each cycle it begins as a sphere, and then it morphs into a flat disk,
-next a cylinder, each form increasing in the number of sides it has.
-The cycle ends as a 24 sided polygon, and it's next form returns to a sphere.
+Description: The only remarkable feature of this blade is that
+its blade never dulls, and once grasped the person weilding it
+cannot let go until they die.
+$END$
 
-The object appears to be composed of solid steel. When in a certain form it
-is solid and unable to be damaged by any known material or force. While cycling,
-it appears to be fluid steel, cool to the touch.
+$OD$
+Despite its name, the Obsidian Knife is not actually made from
+obsidian. It is constructed from a single piece of unbreakable 
+glassy black stone similar in appearance, from where its name 
+is derived.
+$END$
+
+$N1$
+Removal of the limb holding the knife succesfully results in the
+dismembered limb letting go of the knife.
+$END$
+
+$N2$
+The knife cuts remarkably well.
 $END$
 
 $OA$

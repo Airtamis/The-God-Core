@@ -1,7 +1,8 @@
 <FILES>
 [01] Object Summary -- OS
 [02] Object Description -- OD
-[03] Object Access -- OA
+[03] Note 1 -- N1
+[04] Object Access -- OA
 
 <TAGS>
 $HELP$
@@ -12,19 +13,20 @@ Type Help to see this message again
 $END$
 
 $OS$
-Object Name: The Euclidean Object
+Object Name: The Fixed Point
 Object Class: Benign
-Description: This object cycles shape roughly once every two hours.
-Each cycle it begins as a sphere, and then it morphs into a flat disk,
-next a cylinder, each form increasing in the number of sides it has.
-The cycle ends as a 24 sided polygon, and it's next form returns to a sphere.
+Description: This object will always vaish and reappear at the same point in space
+ever seven minutes no matter where it is or its current state. It has been utterly
+destroyed multiple times, but it still reappears.
 $END$
 
 $OD$
-The object appears to be composed of an unclassified solid grey metal. 
-When in a certain form it is solid and unable to be damaged by any known 
-material or force. While cycling, it appears to be fluid steel, cool to 
-the touch. Each object is approximately 1 meter in diameter.
+The object appears to be a small fragment of an asteroid, 8 centimeters
+in diameter. There is nothing remakrable about its composition or structure.
+$END$
+
+$N1$
+This object is responsible for the Deadalus's current position.
 $END$
 
 $OA$

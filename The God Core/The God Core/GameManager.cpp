@@ -19,12 +19,15 @@
 
 #include "Logger.h"
 
+#include "Return.h"
+
 using namespace std;
 
 void GameManager::mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_RIGHT_BUTTON)
 	{
+		// Jokes on my I never ended up using the right button
 		if (state == GLUT_DOWN)
 		{
 
@@ -183,7 +186,8 @@ void GameManager::endGame()
 		// The last portion of the game is divided into 3 segments
 		if (segment == 1)
 		{
-			// Do nothing, first segment is normal
+			HUD.displayWarning("");
+			glClearColor(1, 1, 1, 1);
 		}
 
 		else if (segment == 2)
@@ -192,7 +196,12 @@ void GameManager::endGame()
 			{
 				HUD.displayWarning("QUANT");
 				initSegment = false;
-			}		
+			}
+
+			for (unsigned i = 0; i < walls.size(); i++)
+			{
+				walls[i].mutate();
+			}
 		}
 
 		else if (segment == 3)
@@ -200,13 +209,26 @@ void GameManager::endGame()
 			if (initSegment)
 			{
 				HUD.goFade(15);
+				HUD.setStatus("INFO-UN");
 				initSegment = false;
-			}	
+			}
+
+			for (unsigned i = 0; i < walls.size(); i++)
+			{
+				walls[i].mutate();
+			}
 		}
 
 		else
 		{
-			exit(0);
+			// Return to main menu at game end
+			isInMain = true;
+
+			// Return everything to as it was before level 4
+			HUD.setStatus("INFO-WELL");
+			HUD.displayWarning("");
+			segment = 1;
+			HUD.goDark(0);
 		}
 
 		// Switch segments

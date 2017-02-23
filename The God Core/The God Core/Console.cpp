@@ -70,7 +70,7 @@ void Console::printInput()
 	for (it; it != console_log.end(); it++, jt++)
 	{
 		//                                        Index of it
-		log.printString(0, 10 + 10 * (it - console_log.begin()),
+		log.printString(0, 10 + 20 * (it - console_log.begin()),
 			jt->a, jt->b, jt->c, *it);
 	}
 

@@ -44,6 +44,7 @@ private:
 	// Binds the triggering object and target object to a single trigger
 	bool bindTrigger(std::string id, std::string trigger, std::string triggerType);
 	bool bindTarget(std::string id, std::string target, std::string targetType);
+
 public:
 	// Manages the loading of the level
 	void loadLevel(std::string levelName);

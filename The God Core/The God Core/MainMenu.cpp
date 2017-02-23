@@ -90,10 +90,10 @@ void MainMenu::drawClickBoxes()
 	// Exit
 	
 	glBegin(GL_LINE_LOOP);
-	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.35);
-	glVertex2d(SCREENRIGHT / 8.5, SCREENBOTTOM / 1.45);
-	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.45);
-	glVertex2d(SCREENRIGHT / 3.9, SCREENBOTTOM / 1.35);
+	glVertex2d(SCREENRIGHT / 6.5, SCREENBOTTOM / 1.16);
+	glVertex2d(SCREENRIGHT / 6.5, SCREENBOTTOM / 1.25);
+	glVertex2d(SCREENRIGHT / 4.5, SCREENBOTTOM / 1.25);
+	glVertex2d(SCREENRIGHT / 4.5, SCREENBOTTOM / 1.16);
 	glEnd();
 }
 
@@ -105,8 +105,10 @@ void MainMenu::getClick(double x, double y)
 		if (y >= SCREENBOTTOM / 2.2 && y <= SCREENBOTTOM / 1.9)
 		{
 			isInMain = false;
-			songNum++;
+			songNum = 1;
 			changeSong = true;
+			curr_level = "LEVELZERO";
+			loading = true;
 		}
 	}
 
@@ -127,19 +129,18 @@ void MainMenu::getClick(double x, double y)
 	{
 		if (y >= SCREENBOTTOM / 1.45 && y <= SCREENBOTTOM / 1.35)
 		{
-			//
+			// Jokes on me I never did get any options up
 		}
 	}
 
 	// Exit
-	/*
-	if (x >= SCREENRIGHT / 20.0 && x <= SCREENRIGHT / 3.0)
+	if (x >= SCREENRIGHT / 6.5 && x <= SCREENRIGHT / 4.5)
 	{
-		if (y >= SCREENBOTTOM / 2.2 && y <= SCREENBOTTOM / 1.9)
+		if (y >= SCREENBOTTOM / 1.25 && y <= SCREENBOTTOM / 1.16)
 		{
-			exit(0);
-		}
-	}*/
+			exit(EXIT_OK);
+		} 
+	}
 }
 
 void MainMenu::display()

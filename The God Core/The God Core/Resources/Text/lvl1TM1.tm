@@ -26,7 +26,7 @@ but they seemed spooked nontheless. The manifest lists it as a Malignant class o
 since we recieved a shipment like this.
 
 Officer Fries
-$END
+$END$
 
 $IR46$
 Intake 003 - Week 46 Intake Report

@@ -31,6 +31,7 @@ private:
 	// One of the predefined types
 	GCtype targetType;
 
+	// Unique ID
 	std::string id;
 
 public:
@@ -43,6 +44,7 @@ public:
 	// Actually draws the switch
 	void Display();
 
+	// Get's the switch's ID
 	std::string getID();
 
 	// Gets the translation coordinates

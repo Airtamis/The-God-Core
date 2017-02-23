@@ -12,6 +12,7 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
+// To help find the user's document folder
 #include <shlobj.h>
 
 // std::vector

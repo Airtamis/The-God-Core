@@ -1,6 +1,7 @@
 <FILES>
 [01] Object Summary -- OS
-[02] Object Access -- OA
+[02] Object Description -- OD
+[03] Object Access -- OA
 
 <TAGS>
 $HELP$
@@ -11,16 +12,16 @@ Type Help to see this message again
 $END$
 
 $OS$
-Object Name: 
+Object Name: The Hand Held Star
 Object Class: Benign
-Description: This object cycles shape roughly once every two hours.
-Each cycle it begins as a sphere, and then it morphs into a flat disk,
-next a cylinder, each form increasing in the number of sides it has.
-The cycle ends as a 24 sided polygon, and it's next form returns to a sphere.
+Description: This object was discovered near the center of an asteroid
+by a mining corporation. It emits a constant faint white light that,
+although not very intense at all, can light up any shadow within 100 meters.
+$END$
 
-The object appears to be composed of solid steel. When in a certain form it
-is solid and unable to be damaged by any known material or force. While cycling,
-it appears to be fluid steel, cool to the touch.
+$OD$
+The Star is a small crystalline sphere approximately 10 centimeters
+in diameter. It has a deep blue coloring.
 $END$
 
 $OA$

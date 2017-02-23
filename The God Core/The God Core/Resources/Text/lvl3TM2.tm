@@ -1,7 +1,7 @@
 <FILES>
 [01] Object Summary -- OS
 [02] Object Description -- OD
-[03] Note on Classification -- NOC
+[03] Note 1 -- N1
 [04] Object Access -- OA
 
 <TAGS>
@@ -23,9 +23,8 @@ that there must be some form of limit on its effects.
 Symptoms of the alterations
 $END$
 
-
 $OD$
-The object is a a perfect sphere, 3 meters in diameter. It appears to be composed
+The object is a perfect sphere, 3 meters in diameter. It appears to be composed
 of smooth, gray stone that cannot be fractured by any known substance. Etched into
 the surface of the sphere are glyph from many known languages: English, Yiddish,
 Egyptian, and Greek to name a few; as well as from unkown languages. The glyphs
@@ -33,7 +32,7 @@ glow constantly in a light that shifts from red to green to gold with no apparan
 pattern in the change. The sphere emits a constant dim blue glow.
 $END$
 
-$NOC$
+$N1$
 The God Core straddles the line between an Anomalous class and Malignant
 class, but given the recent troubles on the ship it has been classified as Malignant
 for safety reasons.

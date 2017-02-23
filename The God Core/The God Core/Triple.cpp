@@ -5,7 +5,7 @@
  * Tennessee at Martin's University Scholars Organization    *
  *                                                           *
  * This file contains the definition of the TwoD class       *
- * For more information, see CameraControl.h                 *
+ * For more information, see Triple.h                        *
 \*************************************************************/
 
 #include "Triple.h"

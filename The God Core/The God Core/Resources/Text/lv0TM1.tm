@@ -13,7 +13,13 @@ Type Help to see this message again
 $END$
 
 $INTRO$
-Introduction
+Welcome to the God Core, an independant game developed entirely in C++.
+It's a short little game that I made for a university project.
+An average playthrough should take anywhere between 10 to 20 minutes, although
+if you really try you could speed through it in 5 minutes.
+
+I hope you enjoy playing,
+Jeremy
 $END$
 
 $COMMLETTER$

@@ -54,6 +54,7 @@ private:
 	char CHAR_PATH[MAX_PATH];
 	std::string SAVE_PATH;
 
+	// Is the console active or not
 	bool isActive;
 
 	// The bottom of the console
