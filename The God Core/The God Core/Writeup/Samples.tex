@@ -1,0 +1,107 @@
+\documentclass{article}
+
+% For importint code and text files
+\usepackage{listings}
+% For enumerating the Table of Contents
+\usepackage{enumitem}
+% Incase I need pictures
+\usepackage{graphicx}
+
+%Mathematics Galore
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{gensymb}
+
+\usepackage{fullpage}
+
+\usepackage{csvsimple}
+\usepackage{longtable}
+
+% Subsection numbering
+\setcounter{secnumdepth}{3}
+
+% Only Subsections in Table of Contents
+\setcounter{tocdepth}{2}
+
+\begin{document}
+
+$
+aX + bY + cZ + d = 0 \\ 
+$
+
+$
+\vec{AB} = \left| \begin{array}{c}
+Bx - Ax \\
+By - Ay \\
+Bz - Az
+\end{array} \right|
+\vec{AC} = \left| \begin{array}{c}
+Cx - Ax \\
+Cy - Ay \\
+Cz - Az
+\end{array} \right| \\ \\ \\
+$
+$
+a = \vec{AB}_2 * \vec{AC}_3 - \vec{AB}_3 * \vec{AC}_2 \\
+b = \vec{AB}_3 * \vec{AC}_1 - \vec{AB}_1 * \vec{AC}_3 \\
+c = \vec{AB}_1 * \vec{AC}_2 - \vec{AB}_2 * \vec{AC}_1 \\ 
+d = -(aAx + bAy + cAz) \\ \\ \\
+$
+\noindent
+A = -5, 1, -4 \\
+B = -5, 1, 1 \\
+C = -5, -1, 1 \\
+D = -5, -1, -4 \\ \\ \\
+
+$
+\vec{AB} = \left| \begin{array}{c}
+-5 - -5 \\
+1 - 1 \\
+1 - -4
+\end{array} \right|
+\vec{AC} = \left| \begin{array}{c}
+-5 - -5 \\
+-1 - 1 \\
+1 - -4
+\end{array} \right| \\ \\ \\
+$
+
+$
+\vec{AB} = \left| \begin{array}{c}
+0 \\
+0 \\
+-5
+\end{array} \right|
+\vec{AC} = \left| \begin{array}{c}
+0 \\
+-2 \\
+-5
+\end{array} \right| \\ \\ \\
+$
+
+\noindent
+$
+a = (0 * -5) - (-5 * -2) = 10\\
+b = (-5 * 0) - (0 * -5) = 0 \\
+c = (0 * -2) - (0 * 0) = 0 \\
+d = -(10 * -5 + 0 * 1 + 0 * -4) = 50 \\ \\ \\
+10x + 50 = 0 \\ \\
+$
+
+$
+\sqrt{a^2 + b^2 + c^2} \\ \\
+$
+
+$
+\sqrt{10^2} = 10 \\ \\
+$
+
+$
+\frac{ax + by + cz + d}{\sqrt{a^2 + b^2 + c^2}} < r \\ \\
+$
+
+$
+\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2} < r_2 + r_1
+$
+\end{document}

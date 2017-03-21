@@ -123,3 +123,9 @@ std::string getLevelString(int input)
 
 	return ret;
 }
+
+void advanceMusic()
+{
+	songNum++;
+	if (songNum > 5) songNum = 0;
+}

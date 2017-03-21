@@ -21,6 +21,8 @@
 \usepackage{csvsimple}
 \usepackage{longtable}
 
+\usepackage{indentfirst}
+
 % Subsection numbering
 \setcounter{secnumdepth}{3}
 
@@ -37,32 +39,68 @@
 
 \section{Preamble}
 
-\section{Programming}
-
-\subsection{The Language}
+\section{Development Tools}
 
 \subsection{APIs}
 
+API's, or \emph{Application Programmer Interfaces}, are a set of methods and tools to allow a programmer to access a piece of software through code. They are useful when developing more complex applications, as you can incorporate useful, quality tools that have already been created rather than spending time redeveloping what has already been created.
+
 \subsubsection{OpenGL}
-OpenGL, or the Open Graphics Library, is one of the most popular graphics libraries out there. It gives access to linear algebra functions for matrix manipulation (which is important, as 3D graphics relies heavily upon matrix transformations), keyboard and mouse input, and windowing. I chose to use OpenGL over a different graphics library, such as Microsoft's DirectX, because it is open source and cross platform, which would make porting my game to a different Operating System a much easier task if I ever decide to in the future.
+
+OpenGL, or the Open Graphics Library, is one of the most popular graphics libraries available. It provides access to matrix manipulation, keyboard and mouse input, windowing, and vector graphics. It is the graphical backbone of both the Unity and Unreal Engines for Mac OS and Linux.
+
+OpenGL provides the ability to draw in both 2D and 3D and gives access to primitives such as rectangles, triangles, and lines. With the glut and glew extensions, OpenGL can also draw simple spheres and cylinders.
+
+I chose to use OpenGL over a different graphics library, such as Microsoft's DirectX, because it is open source and cross platform, which would make porting my game to a different Operating System a much easier task if I ever decide to in the future.
 
 \subsubsection{SOIL}
+
 SOIL, or the Simple OpenGL Interface Library, is a small extension to OpenGL that I picked up along the way. It is a texture library that can load .jpg and .png images and bind them to an OpenGL texture, making it very simple to incorporate such images into my game.
 
 \subsubsection{FMOD}
-I chose FMOD as the base for my game's audio as it is a simple, lightweight, and free to use sound API, and most other audio APIs that I looked at lacked support for MP3 files. 
+
+FMOD is a sound effects engine developed by Firelight Technologies that can play many different files types on numerous Operating Systems including but not limited to: Windows, OSX, IOS, Playstations and Xboxes, and Android.
+
+FMOD is the primary audio system for many game engines including Unity, Unreal, CryEngine, and Havok.  
 
 \subsubsection{SQlite}
+
+Modularity and code reduction is important for any large programming project. 
+
 I decided to use SQLite for my database because it is a lightweight simplified version of a SQL database, allowing the game data to be stored and embedded in the application without taking much room or take a great deal of time to perform a query.
 
-\subsection{Game Engine}
+\subsubsection{Windows API}
 
-I crafted the engine of my game in C++ over two years starting in my second semester sophomore year and ending the first semester of my senior year. It consists of 53 C++ files and was developed in Microsoft Visual Studio. The code can be found in the Appendix of this writeup or it can be located on GitHub at \emph{https://github.com/Jerrgree/The-God-Core-Source}. The game can also be installed at GitHub.
+The Windows API comes with Microsoft Visual Studio and provides access to various features of the Operating System.
 
-\subsubsection{Rectangles and Triangles}
-Rectangles and triangles are the two fundamental polygons that build up my game. Rectangles in particular make up the walls, floors, ceilings, doors, terminals, and most of the HUD and menu. They started as simply two arrays- one that holds all 9 (for triangles) or 12 (for rectangles) values describing the coordinates in the game that they inhabit, as well as a 4 value vector containing the objects RGBA values.
+My project only utilizes one of the eight modules, the Shell Object, that gives access to the OS shell. Since the program only has read permission for the Program Files directory, the Shell Object module is used to locate the user's personal documents folder, where both the save file and the log file are written.
 
-For collision purposes, when a rectangle class is expanded with the ability to calculate and store its norm and Plane equation (Form $ax + by + cz + d = 0$).
+\subsection{Development Environment}
+
+\subsubsection{Microsoft Visual Studio}
+
+Microsoft Visual Studio is an IDE (\emph{Integrated Development Environment}) developed for Windows that supports a variety of programming languages, and it is where I wrote all of the code for my project. I chose Visual Studio as my IDE because it give access to an Installer package, which allows me to create a windows installer for my game so that it can be installed on any Windows computer. The Installer packages together the executable source code, any resources that I have developed, as well as system resources such as the Microsoft C++ redistributes necessary to run programs developed in Visual Studio. Visual Studio also provides powerful analytic tools to monitor memory usage to avoid creating memory leaks.
+
+\subsubsection{SQLite Studio}
+
+SQLite Studio is a third party GUI for SQLite that allows information to be analyzed and editing quickly and easily. It also provides utilities to export a database to a number of different file formats, allowing me to easily include the database for reference in section \ref{database}.
+
+\subsubsection{GitHub}
+
+GitHub is an online Git repository that houses many open source projects. It also provides a great source control and branching system, where multiple branches can be created from a single point in the project to experiment with new features without any fear of damaging your code if they do not work out.
+
+\section{Game Engine}
+
+I crafted the engine of my game in C++ over two years starting in my second semester sophomore year and ending the first semester of my senior year. It consists of 49 C++ files, in which there are 3,308 lines of code and 1,122 lines of comments. The code can be found in the Appendix of this writeup or it can be located on GitHub at \emph{https://github.com/Jerrgree/The-God-Core-Source}. The game can also be installed at GitHub.
+
+The engine reads a SQLite database (Data.db) that is housed in the same directory as the game executable, and it recognizes six tables in the database that correspond to six different types of in game objects---Walls, Doors, Cylinders, Terminals, Switches, and Triggers.
+
+\subsection{Walls and Doors}
+
+\subsubsection{Rectangles}
+Rectangles are the fundamental polygon that build up walls and doors, and due to the complexity of their collision mechanics as detailed in section \ref{collision}, they have a lot of mechanics under a simple object \textbf{[Find better wording]}. Rectangles in particular make up the walls, floors, ceilings, doors, terminals, and most of the HUD and menu. They started as simply two arrays- one that holds all 9 (for triangles) or 12 (for rectangles) values describing the coordinates in the game that they inhabit, as well as a 4 value vector containing the objects RGBA values.
+
+For collision purposes, when a rectangle class is expanded with the ability to calculate and store its norm and Plane equation (Form $aX + bY + cZ + d = 0$).
 
 This equation is calculated using the any three corners of the rectangle (Calling them A, B, and C) as follows:
 
@@ -81,14 +119,16 @@ Cz - Az
 a = \vec{AB}_2 * \vec{AC}_3 - \vec{AB}_3 * \vec{AC}_2 \\
 b = \vec{AB}_3 * \vec{AC}_1 - \vec{AB}_1 * \vec{AC}_3 \\
 c = \vec{AB}_1 * \vec{AC}_2 - \vec{AB}_2 * \vec{AC}_1 \\
-d = aAx + bAy + cAz
+d = -(aAx + bAy + cAz)
 $
 
-\emph{\tiny{Formula obtained from http://keisan.casio.com/exec/system/1223596129}}
+\cite{Plane}
 
 The norm of the plane can then be derived using the equation $\sqrt{a^2 + b^2 + c^2}$
 
-\subsubsection{In Game Terminals}
+In the source code, rectangles were renamed to planes due to the fact that shlob.h, which was included to gain access to the user's documents folder, already has a function named rectangle. 
+
+\subsection{In Game Terminals}
 In game terminals are each bound to a \emph{terminal file}, a unique file that contains the contents of its respective terminal.
 
 The terminal file is divided into two sections: the file names and the file contents. This is an example terminal file:
@@ -104,14 +144,14 @@ The program parses the file by first separating the in game content (the bracket
 
 Then, whenever the player types in a read command (E.G. Read 1), the program will send the terminal file and the correct tag to the text engine for the content to be displayed to the screen.
 
-\subsubsection{Triggers and Switches}
+\subsection{Triggers and Switches}
 Triggers are a more sophisticated way to implement interaction between two different objects. The implementation was designed to be abstracted away from object types so that, in theory, any arbitrary object could activate another, but in practice due to the few classes of objects in my game, it served as a way for terminals to power switches on. 
 
 The trigger class works by holding two void pointers, one for a triggering object and one for the target object. It also holds the object types (defined in GCTypes.h) of each object. Whenever an object is interacted with, every trigger in the game is attempted to be triggered \textbf{(trying to find better phrasing here)} and if the object is the same as the trigger pointer (no referencing needed as the pointers will always be equal), the target is dereferenced according to the appropriate type and activated.
 
 It holds very similar function to a switch, the primary difference being that the switch is a tangible object in the game with the triggering object being itself, and the triggers being an intangible association between two objects. If I had more time in development, I would have liked to refactor much of the switch's internal functionality so that it is simply an object, with the actual interaction between the switch and it's target taking place as a trigger, but the conception and implementation of triggers came too late in development and implementing the switch change would require a good deal of code and data rewrites.
 
-\subsubsection{Camera Control}
+\subsection{Camera Control}
 The CameraControl class is designed to control and manipulate the player's perspective as they navigate through the game. It contains two ordered triples of floating point numbers: The xyz location of the player, and the rotation along the x axis (looking left/right), the y axis (up/down), and the z axis (barrel roll). It also contains two additional floating point values, the movement speed and the turning speed. 
 
 The player can move forwards and backwards, as well as strafe left and right. To correctly formulate the player's movement, I had to envision a circle centered on the player with a radius of the player's movement speed. Based on the angle from the x and z rotation, the next place that the player move is simply a spot on the circumference of the circle based on the rotation angle, and moving forward can be derived from this formula:
@@ -120,25 +160,50 @@ z := z $\pm$ moveSpeed * cos(radian(x\_angle))
 
 x := x $\mp$ moveSpeed * sin(radian(x\_angle))
 
-\emph{\tiny{Formula obtained from Robert De Yoso}}
-
-\small{}
+\cite{Deyoso}
 
 Following that formula, it's simple to implement movement to the left, right by adding or subtracting 90$\degree$, and backwards movement by adding 180$\degree$.
 
 Whenever OpenGL renders a new frame, the 'camera' is always returned to the origin of the map, so after drawing the level and before flushing the buffer, the Camera Control calls glTranslate to move the camera to the correct location, and then calls glRotate 3 times, once for each axis, to orient the camera in the correct direction.
 
-\subsubsection{Heads Up Display}
+\subsection{Keyboard}
+The Keyboard class primarily serves to encapsulate the OpenGL callbacks that receive keystrokes: the normal function that accepts all alphanumeric and punctuation, and the special function that handles function keys and escape. However, there is a minor bit of overhead that goes into deciding where the input goes.
+
+Under normal circumstances, the only normal keystrokes accepted are the WASD keys for movement, the E key for interaction, and the '~' key for toggling the development console.
+
+When in either a terminal or the development console, all keys are immediately concatenated to an input string with the exception of the '~' which will close the development console, or the enter key which will send the input string to it's appropriate destination to be parsed and interpreted, after which the input string is cleared so that a new command can be entered.
+
+Also accepted are the up and down arrow keys, which will cycle through the console/terminals command history.
+
+\subsection{MusicManager}
+To play background music, I used the FMOD low level API for C++. FMOD can dynamically load and play as multiple sounds, which can either be set to loop (such as background music) or not to loop (for sound effects). Proper memory management is important, as the individual sounds are dynamically created outside of the Music Manager class and must be allocated and deallocated properly to avoid memory leaks.
+
+\subsection{TextEngine}
+The Text Engine was constructed to handle displaying all text to the screen. It uses OpenGL's glutBitmapCharacter function to display clear, concise text.
+
+Every function to display text takes two coordinates (the x,y coordinates on the screen to start displaying the text), and the RGB color values for the text. There are two functions for displaying text, the simpler one merely takes in a string and prints it on the corresponding location on the screen. The more complex function takes in a file and a content tag. The files are structured like so:
+
+\lstinputlisting[
+basicstyle=\ttfamily \small,
+numbers=left,
+breaklines=true,
+linerange={1-1000},
+firstnumber = 1]{../Resources/Text/test.txt}
+
+The Text Engine searches through the designated file line by line until it discovers the line containing the proper tag. Then, until it reaches the closing 'END' tag, it stores every line inside of a vector. Once it has retrieved all of the necessary content, it starts to display the text to the screen line by line, starting from the designated XY position and increasing the Y value for each line.
+
+
+\subsection{Heads Up Display}
 The Heads Up Display is drawn after the level is draw, so that it overlays information to the player. It primarily is used to add a bit of flavor to the game by drawing the helmet for the player, but it also serves to display the developer console when activated.
 
 The display also delivers a prompt to the user whenever they are in range of an object that can be interacted with.
 
-\subsubsection{2D}
+\subsection{2D}
 As multiple different objects required the ability to \textbf{2D IT UP CHANGE THIS SOON}, I extracted the ability to draw in 2D into it's own class and it was inherited whenever it was needed.
 
 To convert OpenGL into 2D frame, I needed to first disable lighting, depth testing and depth masking. Next I pushed an \emph{orthogonal} matrix onto OpenGL's matrix stack using the length and width of the screen so that all matrix transformations corresponded to a pixel on the screen. Re-enabeling 3D is as simple as popping the orthogonal matrix from the stack and re-enabling depth testing and masking.
 
-\subsubsection{Collision Engine}
+\subsection{Collision Engine} \label{collision}
 This determines when the player has collided with an object in the world. There are two types of collisions: player-object collisions and player-wall collisions.
 
 Player object collisions are simple to detect, as both the player and the object can be placed within imaginary "bounding spheres" that extend around the player and object. Collision can be detected with this formula:
@@ -149,39 +214,16 @@ Player-wall collisions were much harder to reconcile. Because walls tend to be l
 
 To rectify that, the collision is split into two phases: broad and narrow.
 
-In the broad phase, we use the plane equation $ax + by + cz + d$ that is derived in the Rectangle section. We use the formula $\frac{ax + by + cz + d}{\sqrt{a^2 + b^2 + c^2}}$, where x, y, and z are the player's x, y, and z coordinates. If the resulting value is less than the radius of the player's bounding sphere, the player has hit that plane and we move onto the narrow phase.
+In the broad phase, we use the plane equation $ax + by + cz + d$ that is derived in the Rectangle section. We use the formula $\frac{ax + by + cz + d}{\sqrt{a^2 + b^2 + c^2}} < r$, where x, y, and z are the player's x, y, and z coordinates. If the resulting value is less than the radius of the player's bounding sphere, the player has hit that plane and we move onto the narrow phase.
 
 In the narrow phase, each wall is aligned on an axis: x, y, or z. We simply take the largest and smallest values of the coordinates on that axis (for instance, if the wall is x aligned, we take the largest and smallest x value). If the sphere is in between the two values, the player has hit the wall. Otherwise, they hit the plane but not the wall.
 
-\subsubsection{MusicManager}
-To play background music, I used the FMOD low level API for C++. FMOD can dynamically load and play as multiple sounds, which can either be set to loop (such as background music) or not to loop (for sound effects). Proper memory management is important, as the individual sounds are dynamically created outside of the Music Manager class and must be allocated and deallocated properly to avoid memory leaks.
+\subsection{Game Saving and Loading}
+Game saving and loading is a relatively simple file transaction. To save, the current level (as a string) and the song that is playing are appended to each other. The string is then encrypted and stored in the a file within the user's documents folder.
 
-\subsubsection{TextEngine}
-The Text Engine was constructed to handle displaying all text to the screen. It uses OpenGL's glutBitmapCharacter function to display clear, concise text.
+Loading is a two step process. First the contents of the save file are read, decrypted, and parsed into the saved level and the saved song. Next the contents are verified so that they are valid levels to load and songs to play. If either one is invalid, the save file is considered corrupted and the game will refuse to complete the load.
 
-Every function to display text takes two coordinates (the x,y coordinates on the screen to start displaying the text), and the RGB color values for the text. There are two functions for displaying text, the simpler one merely takes in a string and prints it on the corresponding location on the screen. The more complex function takes in a file and a content tag. The files are structured like so:
-
-\lstinputlisting[
-	basicstyle=\ttfamily \small,
-	numbers=left,
-	breaklines=true,
-	linerange={1-1000},
-	firstnumber = 1]{../Resources/Text/test.txt}
-	
-The Text Engine searches through the designated file line by line until it discovers the line containing the proper tag. Then, until it reaches the closing 'END' tag, it stores every line inside of a vector. Once it has retrieved all of the necessary content, it starts to display the text to the screen line by line, starting from the designated XY position and increasing the Y value for each line.
-
-\subsubsection{Game Saving and Loading}
-
-\subsubsection{Keyboard}
-The Keyboard class primarily serves to encapsulate the OpenGL callbacks that receive keystrokes: the normal function that accepts all alphanumeric and punctuation, and the special function that handles function keys and escape. However, there is a minor bit of overhead that goes into deciding where the input goes.
-
-Under normal circumstances, the only normal keystrokes accepted are the WASD keys for movement, the E key for interaction, and the '~' key for toggling the development console.
-
-When in either a terminal or the development console, all keys are immediately concatenated to an input string with the exception of the '~' which will close the development console, or the enter key which will send the input string to it's appropriate destination to be parsed and interpreted, after which the input string is cleared so that a new command can be entered.
-
-Also accepted are the up and down arrow keys, which will cycle through the console/terminals command history.
-
-\subsubsection{Level Loading and displaying}
+\subsection{Level Loading and displaying}
 Loading each level involves a series of SQL queries through the SQLite API. Loading each level first involves opening a connection with the database, and retrieving all data from each table in the database in turn. All important data from the database is stored in a class of the appropriate type, unnecessary data is discarded, and in the end each class is pushed into a vector of the appropriate type. 
 
 The data is loaded in a strict order, due to some objects having dependencies on others (that is, some objects require other objects to already exist). Thus the first things that are loaded are purely independent objects, all doors, walls, and terminals. Next switches are loaded, because they require both doors and terminals to already exist. Finally, the triggers are loaded, because they require both switches and terminals.
@@ -192,7 +234,44 @@ If there is any data error in regards to binding --- that is, and object attempt
 
 The OpenGL display function calls upon the Level class to display all in game objects. This is a simple matter, because each object has it's own function to display itself. Thus it is a simple matter to loop through each vector and tell each object to display itself.
 
-\subsubsection{Console and Logging}
+\subsection{Console and Logging}
+
+To aid in debugging a created a Developer Console and a game log. The developer console accepts user commands to perform actions such as writing to the save file, reading the save file, disabling collision, and changing what song is playing.
+
+The logger writes to a log file as the game runs to report on the status of operations, primarily the loading of each level. If an error occurs and the game aborts (without crashing), the appropriate error and error code is written at the end of the log file. There is only ever one log file, which is erased when the game is launched and new data is appended to it as the game runs.
+
+\section{Problems and Future Considerations}
+Of course, the development was not always smooth, and I did encounter plenty of problems during development.
+
+\subsection{Challenges that I Faced}
+\subsubsection{The Death of a Computer}
+
+I changed computers twice. I went from a laptop to a more powerful desktop junior year, and senior year my operating system got corrupted and I had to perform a fresh reinstall. Both times I was able to get back up to speed in only a few hours thanks to GitHub.
+
+\subsubsection{Clipping Issues}
+
+OpenGL There is a problem when getting to close to a wall or a door where the player can see through parts of the wall, no doubt to do OpenGL's depth buffering in relation to distance to the wall. Part of the development processes involved balancing collision distance to the walls, at distances where the user could not see through walls the user was a noticeable distance from the wall, so I chose to allow the user to get close enough to slightly peer through the wall, as the distance felt more natural.
+
+\subsection{Future Considerations}
+
+The project was developed with a time constraint of two years. As such every design choice that I made bore this limit in mind, and there portions of the engine that I was unable to optimize or implement due to lack of development time.
+
+\subsubsection{Triggers and Switches}
+
+Given time, I would have liked to implement the back end of a switch's interaction into triggers.The primary difference between triggers and switches is that a trigger is a one time activation, whereas a switch is a potentially many time toggle, but it would be a simple matter to add in different trigger types.
+
+\subsubsection{Engine and Data Separation}
+
+\section{Thanks}
+
+I would like to offer thanks to the following people:
+
+\begin{itemize}
+	\item Kevin MacLeod, Devin Powers, and Arseniy Shkljaev for the music
+	\item Robert Deyoso III for the movement equation
+	\item Cody Robertson for bouncing ideas off of
+	\item Dr. Joshua Guerin for mentoring the project
+\end{itemize}
 
 \section{Appendices}
 
@@ -584,7 +663,7 @@ The OpenGL display function calls upon the Level class to display all in game ob
 					linerange={1-1000},
 					firstnumber = 1]{../TwoD.cpp}
 
-\subsection{Database}
+\subsection{Database} \label{database}
 	
 \subsubsection{Walls}
 
@@ -619,6 +698,46 @@ The OpenGL display function calls upon the Level class to display all in game ob
 	\includegraphics[width=18cm]{../Resources/Images/banner}
 \subsubsection{Game Icon}
 	\includegraphics[width=5cm]{../Resources/Images/Core}
+	
 \subsection{Music}
+
+\pagebreak
+
+\begin{thebibliography}{9}
+
+\bibitem{FMOD}
+Firelight Technologies 
+\textit{FMOD Studio API} \\
+\textit{http://www.fmod.org/documentation/}
+
+\bibitem{SOIL}
+Jonathan Dummer
+\textit{Simple OpenGL Image Library} July 7, 2008 \\
+\textit{http://www.lonesock.net/soil.html}
+	
+\bibitem{OGL}
+Khronos Group
+\textit{OpenGL API Documentation Overview} \\
+\textit{https://www.opengl.org/documentation/}
+
+\bibitem{Plane}
+Maplesoft
+\textit{Equation of a Plane - 3 Points}
+
+\bibitem{SHLOBJ}
+Microsoft
+\textit{SHGetFolderPath function} \\
+\textit{https://msdn.microsoft.com/en-us/library/windows/desktop/bb762181(v=vs.85).aspx}
+
+\bibitem{Deyoso}
+Robert Deyoso
+\textit{Personal Interview} February, 2015
+
+\bibitem{sql}
+SQLite Consortium
+\textit{An Introduction To The SQLite C/C++ Interface} \\
+\textit{https://www.sqlite.org/cintro.html}
+
+\end{thebibliography}
 
 \end{document}

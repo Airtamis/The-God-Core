@@ -70,7 +70,7 @@ void Switch::toggleTarget()
 			loading = true;
 			
 			// TEMP
-			songNum++;
+			advanceMusic();
 			changeSong = true;
 		}
 	}

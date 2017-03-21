@@ -86,5 +86,7 @@ std::string getSongName(int input);
 int getLevelNum(std::string input);
 // Converts level_num to a string in curr_level
 std::string getLevelString(int input);
+// Safely advance the song
+void advanceMusic();
 
 #endif
