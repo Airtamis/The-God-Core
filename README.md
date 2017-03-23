@@ -6,12 +6,6 @@ CONSOLE COMMANDS:
 
 TogClip
 	Toggles collision on and off
-	CURRENTLY NON-EFFECTIVE
-
-TogGod
-	Toggles godmode
-	CURRENTLY NON-EFFECTIVE
-	If I even implement damage?
 
 Save $saveinfo
 	Writes saveinfo you wish to core.sav
@@ -28,8 +22,3 @@ Read $tag $file
 
 Play ($song | $number)
 	Plays the designated song, or the designated track number
-	Currently implemented:
-		0 -- Dark Fog.mp3
-		1 -- Mismer.mp3
-		2 -- Cold Hope.mp3
-		3 -- One Sly Move.mp3
