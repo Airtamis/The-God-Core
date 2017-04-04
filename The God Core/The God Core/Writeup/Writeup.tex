@@ -1,7 +1,7 @@
 \documentclass{article}
 
 \author{Author: Jeremy Greenburg \\ Mentor: Dr. Joshua Guerin \\ Second Reader: Bob Bradley}
-\title{The God Core \\ A Science Fiction Video Game Developed in C++}
+\title{The God Core \\ A video game engine and video game developed in C++}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PACKAGES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -74,6 +74,8 @@ I chose to use OpenGL over its stronger competitor, Microsoft's DirectX, because
 
 SOIL (Simple OpenGL Interface Library), is a small extension to OpenGL that provides an easy to use interface for using textures in OpenGL, including saving images, loading and binding textures, and resizes textures. A \emph{texture} is an image on the hard disk, such as a JPG or PNG file, that is loaded into memory and rendered over an OpenGL primitive, such as a rectangle. I use textures for the main menu and as part of the background for Terminals to make them look nicer, everything else rendered in game is an OpenGL or glut primitive.
 
+The images used for the textures can be found in section \ref{subsec:images}
+
 \subsubsection{FMOD} \label{subsubsec:FMOD}
 
 FMOD is a sound effects engine developed by Firelight Technologies that can play many different files types on numerous Operating Systems including but not limited to: Windows, OSX, IOS, Playstations and Xboxes, and Android; and it is is the primary audio system for many game engines including Unity, Unreal, CryEngine, and Havok. I decided to use FMOD because I was impressed with its flexibility and diversity, no other API that I looked at could read as many different sound files, particularly MP3 files which was the format of the sound files that I had acquired.
@@ -96,14 +98,15 @@ The game engine only utilizes one of its eight modules, the Shell Object module,
 
 Microsoft Visual Studio is an IDE (Integrated Development Environment) developed for Windows that supports a variety of programming languages, and it is where I wrote all of the code for the game engine. I chose Visual Studio as my IDE because it give access to an Installer package, which allows me to create a windows installer for my game so that it can be installed on any Windows computer. The Installer packages together the executable source code, any resources that I have developed, as well as system resources such as the Microsoft C++ redistributes necessary to run programs developed in Visual Studio. Visual Studio also provides powerful analytic tools to monitor memory usage to avoid creating memory leaks.
 
-I chose to develop my project in C++ because it is an extremely fast language, and speed is one of the most important qualities in real time software like video games. C++ also allows low level memory access with pointers and the ability to use typeless pointers, which are of great use in section \ref{subsec:Triggers}.
+I chose to develop my project in C++ because it is an extremely fast language, and speed is one of the most important qualities in real time software like video games. C++ also allows low level memory access with pointers and the ability to use typeless pointers, which are of great use in sections \ref{subsubsec:Triggers} and \ref{subsubsec:switch}.
 
 \subsubsection{SQLite Studio} \label{subsubsec:SQLStudio}
 
 SQLite Studio is a third party GUI for SQLite that allows information to be analyzed and edited quickly and easily. It also provides utilities to export a database to a number of different file formats, allowing me to easily include the database for reference in section \ref{subsec:database}.
 
 \begin{figure}[H]
-	\includegraphics[width=300px]{sqlstudio}
+	\centering
+	\includegraphics[width=500px]{sqlstudio}
 	\caption{A picture of the \emph{doors} table in the SQLite Studio editor.}
 	\label{fig:sqlstudio}
 \end{figure}
@@ -118,7 +121,7 @@ The project consists of two entities: the game engine and the game itself, which
 
 \subsection{The Game Engine} \label{subsec:engine}
 
-I developed the engine of my game in C++ during two, years starting in my second semester sophomore year and ending the first semester of my senior year. It consists of 49 C++ files, in which there are 3,308 lines of code and 1,122 lines of comments. The code can be found in the section \ref{subsec:source}, and it as also located on GitHub at \emph{https://github.com/Jerrgree/The-God-Core-Source}.
+I developed the engine of my game in C++ during two, years starting in spring of 2015 and ending in fall of 2016. It consists of 49 C++ files, in which there are 3,308 lines of code and 1,122 lines of comments. The code can be found in the section \ref{subsec:source}, and it as also located on GitHub at \emph{https://github.com/Jerrgree/The-God-Core-Source}.
 
 The engine reads a SQLite database (Data.db) that is housed in the same directory as the game executable, and it recognizes six tables in the database that correspond to six different types of in game objects---Walls, Doors, Cylinders, Terminals, Switches, and Triggers. Due to limitations discussed in \ref{subsubsec:seperation}, it will only properly work with a game that has five levels.
 
@@ -133,6 +136,7 @@ The rectangles contain the most complex mathematics needed for collision, as the
 In the constructor of a rectangle, after all values are initialized, the equation of the plane (Figure \ref{fig:plane}) is immediately calculated for future reference in collision detection.
 
 \begin{figure}[H]
+	\centering
 	$aX + bY + cZ + d = 0$
 	\caption{The equation of a plane.}
 	\label{fig:plane}
@@ -141,6 +145,7 @@ In the constructor of a rectangle, after all values are initialized, the equatio
 This equation is calculated using the any three corners of the rectangle (A, B, and C) and then creating two vectors (B-A and C-a) using their dot product as show in Figure \ref{fig:rectangles}.
 
 \begin{figure}[H]
+\centering
 \noindent
 $
 \vec{AB} = \left| \begin{array}{c}
@@ -152,14 +157,15 @@ Bz - Az
 Cx - Ax \\
 Cy - Ay \\
 Cz - Az
-\end{array} \right| \\
-a = \vec{AB}_2 * \vec{AC}_3 - \vec{AB}_3 * \vec{AC}_2 \\
-b = \vec{AB}_3 * \vec{AC}_1 - \vec{AB}_1 * \vec{AC}_3 \\
-c = \vec{AB}_1 * \vec{AC}_2 - \vec{AB}_2 * \vec{AC}_1 \\
-d = -(aAx + bAy + cAz)
-$
+\end{array} \right|$ 
+\vspace{.5cm}
 
-\caption{Given three points of a rectangle (A, B, and C), the equation of the plane can be derived with the dot product of two vectors. \cite{Plane} }
+$a = \vec{AB}_2 * \vec{AC}_3 - \vec{AB}_3 * \vec{AC}_2$ \\
+$b = \vec{AB}_3 * \vec{AC}_1 - \vec{AB}_1 * \vec{AC}_3$ \\
+$c = \vec{AB}_1 * \vec{AC}_2 - \vec{AB}_2 * \vec{AC}_1$ \\
+$d = -(aAx + bAy + cAz)$
+
+\caption{Given three points of a rectangle (A, B, and C), the equation of the plane can be derived with the cross product of two vectors. \cite{Plane} }
 \label{fig:rectangles}
 \end{figure}
 The norm of the plane can then be derived using the equation $\sqrt{a^2 + b^2 + c^2}$.
@@ -171,19 +177,27 @@ Terminals are an in-game computer that the player can access to read parts of th
 Each terminal is bound to a unique \emph{terminal file} that is heavily structured and contains its data. An example is show in Figure \ref{fig:terminal}
 
 \begin{figure}[H]
-\lstinputlisting[
-basicstyle=\ttfamily \small,
-numbers=left,
-breaklines=true,
-linerange={1-1000},
-firstnumber = 1]{../Resources/Text/test.tm}
-\caption{An example Terminal file}
-\label{fig:terminal}
+	\centering
+	\lstinputlisting[
+	basicstyle=\ttfamily \small,
+	numbers=left,
+	breaklines=true,
+	linerange={1-1000},
+	firstnumber = 1]{../Resources/Text/test.tm}
+	\caption{An example Terminal file}
+	\label{fig:terminal}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=500px]{screen}
+	\caption{One the terminal file is parsed, this is how it appears in game.}
+	\label{fig:terminalscreen}
 \end{figure}
 
 The program parses the file by first separating the in game content (the bracketed number and name) that should be displayed to the user from it's tag. The tags are stored in an array, where its index is equal to the bracketed number. The help display is always stored at the 0th index.
 
-The terminal recognizes a number of commands.
+The terminal recognizes a number of commands:
 
 \begin{itemize}
 	\item Help---Displays the help prompt.
@@ -193,21 +207,42 @@ The terminal recognizes a number of commands.
 
 The terminal also stores a history of what the player types, and the up and down arrows can be used to cycle through previous commands.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=200px]{terminal}
+	\caption{The 3D terminal object.}
+	\label{fig:3Dterminal}
+\end{figure}
+
 \subsubsection{Switches} \label{subsubsec:switch}
 
 A switch is a button that is attached to a wall and is visible on either side. Switches are primarily bound to doors and terminals and are used to open/close a door or power on/off a terminal. Switches are also the mechanism to change levels, each level except for the last contains a switch that, when activated, will trigger a level change. Switches serve as the primary means of progress, as the level change switch and many door switches will initially be off, and the player must navigate through the level to power on more switches and progress through the level.
 
 Internally a switch consists of two three dimension vectors, one containing its $xyz$ center and the other containing its $xyz$ rotation. It also contains a void pointer to its target and an identifier as to what type of object the target is so that the pointer can be properly typecast.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=200px]{switch}
+	\caption{A switch that is embedded in a wall.}
+	\label{fig:3Dswitch}
+\end{figure}
+
 \subsubsection{Triggers} \label{subsubsec:Triggers}
 
-Triggers are not a tangible object in the game, rather, they serve as the description of an event. Triggers are a more sophisticated form of interaction between two different objects. The implementation was designed to be abstracted away from object types so that any arbitrary object could activate another. 
+Triggers are not a tangible object in the game, rather, they serve as an event. Triggers are a more sophisticated form of interaction between two different objects. The implementation was designed to be abstracted away from object types so that any arbitrary object could activate another. 
 
-The trigger holds two void pointers, one for a triggering object and one for the target object, as well as identifiers for which object type they are. Whenever an object is interacted with, every trigger in the game is tested and if the object is the same as the trigger pointer (no referencing needed as the pointers will always be equal), the target is dereferenced according to the appropriate type and activated. For the differences between triggers and switches, see section \ref{subsubsec:trigandswitch}.
+The trigger holds two void pointers, one for a triggering object and one for the target object, as well as identifiers for which object type they are. Whenever an object is interacted with, every trigger in the game is tested and if the object is the same as the trigger pointer (no referencing needed as the pointers will always be equal), the target is dereferenced according to the appropriate type and activated.
 
 \subsubsection{Cylinders} \label{subsubsec:cylinders}
 
 Cylinders solely exist as decoration. Internally it contains the radius of each base, the height, an $xyz$ center, the $rgba$ values, and the number of "slices" or how smooth it should appear.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=200px]{cylinder}
+	\caption{An object composed of three cylinders.}
+	\label{fig:3DCylinder}
+\end{figure}
 
 \subsubsection{Camera Controller} \label{subsubsec:camera}
 
@@ -216,7 +251,7 @@ The camera control describes how the player looks around and moves. Internally i
 The player can move forwards and backwards, as well as strafe left and right, in respect to the direction that they are facing. The equation to determine movement is the formula to determine a point on the circumference of a circle as seen in Figure \ref{fig:circumference}. Only the angle of x rotation is necessary for the formula, as looking left and right are the only things that impact where one would move. Given the formula, it is equally easy to implement other directions of movement by adding and subtracting 90$\degree$ from the x angle.
 
 \begin{figure}[H]
-
+\centering
 z := z $\pm$ moveSpeed * cos(radian($\theta$)) \\ 
 x := x $\mp$ moveSpeed * sin(radian($\theta$))
 
@@ -226,7 +261,8 @@ x := x $\mp$ moveSpeed * sin(radian($\theta$))
 Following that formula, it's simple to implement movement to the left, right by adding or subtracting 90$\degree$, and backwards movement by adding 180$\degree$.
 
 \begin{figure}[H]
-\includegraphics[width=100px]{circle}
+\centering
+\includegraphics[width=200px]{circle}
 \caption{A graphical representation of movement. With the player at the center of the circle and $\theta$ = x rotation, point A would represent forward movement, B and C would represent strafing left and right, and point D would represent backwards movement.}
 \label{fig:circle}
 \end{figure}
@@ -235,9 +271,9 @@ Following that formula, it's simple to implement movement to the left, right by 
 
 The Keyboard class primarily serves to encapsulate the OpenGL callbacks that receive keystrokes: the normal function that accepts all alphanumeric and punctuation keys, and the special function that handles function keys and arrows. The keyboard function acts differently depending on what mode the player is currently in.
 
-Under normal circumstances, the only normal keystrokes accepted are the WASD keys for movement, the E key for interaction, the '~' key for toggling the development console, and the escape key which will return the player to the main menu.
+Under normal circumstances, the only normal keystrokes accepted are the WASD keys for movement, the E key for interaction, the `\textasciitilde` key for toggling the development console, and the escape key which will return the player to the main menu.
 
-When in either a terminal or the development console, all keys are immediately concatenated to an input string with the exception of the '~' which will close the development console, or the enter key which will send the input string to it's appropriate destination to be parsed and interpreted, after which the input string is cleared so that a new command can be entered.
+When in either a terminal or the development console, all keys are immediately concatenated to an input string with the exception of the `\textasciitilde` which will close the development console, or the enter key which will send the input string to it's appropriate destination to be parsed and interpreted, after which the input string is cleared so that a new command can be entered.
 
 Also accepted are the up and down arrow keys, which will cycle through the console/terminals command history.
 
@@ -256,6 +292,7 @@ The Text Engine handles displaying all text to the screen, from prompts on the H
 Every function to display text takes the $xy$ coordinates for where on the screen to start printing, and the $RGB$ color values for the text. There are two functions for displaying text, the simpler one merely takes in a string and prints it on the corresponding location on the screen. The more complex function takes in a file and a content tag which needs to be parsed. The text files are similar to terminal files as seen in Figure \ref{fig:text}.
 
 \begin{figure}[H]
+\centering
 \lstinputlisting[
 basicstyle=\ttfamily \small,
 numbers=left,
@@ -275,6 +312,7 @@ A \emph{collision} occurs when two or more objects in game attempt to occupy the
 Player object collisions are simple to detect, as both the player and the object can be placed within imaginary "bounding spheres" that extend around the player and object, the collision can be detected easily using the distance formula and the radii of the spheres as seen in Figure \ref{fig:collisionsphere}.
 
 \begin{figure}[H]
+	\centering
 	$\sqrt{(x_2 - x_1) + (y_2 - y_1) + (z_2 - z_1)} < r_2 + r_1$
 	\caption{If the distance between the sphere is shorter than the combined radii of the spheres, a collision has occurred.}
 	\label{fig:collisionsphere}
@@ -285,6 +323,7 @@ Player-wall collisions were much harder to reconcile. Because walls tend to be l
 To rectify that, the collision is split into two phases. In the first phase, we use the plane equation that is derived in the section \ref{subsubsec:walls}. Using the equation from Figure \ref{fig:wallcollision}. If the resulting value is less than the radius of the player's bounding sphere, the player is close enough to collide with that plane. However, a plane is an infinite length, and relying solely on this method would induce false collisions if the player was close to the wall but beyond it.
 
 \begin{figure}[H]
+	\centering
 	$\frac{ax + by + cz + d}{\sqrt{a^2 + b^2 + c^2}} < r$
 	\caption{By substituting the player's $xyz$ coordinates and dividing by the norm of the plane, we can determine the distance to the plane.}
 	\label{fig:wallcollision}
@@ -324,7 +363,7 @@ The logger writes to a log file as the game runs to report on the status of oper
 
 \subsection{The Game} \label{subsec:thegame}
 
-The game itself was also developed over a period of two years, starting first semester junior year and ending second semester senior year. The game itself consists of the SQLite database containging the game objects, as well as all text, terminal, image, and sound files that the game engine uses. The game is relatively short, an average play through would take 15-20 minutes, although it can easily be speed-ran in approximately five minutes.
+The game itself was also developed over a period of two years, starting fall of 2015 and ending in spring of 2017. The game itself consists of the SQLite database containing the game objects, as well as all text, terminal, image, and sound files that the game engine uses. The game is relatively short, an average play through would take 15-20 minutes, although it can easily be speed-ran in approximately five minutes.
 
 \subsubsection{Setting} \label{subsubsec:setting}
 
@@ -350,27 +389,27 @@ Level three takes place in a gallery housing access to eight different objects. 
 
 The final level takes place in the God Core's exhibit. The player can only stare at the God Core as reality starts to deform around them, before they vanish into the unknown, ending the game.
 
-\section{Challenges and Future Considerations} \label{sec:problemsandfuture}
+\section{Challenges and Future Work} \label{sec:problemsandfuture}
 
-\subsection{Challenges that I Faced} \subsection{challenges}
+\subsection{Challenges that I Faced} \label{subsec:challenges}
 
-Of course, the development was not always smooth, and I did encounter plenty of problems during development.
+Development was not always smooth, and I encountered a few interesting problems along the way.
 
 \subsubsection{The Death of a Computer} \label{subsubsec:death}
 
-I changed computers twice. I went from a laptop to a more powerful desktop junior year, and senior year my operating system got corrupted and I had to perform a fresh reinstall. Both times I was able to get back up to speed in only a few hours thanks to GitHub.
+Over the course of my project, I changed computers twice. My laptop died, and I switched to a more powerful desktop in fall 2015, and in spring 2016 my operating system was corrupted and I had to perform a fresh reinstall. Both times I was able to get back up to speed in only a few hours thanks to GitHub, losing only a few hours of progress at most. Frequent commits and syncing is a solid defense against any disaster on the developers end.
 
 \subsubsection{Clipping Issues} \label{subsubsec:clipping}
 
-OpenGL There is a problem when getting to close to a wall or a door where the player can see through parts of the wall, no doubt to do OpenGL's depth buffering in relation to distance to the wall. Part of the development processes involved balancing collision distance to the walls, at distances where the user could not see through walls the user was a noticeable distance from the wall, so I chose to allow the user to get close enough to slightly peer through the wall, as the distance felt more natural.
+There is a problem when getting to close to a wall or a door where the player can see through parts of the wall, no doubt to do OpenGL's depth buffering in relation to distance to the wall. Part of the development processes involved balancing collision distance to the walls, at distances where the user could not see through walls the user was a noticeable distance from the wall, so I chose to allow the user to get close enough to slightly peer through the wall, as the distance felt more natural.
 
 \subsubsection{APIs and Naming} \label{subsubsec:naming}
 
 C++ uses unique identifiers. This means that no class, variable, or function can share the same name. Initially the Plane class was named Rectangle, as it more clearly showed that it was a wrapper for the OpenGL rectangle primitive, but when I included the Windows API I discovered that it had its own function named Rectangle, rendering my program uncompilable until I renamed every instance of my class.
 
-\subsection{Future Considerations} \label{subsec:future}
+\subsection{Future Work} \label{subsec:future}
 
-Of course, time itself was a constraining factor, I only had two years to develop the project. As such every design choice that I made bore this limit in mind, and there portions of the engine that I was unable to optimize or implement due to lack of development time. Rarely is a project ever done, and there are always changes and improvements that could be made.
+Of course, time itself was a constraining factor; I only had two years to develop the project. As such every design choice that I made bore this limit in mind, and there portions of the engine that I was unable to optimize or implement due to lack of development time. Rarely is a project ever done, and there are always changes and improvements that could be made.
 
 \subsubsection{Triggers and Switches} \label{subsubsec:trigandswitch}
 
@@ -394,7 +433,9 @@ I would like to offer thanks to the following people:
 	\item Dr. Joshua Guerin for mentoring the project
 \end{itemize}
 
-\section{Appendices}
+\pagebreak
+
+\section{Appendices} \label{sec:appendices}
 
 \subsection{Source Code} \label{subsec:source}
 
@@ -444,8 +485,7 @@ I would like to offer thanks to the following people:
 	 \lstinputlisting[basicstyle=\ttfamily \small, numbers=left, breaklines=true, linerange={1-1000}, firstnumber = 1]{../Globals.h}
 	 				
 \subsubsection{Globals.cpp}
-	 \lstinputlisting[basicstyle=\ttfamily \small, numbers=left, breaklines=true, linerange={1-1000}, firstnumber = 1]{../Globals.cpp}
-	 				
+	 \lstinputlisting[basicstyle=\ttfamily \small, numbers=left, breaklines=true, linerange={1-1000}, firstnumber = 1]{../Globals.cpp} 				
 	 				
 \subsubsection{HeadsUpDisplay.h}
 	 \lstinputlisting[basicstyle=\ttfamily \small, numbers=left, breaklines=true, linerange={1-1000}, firstnumber = 1]{../HeadsUpDisplay.h}
@@ -523,8 +563,7 @@ I would like to offer thanks to the following people:
 	\lstinputlisting[basicstyle=\ttfamily \small, numbers=left, breaklines=true, linerange={1-1000}, firstnumber = 1]{../Triangle.h}
 	 				
 \subsubsection{Triangle.cpp}
-	\lstinputlisting[basicstyle=\ttfamily \small, numbers=left, breaklines=true, linerange={1-1000}, firstnumber = 1]{../Triangle.cpp}
-	 				
+	\lstinputlisting[basicstyle=\ttfamily \small, numbers=left, breaklines=true, linerange={1-1000}, firstnumber = 1]{../Triangle.cpp}				
 	 				
 \subsubsection{Trigger.h}
 	\lstinputlisting[basicstyle=\ttfamily \small, numbers=left, breaklines=true, linerange={1-1000}, firstnumber = 1]{../Trigger.h}
@@ -571,7 +610,7 @@ I would like to offer thanks to the following people:
 \csvautotabular[respect all]{cylinders.csv}
 
 \small{}
-\subsection{Images}
+\subsection{Images} \label{subsec:images}
 
 \subsubsection{Main Menu}
 	\includegraphics[width=18cm]{../Resources/Images/Main}

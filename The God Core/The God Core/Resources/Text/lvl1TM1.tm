@@ -34,5 +34,4 @@ Apparently later this week we're recieving an emergency shipment, an Anomalous c
 usual about this, and we've already recieved a few specialists ready to analyse it. I can't say that this job is ever boring.
 
 Officer Fries
-Officer Fries
 $END$
