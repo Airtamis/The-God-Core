@@ -355,6 +355,10 @@ Game saving and loading is a simple file transaction. To save, the current level
 
 Loading is a two step process. First the contents of the save file are read, decrypted, and parsed into the saved level and the saved song. Next the contents are verified so that they are valid levels to load and songs to play. If either one is invalid, the save file is considered corrupted and the game will refuse to complete the load.
 
+\subsubsection{Heads up Display} \label{subsubsec:HUD}
+
+The \emph{Heads Up Display} (HUD) is a 2D interface that overlays the screen. I provides both a bit of decoration for the player by drawing the boundaries of the player's helmet, but it also has a functional purpose. It can display prompts to the user, such as when an interactible object is within range of the player, as well as providing in introductory fade in from black with the player initially loads the level.
+
 \subsubsection{Console and Logging} \label{subsubsec:console}
 
 To aid in debugging a created a Developer Console and a game log. The developer console accepts user commands to perform actions such as writing to the save file, reading the save file, disabling collision, and changing what song is playing.
@@ -364,6 +368,19 @@ The logger writes to a log file as the game runs to report on the status of oper
 \subsection{The Game} \label{subsec:thegame}
 
 The game itself was also developed over a period of two years, starting fall of 2015 and ending in spring of 2017. The game itself consists of the SQLite database containing the game objects, as well as all text, terminal, image, and sound files that the game engine uses. The game is relatively short, an average play through would take 15-20 minutes, although it can easily be speed-ran in approximately five minutes.
+
+\subsubsection{Game Data} \label{subsubsec:gamedata}
+
+By generalizing the game engine itself away from the game data, the game engine can support and run any game that exists within the database and resource files, the game that I developed exists as a proof of concept that the engine does actually function. The particular game that I developed consists of:
+
+\begin{itemize}
+	\item 162 Walls
+	\item 24 Doors
+	\item 33 Switches
+	\item 14 Triggers
+	\item 18 Terminals
+	\item 17 Cylinders
+\end{itemize}
 
 \subsubsection{Setting} \label{subsubsec:setting}
 
