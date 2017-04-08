@@ -32,6 +32,8 @@
 % Manipulating figures
 \usepackage{float}
 
+\usepackage[nottoc,numbib]{tocbibind}
+
 %Make the figures boxed
 %\floatstyle{boxed}
 %\restylefloat{figure}
@@ -121,7 +123,7 @@ The project consists of two entities: the game engine and the game itself, which
 
 \subsection{The Game Engine} \label{subsec:engine}
 
-I developed the engine of my game in C++ during two, years starting in spring of 2015 and ending in fall of 2016. It consists of 49 C++ files, in which there are 3,308 lines of code and 1,122 lines of comments. The code can be found in the section \ref{subsec:source}, and it as also located on GitHub at \emph{https://github.com/Jerrgree/The-God-Core-Source}.
+I developed the engine of my game in C++ during two, years starting in spring of 2015 and ending in fall of 2016. It consists of 49 C++ files, in which there are 3,308 lines of code and 1,122 lines of comments. The code can be found in the section \ref{subsec:source}, and it as also located on GitHub \cite{bib:git}.
 
 The engine reads a SQLite database (Data.db) that is housed in the same directory as the game executable, and it recognizes six tables in the database that correspond to six different types of in game objects---Walls, Doors, Cylinders, Terminals, Switches, and Triggers. Due to limitations discussed in \ref{subsubsec:seperation}, it will only properly work with a game that has five levels.
 
@@ -165,7 +167,7 @@ $b = \vec{AB}_3 * \vec{AC}_1 - \vec{AB}_1 * \vec{AC}_3$ \\
 $c = \vec{AB}_1 * \vec{AC}_2 - \vec{AB}_2 * \vec{AC}_1$ \\
 $d = -(aAx + bAy + cAz)$
 
-\caption{Given three points of a rectangle (A, B, and C), the equation of the plane can be derived with the cross product of two vectors. \cite{Plane} }
+\caption{Given three points of a rectangle (A, B, and C), the equation of the plane can be derived with the cross product of two vectors. \cite{bib:Plane} }
 \label{fig:rectangles}
 \end{figure}
 The norm of the plane can then be derived using the equation $\sqrt{a^2 + b^2 + c^2}$.
@@ -244,6 +246,25 @@ Cylinders solely exist as decoration. Internally it contains the radius of each 
 	\label{fig:3DCylinder}
 \end{figure}
 
+\subsubsection{Level Management} \label{subsubsec:load}
+
+Loading each level involves a series of operations through the SQLite API. First a connection with the database is opened, and then a series of queries are made to the database for each table in the database in turn. All important data from the database is stored in a class of the appropriate type, unnecessary data is discarded, and in the end each class is pushed into a vector of the appropriate type. 
+
+The data is loaded in a strict order, due to some objects having dependencies on others (that is, some objects require other objects to already exist). Thus the first things that are loaded are purely independent objects, all doors, walls, cylinders, terminals. Next switches are loaded, because they require both doors and terminals to already exist. Finally, the triggers are loaded, because they require both switches and terminals.
+
+When loading switches and triggers, the objects also need to be \emph{bound} to their appropriate required object(s). This is why doors, switches, and terminals all carry their ID's into the program with them, while triggers and walls discard their ID. Once all of the objects that need to be bound are loaded into the game, the game proceeds to bind them to their target. For each switch that needs to be bound, the game loops through the list of possible target objects and creates a pointer to the correct object inside of the switch, thus ensuring that the switch can toggle its target instantly without needing to search every time it is triggered. The triggers are bound similar, with the difference that each object must perform two searches, one for the triggering object and one for the target object.
+
+If there is any data error in regards to binding --- that is, an object attempts to bind to an object that does not exist, the error is considered fatal and the game immediately shuts down after logging the error.
+
+The OpenGL display function calls upon the Level class to display all in game objects. This is a simple matter, because each object knows how to display itself. Thus it is a simple matter to loop through each vector and tell each object to display itself.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=200px]{ERD}
+	\caption{An Entity-Relation Diagram shows the dependencies of certain objects.}
+	\label{fig:erd}
+\end{figure}
+
 \subsubsection{Camera Controller} \label{subsubsec:camera}
 
 The camera control describes how the player looks around and moves. Internally it contains the $xyz$ rotation, which describes the direction that the player is looking, and the $xyz$ coordinates where the player is physically located. The $x$ rotation corresponds to left/right movement, the $y$ coordinate refers to up/down movement, and $z$ rotation would be similar to a barrel roll.
@@ -255,7 +276,7 @@ The player can move forwards and backwards, as well as strafe left and right, in
 z := z $\pm$ moveSpeed * cos(radian($\theta$)) \\ 
 x := x $\mp$ moveSpeed * sin(radian($\theta$))
 
-\caption{This equation finds an arbitrary point on a circle's circumference in relation to a specified angle. \cite{Deyoso} }
+\caption{This equation finds an arbitrary point on a circle's circumference in relation to a specified angle. \cite{bib:Deyoso} }
 \label{fig:circumference}
 \end{figure}
 Following that formula, it's simple to implement movement to the left, right by adding or subtracting 90$\degree$, and backwards movement by adding 180$\degree$.
@@ -336,18 +357,6 @@ For the second phase, each wall is aligned on an axis: x, y, or z. For the axis 
 As the player's HUD, the main menu, the developer console, and terminals all need to display in a 2D environment, I extracted the ability to draw in 2D into is own class that is inherited by them in order to reduce reused code.
 
 To convert OpenGL into 2D frame, lighting and depth masking must be disabled. Next an \emph{orthogonal} matrix is pushed onto OpenGL's matrix stack using the length and width of the screen so that all matrix transformations corresponded to a pixel on the screen. Re-enabeling 3D is as simple as popping the orthogonal matrix from the stack and re-enabling depth testing and masking.
-
-\subsubsection{Level Management} \label{subsubsec:load}
-
-Loading each level involves a series of operations through the SQLite API. First a connection with the database is opened, and then a series of queries are made to the database for each table in the database in turn. All important data from the database is stored in a class of the appropriate type, unnecessary data is discarded, and in the end each class is pushed into a vector of the appropriate type. 
-
-The data is loaded in a strict order, due to some objects having dependencies on others (that is, some objects require other objects to already exist). Thus the first things that are loaded are purely independent objects, all doors, walls, cylinders, terminals. Next switches are loaded, because they require both doors and terminals to already exist. Finally, the triggers are loaded, because they require both switches and terminals.
-
-When loading switches and triggers, the objects also need to be \emph{bound} to their appropriate required object(s). This is why doors, switches, and terminals all carry their ID's into the program with them, while triggers and walls discard their ID. Once all of the objects that need to be bound are loaded into the game, the game proceeds to bind them to their target. For each switch that needs to be bound, the game loops through the list of possible target objects and creates a pointer to the correct object inside of the switch, thus ensuring that the switch can toggle its target instantly without needing to search every time it is triggered. The triggers are bound similar, with the difference that each object must perform two searches, one for the triggering object and one for the target object.
-
-If there is any data error in regards to binding --- that is, an object attempts to bind to an object that does not exist, the error is considered fatal and the game immediately shuts down after logging the error.
-
-The OpenGL display function calls upon the Level class to display all in game objects. This is a simple matter, because each object knows how to display itself. Thus it is a simple matter to loop through each vector and tell each object to display itself.
 
 \subsubsection{Game Saving and Loading} \label{subsubsec:saveload}
 
@@ -444,11 +453,15 @@ I would like to offer thanks to the following people:
 
 \begin{itemize}
 	\item Kevin MacLeod, Devin Powers, and Arseniy Shkljaev for the music
-	\item Robert Deyoso III for the movement equation
 	\item Cody Robertson for bouncing ideas off of
 	\item Brian Affolter and Lauren Ball for helping test
-	\item Dr. Joshua Guerin for mentoring the project
 \end{itemize}
+
+\pagebreak
+
+\nocite{*}
+\bibliographystyle{ieeetr}
+\bibliography{references}
 
 \pagebreak
 
@@ -646,43 +659,5 @@ I would like to offer thanks to the following people:
 	\item Cold Hope---Arseniy Shkljaev
 	\item Spacial Harvest---Kevin MacLeod
 \end{enumerate}
-
-\pagebreak
-\begin{thebibliography}{9}
-
-\bibitem{FMOD}
-Firelight Technologies 
-\textit{FMOD Studio API} \\
-\textit{http://www.fmod.org/documentation/}
-
-\bibitem{SOIL}
-Jonathan Dummer
-\textit{Simple OpenGL Image Library} July 7, 2008 \\
-\textit{http://www.lonesock.net/soil.html}
-	
-\bibitem{OGL}
-Khronos Group
-\textit{OpenGL API Documentation Overview} \\
-\textit{https://www.opengl.org/documentation/}
-
-\bibitem{Plane}
-Maplesoft
-\textit{Equation of a Plane - 3 Points}
-
-\bibitem{SHLOBJ}
-Microsoft
-\textit{SHGetFolderPath function} \\
-\textit{https://msdn.microsoft.com/en-us/library/windows/desktop/bb762181(v=vs.85).aspx}
-
-\bibitem{Deyoso}
-Robert Deyoso
-\textit{Personal Interview} February, 2015
-
-\bibitem{sql}
-SQLite Consortium
-\textit{An Introduction To The SQLite C/C++ Interface} \\
-\textit{https://www.sqlite.org/cintro.html}
-
-\end{thebibliography}
 
 \end{document}
